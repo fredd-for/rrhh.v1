@@ -1,0 +1,730 @@
+</head>
+<style>
+    .activeDay {background-color:#ff0000 !important;}
+</style>
+<body>
+<h2 style="padding-top: 0px; width: 100%;"><b>Mis Boletas de Excepci&oacute;n </h2>
+<h3 style="padding-top: 0px; width: 100%;">(Permisos, Comisiones, Licencias, Tolerancias y Horarios de Lactancia)</b></h3>
+<input type="hidden" id="hdnIdRelaboralUsuario" name="hdnIdRelaboralUsuario" value="<?php echo $idRelaboral; ?>">
+<input type="hidden" id="hdnIdPersonaUsuario" name="hdnIdPersonaUsuario" value="<?php echo $idPersona; ?>">
+<input type="hidden" id="hdnNombresUsuario" name="hdnNombresUsuario" value="<?php echo $nombres; ?>">
+<input type="hidden" id="hdnCiUsuario" name="hdnciUsuario" value="<?php echo $ci; ?>">
+
+<div id='divTabControlExcepciones'>
+<ul>
+    <li id="liExcept">Excepciones</li>
+    <li id="liNew">Nuevo</li>
+    <li id="liEdit">Modificaci&oacute;n</li>
+    <li id="liSend">Enviar</li>
+    <li id="liTurnAndExcept">Turnos & Excepciones / Relaci&oacute;n Laboral</li>
+
+</ul>
+<br>
+<div class="section" id="divExcept">
+    <form class="navbar-form" id="formExcept">
+        <div id="tabFichaPersonalTurnAndExcept">
+            <ul style="margin-left: 30px;">
+                <li>Relaci&oacute;n Laboral</li>
+                <li>Datos Personales</li>
+                <li>Contacto Personal</li>
+                <li>Contacto Institucional</li>
+            </ul>
+            <div class="form-horizontal col-sm-12">
+                <br>
+                <div class="widget">
+                    <div class="widget-simple themed-background-dark">
+                        <a href="#" id="aFotoPerfilTurnAndExceptRelaboral">
+                            <img id="imgFotoPerfilTurnAndExceptRelaboral" class="img-rounded pull-right img-perfil">
+                        </a>
+                        <h4 class="widget-content">
+                            <div class="col-sm-5">
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt class="dtNombresTurnAndExcept">Nombres:</dt><dd class="ddNombresTurnAndExcept"></dd>
+                                    <dt class="dtCIAndNumComplementoExpdTurnAndExcept">CI:</dt><dd class="ddCIAndNumComplementoExpdTurnAndExcept"></dd>
+                                    <dt id="dtCargoTurnAndExcept">Cargo:</dt><dd id="ddCargoTurnAndExcept"></dd>
+                                    <dt id="dtProcesoTurnAndExcept">Proceso:</dt><dd id="ddProcesoTurnAndExcept"></dd>
+                                    <dt id="dtFinanciamientoTurnAndExcept">Financiamiento:</dt><dd id="ddFinanciamientoTurnAndExcept"></dd>
+                                    <dt id="dtGerenciaTurnAndExcept">Gerencia:</dt><dd id="ddGerenciaTurnAndExcept"></dd>
+                                    <dt id="dtDepartamentoTurnAndExcept">Departamento:</dt><dd id="ddDepartamentoTurnAndExcept"></dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-5">
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt id="dtUbicacionTurnAndExcept">Ubicaci&oacute;n:</dt><dd id="ddUbicacionTurnAndExcept"></dd>
+                                    <dt id="dtItemTurnAndExcept">&Iacute;tem:</dt><dd id="ddItemTurnAndExcept"></dd>
+                                    <dt id="dtNivelSalarialTurnAndExcept">Nivel Salarial:</dt><dd id="ddNivelSalarialTurnAndExcept"></dd>
+                                    <dt id="dtHaberTurnAndExcept">Haber:</dt><dd id="ddHaberTurnAndExcept"></dd>
+                                    <dt id="dtFechaIngTurnAndExcept">Fecha Ingreso:</dt><dd id="ddFechaIngTurnAndExcept"></dd>
+                                    <dt id="dtFechaIniTurnAndExcept">Fecha Inicio:</dt><dd id="ddFechaIniTurnAndExcept"></dd>
+                                    <dt id="dtFechaIncorTurnAndExcept">Fecha Incorporaci&oacute;n:</dt><dd id="ddFechaIncorTurnAndExcept"></dd>
+                                    <dt id="dtFechaFinTurnAndExcept">Fecha Finalizaci&oacute;n:</dt><dd id="ddFechaFinTurnAndExcept"></dd>
+                                    <dt id="dtEstadoDescripcionTurnAndExcept">Estado:</dt><dd id="ddEstadoDescripcionTurnAndExcept"></dd>
+                                    <dt id="dtFechaBajaTurnAndExcept">Fecha Baja:</dt><dd id="ddFechaBajaTurnAndExcept"></dd>
+                                    <dt id="dtMotivoBajaTurnAndExcept">Motivo Baja:</dt><dd id="ddMotivoBajaTurnAndExcept"></dd>
+                                    <dt id="dtObservacionTurnAndExcept">Observaciones:</dt><dd id="ddObservacionTurnAndExcept"></dd>
+                                </dl>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-sm-12">
+                <br>
+
+                <div class="widget">
+                    <div class="widget-simple themed-background-dark">
+                        <a href="#" id="aFotoPerfilTurnAndExcept">
+                            <img id="imgFotoPerfilTurnAndExcept" class="img-rounded pull-right img-perfil">
+                        </a>
+                        <h4 class="widget-content">
+                            <div>
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt id="dtNombresTurnAndExcept">Nombres y Apellidos:</dt>
+                                    <dd id="ddNombresTurnAndExcept"></dd>
+                                    <dt id="dtTipoDeDocumentoTurnAndExcept"></dt>
+                                    <dd id="ddNumeroDeDocumentoTurnAndExcept"></dd>
+                                    <dt id="dtNacionalidadTurnAndExcept">Nacionalidad:</dt>
+                                    <dd id="ddNacionalidadTurnAndExcept"></dd>
+                                    <dt id="dtLugarDeNacimientoTurnAndExcept">Lugar de Nacimiento:</dt>
+                                    <dd id="ddLugarDeNacimientoTurnAndExcept"></dd>
+                                    <dt id="dtFechaDeNacimientoTurnAndExcept">Fecha de Nacimiento:</dt>
+                                    <dd id="ddFechaDeNacimientoTurnAndExcept"></dd>
+                                </dl>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-sm-12">
+                <br>
+
+                <div class="widget">
+                    <div class="widget-simple themed-background-dark">
+                        <a href="#" id="aFotoPerfilContactoPerTurnAndExcept"><img id="imgFotoPerfilContactoPerTurnAndExcept"
+                                                                                  class="img-rounded pull-right img-perfil"></a>
+                        <h4 class="widget-content">
+                            <div>
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt id="dtDireccionTurnAndExcept">Direcci&oacute;n:</dt>
+                                    <dd id="ddDireccionTurnAndExcept"></dd>
+                                    <dt id="dtTelefonoFijoTurnAndExcept">Tel&eacute;fono Fijo:</dt>
+                                    <dd id="ddTelefonoFijoTurnAndExcept"></dd>
+                                    <dt id="dtCelularPerTurnAndExcept">Celular Personal:</dt>
+                                    <dd id="ddCelularPerTurnAndExcept"></dd>
+                                    <dt id="dtEmailPerTurnAndExcept">E-Mail Personal:</dt>
+                                    <dd id="ddEmailPerTurnAndExcept"></dd>
+                                    <dt id="dtAuxiliar1TurnAndExcept">&nbsp;</dt>
+                                    <dd id="ddAuxiliar1TurnAndExcept">&nbsp;</dd>
+                                </dl>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-sm-12">
+                <br>
+
+                <div class="widget">
+                    <div class="widget-simple themed-background-dark">
+                        <a href="#" id="aFotoPerfilContactoInstTurnAndExcept"><img id="imgFotoPerfilContactoInstTurnAndExcept"
+                                                                                   class="img-rounded pull-right img-perfil"></a>
+                        <h4 class="widget-content">
+                            <div>
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt id="dtTelefonoInstTurnAndExcept">Tel&eacute;fono Inst.:</dt>
+                                    <dd id="ddTelefonoInstTurnAndExcept"></dd>
+                                    <dt id="dtCelularInstTurnAndExcept">Celular Corporativo:</dt>
+                                    <dd id="ddCelularInstTurnAndExcept"></dd>
+                                    <dt id="dtTelefonoFaxTurnAndExcept">Fax:</dt>
+                                    <dd id="ddTelefonoFaxTurnAndExcept"></dd>
+                                    <dt id="dtInternoInstTurnAndExcept">N&uacute;mero Interno:</dt>
+                                    <dd id="ddInternoInstTurnAndExcept"></dd>
+                                    <dt id="dtEmailInstTurnAndExcept">E-Mail Institucional:</dt>
+                                    <dd id="ddEmailInstTurnAndExcept"></dd>
+                                </dl>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="divGridControlExcepciones"></div>
+        <div>
+        </div>
+    </form>
+</div>
+<div class="section" id="divNew">
+            <h6><b>NOTA: </b>Los datos precedidos de asterisco son requerido de manera obligatoria (*).</h6>
+    <div class="form-horizontal col-sm-12">
+        <fieldset>
+            <legend><i class="fa fa-angle-right"></i> Datos de Identificaci&oacute;n y Configuraci&oacute;n</legend>
+            <!-- Headings Block -->
+            <div class="block full">
+                <!-- Headings Title -->
+                <div class="block-title" id="divExcepcionNew">
+                    <select id="lstExcepcionNew" class="form-control"><option value="">Seleccionar..</option></select>
+                    <span class="help-block" id="helpErrorExcepcionNew"></span>
+                </div>
+                <div class="table-responsive">
+                    <div class="row headings-container">
+                        <table class="table table-vcenter">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center">Tipo</th>
+                                <th style="text-align: center">C&oacute;digo</th>
+                                <th style="text-align: center">Color</th>
+                                <th style="text-align: center">Descuento</th>
+                                <th style="text-align: center">Compensaci&oacute;n</th>
+                                <th style="text-align: center">Genero</th>
+                                <th style="text-align: center">C/Horario</th>
+                                <th style="text-align: center">Refrigerio</th>
+                                <th style="text-align: center">Frecuencia</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbodyGrillaExcepcionesNew"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="div-control-excepciones" id="divFechaIniNew">
+                    <label class="col-sm-3 control-label" for="txtFechaIniNew">Fecha Inicio *:</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtFechaIniNew" name="txtFechaIniNew" class="form-control input-datepicker-close" placeholder="dd-mm-yyyy"  data-date-format="dd-mm-yyyy" type="text">
+                        <span class="help-block" id="helpErrorFechaIniNew"></span>
+                    </div>
+                </div>
+                <div class="div-control-excepciones" id="divFechaFinNew">
+                    <label class="col-sm-2 control-label" for="txtFechaFinNew">Fecha Final *:</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtFechaFinNew" name="txtFechaFinNew" class="form-control  input-datepicker-close" placeholder="dd-mm-yyy"  data-date-format="dd-mm-yyyy" type="text">
+                        <span class="help-block" id="helpErrorFechaFinNew"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="divHorariosNew">
+                <div class="div-control-excepciones" id="divHoraIniNew">
+                    <label class="col-sm-3 control-label" for="txtHoraIniNew">Hora Inicio *:</label>
+                    <div class="col-md-2">
+                        <div class="input-group clockpicker">
+                            <input type="text" id="txtHoraIniNew" class="form-control hora-ini-control-excepcion">
+                        <span class="input-group-btn" id="spanHoraIniNew">
+                        <a id="aHoraIniNew" class="btn btn-primary"><i class="fa fa-clock-o"></i></a>
+                        </span>
+                        </div>
+                        <span class="help-block" id="helpErrorHoraIniNew"></span>
+                    </div>
+                </div>
+                <div class="div-control-excepciones" id="divHoraFinNew">
+                    <label class="col-sm-2 control-label" for="txtHoraFinNew">Hora Final *:</label>
+                    <div class="col-md-2">
+                        <div class="input-group clockpicker">
+                            <input type="text" id="txtHoraFinNew" class="form-control hora-fin-control-excepcion">
+                        <span class="input-group-btn" id="spanHoraFinNew">
+                        <a id="aHoraFinNew" class="btn btn-primary"><i class="fa fa-clock-o"></i></a>
+                        </span>
+                        </div>
+                        <span class="help-block" id="helpErrorHoraFinNew"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group div-control-excepciones" id="divJustificacionNew">
+                <label class="col-md-3 control-label" for="txtJustificacionNew">Justificaci&oacute;n *:</label>
+                <div class="col-md-6">
+                    <textarea id="txtJustificacionNew" name="txtJustificacionNew" class="form-control" placeholder="Justificaci&oacute;n.."></textarea>
+                </div>
+                <span class="help-block" id="helpErrorJustificacionNew"></span>
+            </div>
+            <div id="divCompensacionNew">
+                <legend><i class="fa fa-angle-right"></i> Compensaci&oacute;n</legend>
+                <div class="row">
+                    <div class="div-control-excepciones" id="divCompensacionTurnoNew">
+                        <label class="col-sm-3 control-label" for="lstCompensacionTurnoNew">Turno *:</label>
+                        <div class="col-md-2">
+                            <select id="lstCompensacionTurnoNew" class="form-control"><option value="">Seleccionar..</option></select>
+                            <span class="help-block" id="helpErrorCompensacionTurnoNew"></span>
+                        </div>
+                    </div>
+                    <div class="div-control-excepciones" id="divCompensacionEntradaSalidaNew">
+                        <label class="col-sm-2 control-label" for="lstCompensacionEntradaSalidaNew">Marcaci&oacute;n *:</label>
+                        <div class="col-md-2">
+                            <select id="lstCompensacionEntradaSalidaNew" class="form-control"><option value="">Seleccionar..</option></select>
+                            <span class="help-block" id="helpErrorCompensacionEntradaSalidaNew"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </fieldset>
+        <fieldset>
+            <legend><i class="fa fa-angle-right"></i> &nbsp;</legend>
+            <div class="form-group div-control-excepciones" id="divObservacionNew">
+                <label class="col-md-3 control-label" for="txtObservacionNew" id="lblObservacionNew">Observaciones:</label>
+                <div class="col-md-6">
+                    <textarea id="txtObservacionNew" name="txtObservacionNew" class="form-control" placeholder="Observaciones.."></textarea>
+                </div>
+                <span class="help-block" id="helpErrorObservacionNew"></span>
+            </div>
+        </fieldset>
+        <div class="form-group form-actions">
+            <div class="col-md-8 col-md-offset-4">
+                <button id="btnGuardarControlExcepcionNew" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-floppy-o"></i>
+                    Guardar
+                </button>
+                <button id="btnCancelarControlExcepcionNew" class="btn btn-sm btn-warning" type="button">
+                    <i class="fa fa-repeat"></i>
+                    Cancelar
+                </button>
+                <button class="btn btn-sm btn-warning" type="button" id="btnVolverAlListadoPrincipalDesdeNew">
+                    <i class="fa fa-reply"></i>
+                    Volver al Listado Principal
+                </button>
+            </div>
+        </div>
+        <input type="hidden" id="hdnIdRelaboralNew" value="0">
+    </div>
+</div>
+<div class="section" id="divEdit">
+    <h6><b>NOTA: </b>Los datos precedidos de asterisco son requerido de manera obligatoria (*).</h6>
+    <div class="form-horizontal col-sm-12">
+        <fieldset>
+            <legend><i class="fa fa-angle-right"></i> Datos de Identificaci&oacute;n</legend>
+            <div class="block full">
+                <!-- Headings Title -->
+                <div class="block-title" id="divExcepcionEdit">
+                    <select id="lstExcepcionEdit" class="form-control"><option value="">Seleccionar..</option></select>
+                    <span class="help-block" id="helpErrorExcepcionEdit"></span>
+                </div>
+                <div class="table-responsive">
+                    <div class="row headings-container">
+                        <table class="table table-vcenter">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center">Tipo</th>
+                                <th style="text-align: center">C&oacute;digo</th>
+                                <th style="text-align: center">Color</th>
+                                <th style="text-align: center">Descuento</th>
+                                <th style="text-align: center">Compensaci&oacute;n</th>
+                                <th style="text-align: center">Genero</th>
+                                <th style="text-align: center">C/Horario</th>
+                                <th style="text-align: center">Refrigerio</th>
+                                <th style="text-align: center">Frecuencia</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbodyGrillaExcepcionesEdit"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="div-control-excepciones" id="divFechaIniEdit">
+                    <label class="col-sm-3 control-label" for="txtFechaIniEdit">Fecha Inicio *:</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtFechaIniEdit" name="txtFechaIniEdit" class="form-control input-datepicker-close" placeholder="dd-mm-yyyy"  data-date-format="dd-mm-yyyy" type="text">
+                        <span class="help-block" id="helpErrorFechaIniEdit"></span>
+                    </div>
+                </div>
+                <div class="div-control-excepciones" id="divFechaFinEdit">
+                    <label class="col-sm-2 control-label" for="txtFechaFinEdit">Fecha Final *:</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="txtFechaFinEdit" name="txtFechaFinEdit" class="form-control  input-datepicker-close" placeholder="dd-mm-yyy"  data-date-format="dd-mm-yyyy" type="text">
+                        <span class="help-block" id="helpErrorFechaFinEdit"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="divHorariosEdit">
+                <div class="div-control-excepciones" id="divHoraIniEdit">
+                    <label class="col-sm-3 control-label" for="txtHoraIniEdit">Hora Inicio *:</label>
+                    <div class="col-md-2">
+                        <div class="input-group clockpicker">
+                            <input type="text" id="txtHoraIniEdit" class="form-control hora-ini-control-excepcion">
+                        <span class="input-group-btn" id="spanHoraIniEdit">
+                        <a id="aHoraIniEdit" class="btn btn-primary"><i class="fa fa-clock-o"></i></a>
+                        </span>
+                        </div>
+                        <span class="help-block" id="helpErrorHoraIniEdit"></span>
+                    </div>
+                </div>
+                <div class="div-control-excepciones" id="divHoraFinEdit">
+                    <label class="col-sm-2 control-label" for="txtHoraFinEdit">Hora Final *:</label>
+                    <div class="col-md-2">
+                        <div class="input-group clockpicker">
+                            <input type="text" id="txtHoraFinEdit" class="form-control hora-fin-control-excepcion">
+                        <span class="input-group-btn" id="spanHoraFinEdit">
+                        <a id="aHoraFinEdit" class="btn btn-primary"><i class="fa fa-clock-o"></i></a>
+                        </span>
+                        </div>
+                        <span class="help-block" id="helpErrorHoraFinEdit"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group div-control-excepciones" id="divJustificacionEdit">
+                <label class="col-md-3 control-label" for="txtJustificacionEdit">Motivo / Justificaci&oacute;n *:</label>
+                <div class="col-md-6">
+                    <textarea id="txtJustificacionEdit" name="txtJustificacionEdit" class="form-control" placeholder="Justificaci&oacute;n.."></textarea>
+                </div>
+                <span class="help-block" id="helpErrorJustificacionEdit"></span>
+            </div>
+            <div id="divCompensacionEdit">
+                <legend><i class="fa fa-angle-right"></i> Compensaci&oacute;n</legend>
+                <div class="row">
+                    <div class="div-control-excepciones" id="divCompensacionTurnoEdit">
+                        <label class="col-sm-3 control-label" for="lstCompensacionTurnoEdit">Turno *:</label>
+                        <div class="col-md-2">
+                            <select id="lstCompensacionTurnoEdit" class="form-control"><option value="">Seleccionar..</option></select>
+                            <span class="help-block" id="helpErrorCompensacionTurnoEdit"></span>
+                        </div>
+                    </div>
+                    <div class="div-control-excepciones" id="divCompensacionEntradaSalidaEdit">
+                        <label class="col-sm-2 control-label" for="lstCompensacionEntradaSalidaEdit">Marcaci&oacute;n *:</label>
+                        <div class="col-md-2">
+                            <select id="lstCompensacionEntradaSalidaEdit" class="form-control"><option value="">Seleccionar..</option></select>
+                            <span class="help-block" id="helpErrorCompensacionEntradaSalidaEdit"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><i class="fa fa-angle-right"></i> &nbsp;</legend>
+            <div class="form-group div-control-excepciones" id="divObservacionEdit">
+                <label class="col-md-3 control-label" for="txtObservacionEdit" id="lblObservacionEdit">Observaciones:</label>
+                <div class="col-md-6">
+                    <textarea id="txtObservacionEdit" name="txtObservacionEdit" class="form-control" placeholder="Observaciones.."></textarea>
+                </div>
+                <span class="help-block" id="helpErrorObservacionEdit"></span>
+            </div>
+        </fieldset>
+        <div class="form-group form-actions">
+            <div class="col-md-8 col-md-offset-4">
+                <button id="btnGuardarControlExcepcionEdit" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-floppy-o"></i>
+                    Guardar
+                </button>
+                <button id="btnCancelarControlExcepcionEdit" class="btn btn-sm btn-warning" type="button">
+                    <i class="fa fa-repeat"></i>
+                    Cancelar
+                </button>
+                <button class="btn btn-sm btn-warning" type="button" id="btnVolverAlListadoPrincipalDesdeEdit">
+                    <i class="fa fa-reply"></i>
+                    Volver al Listado Principal
+                </button>
+            </div>
+        </div>
+        <input type="hidden" id="hdnIdRelaboralEdit" value="0">
+        <input type="hidden" id="hdnIdControlExcepcionEdit" value="0">
+    </div>
+</div>
+<div class="section" id="divSend">
+    <h6><b>NOTA: </b>Los datos precedidos de asterisco son requerido de manera obligatoria (*).</h6>
+        <form id="formEnvioSolicitudExcepcion" method="post" target="_blank">
+            <div class="form-horizontal col-sm-12">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-2 control-label" for="divDestinatarioDestinatarioPrincipal">Destinatario *:</label>
+                            <div class="col-sm-10" id="divDestinatarioPrincipal">
+                                <div style="border: none;" id="lstBoxDestinatariosPrincipales"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-2 control-label" for="chkDestinatarioSecundario">
+                                <input type="checkbox" id="chkDestinatarioSecundario" class="chkDestinatarioSecundario">
+                                CC:</label>
+                            <div class="col-sm-10" id="divDestinatarioSecundario">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-2 control-label" for="divAsunto">Asunto *:</label>
+                            <div class="col-sm-10" id="divAsunto">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="col-md-2 control-label" for="lblDestinatario">Motivo / Justificaci&oacute;n *:</label>
+                            <div class="col-sm-10" id="divJustificacion">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divCarga" style="display:none" align="center">
+                        <div id="divContador"></div>
+                        <img src="../images/barra_carga.gif" />
+                    </div>
+                </fieldset><fieldset>
+                    <legend><i class="fa fa-angle-right"></i> Mensaje Adicional</legend>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <textarea id="txtMensajeAdicional" name="txtMensajeAdicional" rows="10" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group form-actions">
+                    <div class="col-md-8 col-md-offset-4">
+                        <button id="btnEnviarSolicitudExcepcion" class="btn btn-sm btn-primary" type="button">
+                            <i class="fa fa-share"></i>
+                            Enviar
+                        </button>
+                        <button id="btnCancelarEnvioSolicitudExcepcion" class="btn btn-sm btn-warning" type="button">
+                            <i class="fa fa-repeat"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="hdnIntermediacion" name="hdnIntermediacion">
+            <input type="hidden" id="hdnIdRelSolicitante" name="hdnIdRelSolicitante">
+            <input type="hidden" id="hdnIdControlExcepcionEnvio" name="hdnIdControlExcepcionEnvio">
+            <input type="hidden" id="hdnIdRelDestPrincipal" name="hdnIdRelDestPrincipal">
+            <input type="hidden" id="hdnIdRelDestSecundario" name="hdnIdRelDestSecundario">
+    </form>
+</div>
+<div class="section" id="divTurnAndExcept">
+    <form class="navbar-form" id="form" onsubmit="return false;">
+        <!-- Contenido referente al calendario laboral y gestión de horarios -->
+        <div id="page-content">
+            <!-- FullCalendar Content -->
+            <div class="block block-alt-noborder full">
+                <div class="block-title">
+                    <div class="block-options pull-right">
+                        <a id="btnImprimirCalendarioLaboralAndExcept" class="btn btn-alt btn-sm btn-default" title="Imprimir Calendario" data-toggle="tooltip" href="javascript:void(0)" data-original-title="Imprimir">
+                            <i class="fa fa-print"></i>
+                        </a>
+                    </div>
+                    <h2>
+                        <strong><span id="spanPrefijoCalendarioLaboral"></span></strong>
+                        Calendario de Turnos Laborales
+                        <span id="spanSufijoCalendarioLaboral"></span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="calendar"></div>
+                    </div>
+                    </br>
+                    <div class="col-md-12">
+                        <div id="divDatosAsignacionSingle">
+                            Horarios asignados:
+                            <table id="tblGrillaAsignacionSingle" class="table table-vcenter table-condensed table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class='text-center'>Nro.</th>
+                                    <th class='text-center'>Fecha Ini</th>
+                                    <th class='text-center'>Fecha Fin</th>
+                                    <th class='text-center'>Ubicaci&oacute;n</th>
+                                    <th class='text-center'>Estaci&oacute;n</th>
+                                    <th class='text-center'>Hora Ingreso</th>
+                                    <th class='text-center'>Hora Salida</th>
+                                    <th class='text-center'>Observaci&oacute;n</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody_asignacion_single">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="divGrupoBotonesTurnAndExcept" class="btn-group">
+                    <button id="btnCancelarTurnAndExcept" class="btnCancelarTurnAndExcept btn btn-warning"  type="button"><i class="fa fa-repeat"></i> Cancelar / Volver a Listado Principal</button>
+                </div>
+            </div>
+        </div>
+        <!-- END FullCalendar Block -->
+        <!-- END FullCalendar Content -->
+    </form>
+</div>
+</div>
+<!--</form></div>-->
+</body>
+<div class="modal fade bs-example-modal-lg" id="popupDescripcionHorario" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" id="testForm_perfil" data-toggle="validator" onsubmit="return false;"/>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="tituloModal">Horario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <input type="hidden" name="perfil_id" id="perfil_id" value="">
+                            <div class="panel-heading">
+                                DATOS DEL HORARIO SELECCIONADO
+                            </div>
+                            <div class="panel-body form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="txtNombreHorario">Nombre Horario:</label>
+                                    <div class="col-md-6" form-group>
+                                        <input type="text" id="txtNombreHorario" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="divNombreAlternativoHorario">
+                                    <label class="col-sm-3 control-label" for="txtNombreAlternativoHorario">Nombre Alternativo:</label>
+                                    <div class="col-md-6" form-group>
+                                        <textarea id="txtNombreAlternativoHorario" class="form-control" readonly></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="divColorHorario">
+                                    <label class="col-sm-3 control-label" for="txtColorHorario">Color:</label>
+                                    <div class="col-md-6" form-group>
+                                        <input type="text" id="txtColorHorario" value="#FFFFFF" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <fieldset>
+                                    <legend><i class="fa fa-angle-right"></i> Horario Entrada / Salida</legend>
+                                    <div class="form-group">
+                                        <div class="div-calendario-laboral" id="divHoraEntHorario">
+                                            <label class="col-sm-2 control-label" for="txtHoraEntHorario">Entrada:</label>
+                                            <div class="col-md-2"  form-group>
+                                                <input id="txtHoraEntHorario" name="txtHoraEntHorario" placeholder="Hora de entrada." class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="div-calendario-laboral" id="divHoraSalHorario">
+                                            <label class="col-sm-2 control-label" for="txtHoraSalHorario">Salida:</label>
+                                            <div class="col-md-2"  form-group>
+                                                <input id="txtHoraSalHorario" name="txtHoraSalHorario" class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-2 control-label" for="txtHorasLaborales">Horas Laborales:</label>
+                                        <div class="col-md-2">
+                                            <input id="txtHorasLaborales" name="txtHorasLaborales" placeholder="Horas Laborales." type="text" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><i class="fa fa-angle-right"></i> Rango Control Marcaciones</legend>
+                                    <div class="form-group">
+                                        <div class="div-calendario-laboral" id="divHoraInicioRangoEnt">
+                                            <label class="col-sm-3 control-label" for="txtHoraInicioRangoEnt">Inicio Entrada:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHoraInicioRangoEnt" name="txtHoraInicioRangoEnt" placeholder="Hora de entrada." class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="div-calendario-laboral" id="divHoraFinalizacionRangoEnt">
+                                            <label class="col-sm-3 control-label" for="txtHoraFinalizacionRangoEnt">Finalizaci&oacute;n Entrada:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHoraFinalizacionRangoEnt" name="txtHoraFinalizacionRangoEnt" class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="div-calendario-laboral" id="divHoraInicioRangoSal">
+                                            <label class="col-sm-3 control-label" for="txtHoraInicioRangoSal">Inicio Salida:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHoraInicioRangoSal" name="txtHoraInicioRangoSal" placeholder="Hora de inicio de salida." class="form-control" type="text" readonly>
+                                            </div>
+
+                                        </div>
+                                        <div class="div-calendario-laboral" id="divHoraFinalizacionRangoSal">
+                                            <label class="col-sm-3 control-label" for="txtHoraFinalizacionRangoSal">Fin Salida:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHoraFinalizacionRangoSal" name="txtHoraFinalizacionRangoSal" placeholder="Hora de finalizaci&oacute;n de salida." class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><i class="fa fa-angle-right"></i> Rango Fechas</legend>
+                                    <div class="form-group">
+                                        <div class="div-calendario-laboral" id="divHorarioFechaIni">
+                                            <label class="col-sm-3 control-label" for="txtHorarioFechaIni">Fecha Inicio:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHorarioFechaIni" name="txtHorarioFechaIni" class="form-control input-datepicker" placeholder="Desde" data-date-format="dd-mm-yyyy" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="div-calendario-laboral" id="divHorarioFechaFin">
+                                            <label class="col-sm-3 control-label" for="txtHorarioFechaFin">Fecha Fin:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHorarioFechaFin" name="txtHorarioFechaFin" class="form-control input-datepicker" placeholder="Hasta" data-date-format="dd-mm-yyyy" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><i class="fa fa-angle-right"></i> Observaciones</legend>
+                                    <div class="form-group div-move-relab" id="divObservacion">
+                                        <label class="col-md-3 control-label" for="txtObservacion">Observaciones:</label>
+                                        <div class="col-md-6">
+                                            <textarea id="txtObservacion" name="txtObservacion" class="form-control" placeholder="Observaciones.." readonly></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCerrarHorario" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-compress"></i>Cerrar</button>
+                <button type="button" id="btnGuardarModificacionHorario" class="btn btn-primary"><i class="fa fa-pencil"></i>Guardar Modificaci&oacute;n de Fechas</button>
+                <button type="button" id="btnDescartarHorario" class="btn btn-primary"><i class="gi gi-bin"></i>Descartar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade bs-example-modal-lg" id="popupEnvioSolicitudExcepcion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" id="testForm_perfil" data-toggle="validator" onsubmit="return false;"/>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="tituloModal">Solicitud de Excepci&oacute;n</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <input type="hidden" name="perfil_id" id="perfil_id" value="">
+                            <div class="panel-heading">
+                                DATOS DE LA SOLICITUD
+                            </div>
+
+                                <!--<div class="form-group form-actions">
+                                    <div class="col-xs-12">
+                                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                                        <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
+                                    </div>
+                                </div>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCerrarHorario" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-compress"></i>Cerrar</button>
+                <button type="button" id="btnGuardarModificacionHorario" class="btn btn-primary"><i class="fa fa-pencil"></i>Guardar Modificaci&oacute;n de Fechas</button>
+                <button type="button" id="btnDescartarHorario" class="btn btn-primary"><i class="gi gi-bin"></i>Descartar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="divMsjeNotificacionError">
+    <div id="divMsjePorError">
+    </div>
+</div>
+<div id="divMsjeNotificacionWarning">
+    <div id="divMsjePorWarning">
+    </div>
+</div>
+<div id="divMsjeNotificacionSuccess">
+    <div id="divMsjePorSuccess">
+    </div>
+</div>

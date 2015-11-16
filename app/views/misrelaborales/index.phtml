@@ -1,0 +1,145 @@
+</head>
+<body>
+<h2 style="padding-top: 0px; width: 100%;"><b>Mis Contratos</b></h2>
+<input type="hidden" id="hdnIdRelaboralUsuario" name="hdnIdRelaboralUsuario" value="<?php echo $idRelaboral; ?>">
+<input type="hidden" id="hdnIdPersonaUsuario" name="hdnIdPersonaUsuario" value="<?php echo $idPersona; ?>">
+<input type="hidden" id="hdnNombresUsuario" name="hdnNombresUsuario" value="<?php echo $nombres; ?>">
+<input type="hidden" id="hdnCiUsuario" name="hdnciUsuario" value="<?php echo $ci; ?>">
+<form class="navbar-form" id="formView">
+    <div id="tabFichaPersonal">
+        <ul style="margin-left: 30px;">
+            <li>Datos Personales</li>
+            <li>Contacto Personal</li>
+            <li>Contacto Institucional</li>
+        </ul>
+        <div class="form-horizontal col-sm-12">
+            <br>
+
+            <div class="widget">
+                <div class="widget-simple themed-background-dark">
+                    <a href="#" id="aFotoPerfil">
+                        <img id="imgFotoPerfil" class="img-rounded pull-right img-perfil">
+                    </a>
+                    <h4 class="widget-content">
+                        <div>
+                            <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                <dt id="dtNombres">Nombres y Apellidos:</dt>
+                                <dd id="ddNombres"></dd>
+                                <dt id="dtTipoDeDocumento"></dt>
+                                <dd id="ddNumeroDeDocumento"></dd>
+                                <dt id="dtNacionalidad">Nacionalidad:</dt>
+                                <dd id="ddNacionalidad"></dd>
+                                <dt id="dtLugarDeNacimiento">Lugar de Nacimiento:</dt>
+                                <dd id="ddLugarDeNacimiento"></dd>
+                                <dt id="dtFechaDeNacimiento">Fecha de Nacimiento:</dt>
+                                <dd id="ddFechaDeNacimiento"></dd>
+                            </dl>
+                        </div>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="form-horizontal col-sm-12">
+            <br>
+
+            <div class="widget">
+                <div class="widget-simple themed-background-dark">
+                    <a href="#" id="aFotoPerfilContactoPer"><img id="imgFotoPerfilContactoPer"
+                                                                 class="img-rounded pull-right img-perfil"></a>
+                    <h4 class="widget-content">
+                        <div>
+                            <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                <dt id="dtDireccion">Direcci&oacute;n:</dt>
+                                <dd id="ddDireccion"></dd>
+                                <dt id="dtTelefonoFijo">Tel&eacute;fono Fijo:</dt>
+                                <dd id="ddTelefonoFijo"></dd>
+                                <dt id="dtCelularPer">Celular Personal:</dt>
+                                <dd id="ddCelularPer"></dd>
+                                <dt id="dtEmailPer">E-Mail Personal:</dt>
+                                <dd id="ddEmailPer"></dd>
+                                <dt id="dtAuxiliar1">&nbsp;</dt>
+                                <dd id="ddAuxiliar1">&nbsp;</dd>
+                            </dl>
+                        </div>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="form-horizontal col-sm-12">
+            <br>
+
+            <div class="widget">
+                <div class="widget-simple themed-background-dark">
+                    <a href="#" id="aFotoPerfilContactoInst"><img id="imgFotoPerfilContactoInst"
+                                                                  class="img-rounded pull-right img-perfil"></a>
+                    <h4 class="widget-content">
+                        <div>
+                            <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                <dt id="dtTelefonoInst">Tel&eacute;fono Inst.:</dt>
+                                <dd id="ddTelefonoInst"></dd>
+                                <dt id="dtCelularInst">Celular Corporativo:</dt>
+                                <dd id="ddCelularInst"></dd>
+                                <dt id="dtTelefonoFax">Fax:</dt>
+                                <dd id="ddTelefonoFax"></dd>
+                                <dt id="dtInternoInst">N&uacute;mero Interno:</dt>
+                                <dd id="ddInternoInst"></dd>
+                                <dt id="dtEmailInst">E-Mail Institucional:</dt>
+                                <dd id="ddEmailInst"></dd>
+                            </dl>
+                        </div>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div id="HistorialSplitter">
+        <div class="splitter-panel">
+            Gestiones
+            <div id="listboxGestiones"></div>
+        </div>
+        <div class="splitter-panel" style="overflow-y: auto;">
+            <br>
+
+            <div>
+                <div class="block-options pull-right">
+                    <a id="btnImprimirHistorial" data-original-title="Imprimir" href="javascript:void(0)"
+                       class="btn btn-alt btn-sm btn-default"
+                       data-toggle="tooltip" title="Imprimir Historial"><i class="fa fa-print"></i></a>
+                </div>
+                <h2><i class="fa fa-bars"></i> Historial <strong>Relaci&oacute;n Laboral</strong></h2>
+            </div
+                <!-- Draggable Blocks Row -->
+            <div class="row draggable-blocks">
+                <div class="col-xs-12 column">
+                    <!-- Timeline Style Content -->
+                    <div class="timeline block-content-full">
+                        <ul class="timeline-list timeline-hover" id="HistorialTimeLine">
+                        </ul>
+                    </div>
+                    <!-- END Timeline Style Content -->
+                    <input type="hidden" id="hdnIdPersonaHistorial" value="0">
+                    <input type="hidden" id="hdnSwPrimeraVistaHistorial" value="0">
+                </div>
+            </div>
+            <!-- END Draggable Blocks Row -->
+        </div>
+    </div>
+</form>
+
+<!--</form></div>-->
+</body>
+
+<div id="divMsjeNotificacionError">
+    <div id="divMsjePorError">
+    </div>
+</div>
+<div id="divMsjeNotificacionWarning">
+    <div id="divMsjePorWarning">
+    </div>
+</div>
+<div id="divMsjeNotificacionSuccess">
+    <div id="divMsjePorSuccess">
+    </div>
+</div>

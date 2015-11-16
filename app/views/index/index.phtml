@@ -1,0 +1,137 @@
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-dashboard"></i>Pagina de Inicio<br><small>Bienvenido: <?php echo $nombres; ?></small>
+        </h1>
+    </div>
+</div>
+<?php if($modalidad==1){ ?>
+<div class="row" id="divDashbordAdministrador">
+    <div class="col-sm-6 col-lg-3">
+        <div class="widget">
+            <div class="widget-simple">
+                <a href="#" class="widget-icon pull-left themed-background animation-fadeIn">
+                    <i class="fa fa-users"></i>
+                </a>
+                <h3 class="widget-content text-right animation-pullDown">
+                    Contrato Plazo Indefinido: <strong><?php echo $permanentes; ?></strong><br />
+                    <small>Personal Mi Telef&eacute;rico</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="widget">
+            <div class="widget-simple">
+                <a href="#" class="widget-icon pull-left themed-background-amethyst  animation-fadeIn">
+                    <i class="fa fa-users"></i>
+                </a>
+                <h3 class="widget-content text-right animation-pullDown">
+                    Contrato Plazo Fijo: <strong><?php echo $eventuales; ?></strong><br />
+                    <small>Personal Mi Telef&eacute;rico</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="widget">
+            <div class="widget-simple">
+                <a href="#" class="widget-icon pull-left themed-background-night animation-fadeIn">
+                    <i class="fa fa-users"></i>
+                </a>
+                <h3 class="widget-content text-right animation-pullDown">
+                    Contrato Por Consultor&iacute;a: <strong><?php echo $consultores; ?></strong><br />
+                    <small>Personal Mi Telef&eacute;rico</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="widget">
+            <div class="widget-simple">
+                <a href="#" class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                    <i class="fa fa-cogs"></i>
+                </a>
+                <h3 class="widget-content text-right animation-pullDown">
+                    Procesos En Ejecuci&oacute;n: <strong><?php echo $procesos_pendientes; ?></strong><br />
+                    <small>Procesos Mi Telef&eacute;rico</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } else {?>
+    <div class="row" id="divDashbordConsulta">
+        <div class="col-sm-6 col-lg-3">
+            <div class="widget">
+                <div class="widget-simple">
+                    <label class="col-md-4 control-label" for="lstgestiones">Gesti&oacute;n</label>
+                    <select id="lstGestion" name="lstGestion" class="form-control"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="widget">
+                <div class="widget-simple">
+                    <a href="/correspondencia" class="widget-icon pull-left themed-background animation-fadeIn">
+                        <i class="fa fa-users"></i>
+                    </a>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Antigüedad Laboral <strong><?php
+                            foreach($antiguedad as $ant){
+                                echo "</br><small>".$ant->condiciones."</br>";
+                                $fechaIng = $ant->fecha_ing != "" ? date("d-m-Y", strtotime($ant->fecha_ing)) : "";
+                                $fechaUlt = $ant->fecha_ult != "" ? date("d-m-Y", strtotime($ant->fecha_ult)) : "";
+                                echo "Periodo: ".$fechaIng." al ".$fechaUlt."</br>";
+                                echo "Tiempo: ".$ant->antiguedad." meses"."</small>";
+                            }
+                            ?></strong><br/>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="widget">
+                <div class="widget-simple">
+                    <a href="./page_ready_inbox.php.html" class="widget-icon pull-left themed-background-night animation-fadeIn">
+                        <i class="fa fa-users"></i>
+                    </a>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Boletas Sin Env&iacute;o: <strong><?php echo $boletasSinEnvio; ?></strong><br />
+                        <small>Boletas en Elaboraci&oacute;n o Elaboradas</small>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="widget">
+                <div class="widget-simple">
+                    <a href="./page_ready_inbox.php.html" class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                        <i class="fa fa-cogs"></i>
+                    </a>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        Boletas Pendientes de Respuesta: <strong><?php echo $boletasPendientesDeRespuesta; ?></strong><br />
+                        <small>Boletas enviadas que a&uacute;n no se han respondido</small>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+<input type="hidden" id="hdnIdPersona" value="<?php echo $id_persona; ?>">
+    <div class="row">
+        <div class="col-sm-12 animation-stretchRight">
+            <div class="widget">
+                <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
+    </div>
+<?php }?>
+<input type="hidden" id="hdnModalidad" value="<?php echo $modalidad; ?>">
+<input type="hidden" id="hdnGestion" value="<?php echo $gestion; ?>">
+<div class="row">
+    <div class="col-sm-12 animation-stretchRight">
+        <div class="widget">
+             <div id="chartdiv" style="width: 100%; height: 400px;">Comunicados</div>
+        </div>
+    </div>
+</div>

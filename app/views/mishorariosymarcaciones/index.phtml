@@ -1,0 +1,420 @@
+</head>
+<style>
+    .activeDay {background-color:#ff0000 !important;}
+</style>
+<body>
+<h2 style="padding-top: 0px; width: 100%;"><b>Mis Horarios & Marcaciones </h2>
+<input type="hidden" id="hdnIdRelaboralUsuario" name="hdnIdRelaboralUsuario" value="<?php echo $idRelaboral; ?>">
+<input type="hidden" id="hdnCiUsuario" name="hdnciUsuario" value="<?php echo $ci; ?>">
+<div id='divTabControlMarcaciones'>
+<ul>
+    <li id="liHorarios">Horarios</li>
+    <li id="liMarcaciones">Marcaciones</li>
+</ul>
+<br>
+<div class="section" id="divHorarios">
+<form class="navbar-form" id="form" onsubmit="return false;">
+<div id="tabFichaPersonalTurnAndExcept">
+    <ul style="margin-left: 30px;">
+        <li>Relaci&oacute;n Laboral</li>
+        <li>Datos Personales</li>
+        <li>Contacto Personal</li>
+        <li>Contacto Institucional</li>
+    </ul>
+    <div class="form-horizontal col-sm-12">
+        <br>
+        <div class="widget">
+            <div class="widget-simple themed-background-dark">
+                <a href="#" id="aFotoPerfilTurnAndExceptRelaboral">
+                    <img id="imgFotoPerfilTurnAndExceptRelaboral" class="img-rounded pull-right img-perfil">
+                </a>
+                <h4 class="widget-content">
+                    <div class="col-sm-5">
+                        <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                            <dt class="dtNombresTurnAndExcept">Nombres:</dt><dd class="ddNombresTurnAndExcept"></dd>
+                            <dt class="dtCIAndNumComplementoExpdTurnAndExcept">CI:</dt><dd class="ddCIAndNumComplementoExpdTurnAndExcept"></dd>
+                            <dt id="dtCargoTurnAndExcept">Cargo:</dt><dd id="ddCargoTurnAndExcept"></dd>
+                            <dt id="dtProcesoTurnAndExcept">Proceso:</dt><dd id="ddProcesoTurnAndExcept"></dd>
+                            <dt id="dtFinanciamientoTurnAndExcept">Financiamiento:</dt><dd id="ddFinanciamientoTurnAndExcept"></dd>
+                            <dt id="dtGerenciaTurnAndExcept">Gerencia:</dt><dd id="ddGerenciaTurnAndExcept"></dd>
+                            <dt id="dtDepartamentoTurnAndExcept">Departamento:</dt><dd id="ddDepartamentoTurnAndExcept"></dd>
+                        </dl>
+                    </div>
+                    <div class="col-sm-5">
+                        <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                            <dt id="dtUbicacionTurnAndExcept">Ubicaci&oacute;n:</dt><dd id="ddUbicacionTurnAndExcept"></dd>
+                            <dt id="dtItemTurnAndExcept">&Iacute;tem:</dt><dd id="ddItemTurnAndExcept"></dd>
+                            <dt id="dtNivelSalarialTurnAndExcept">Nivel Salarial:</dt><dd id="ddNivelSalarialTurnAndExcept"></dd>
+                            <dt id="dtHaberTurnAndExcept">Haber:</dt><dd id="ddHaberTurnAndExcept"></dd>
+                            <dt id="dtFechaIngTurnAndExcept">Fecha Ingreso:</dt><dd id="ddFechaIngTurnAndExcept"></dd>
+                            <dt id="dtFechaIniTurnAndExcept">Fecha Inicio:</dt><dd id="ddFechaIniTurnAndExcept"></dd>
+                            <dt id="dtFechaIncorTurnAndExcept">Fecha Incorporaci&oacute;n:</dt><dd id="ddFechaIncorTurnAndExcept"></dd>
+                            <dt id="dtFechaFinTurnAndExcept">Fecha Finalizaci&oacute;n:</dt><dd id="ddFechaFinTurnAndExcept"></dd>
+                            <dt id="dtEstadoDescripcionTurnAndExcept">Estado:</dt><dd id="ddEstadoDescripcionTurnAndExcept"></dd>
+                            <dt id="dtFechaBajaTurnAndExcept">Fecha Baja:</dt><dd id="ddFechaBajaTurnAndExcept"></dd>
+                            <dt id="dtMotivoBajaTurnAndExcept">Motivo Baja:</dt><dd id="ddMotivoBajaTurnAndExcept"></dd>
+                            <dt id="dtObservacionTurnAndExcept">Observaciones:</dt><dd id="ddObservacionTurnAndExcept"></dd>
+                        </dl>
+                    </div>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal col-sm-12">
+        <br>
+
+        <div class="widget">
+            <div class="widget-simple themed-background-dark">
+                <a href="#" id="aFotoPerfilTurnAndExcept">
+                    <img id="imgFotoPerfilTurnAndExcept" class="img-rounded pull-right img-perfil">
+                </a>
+                <h4 class="widget-content">
+                    <div>
+                        <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                            <dt id="dtNombresTurnAndExcept">Nombres y Apellidos:</dt>
+                            <dd id="ddNombresTurnAndExcept"></dd>
+                            <dt id="dtTipoDeDocumentoTurnAndExcept"></dt>
+                            <dd id="ddNumeroDeDocumentoTurnAndExcept"></dd>
+                            <dt id="dtNacionalidadTurnAndExcept">Nacionalidad:</dt>
+                            <dd id="ddNacionalidadTurnAndExcept"></dd>
+                            <dt id="dtLugarDeNacimientoTurnAndExcept">Lugar de Nacimiento:</dt>
+                            <dd id="ddLugarDeNacimientoTurnAndExcept"></dd>
+                            <dt id="dtFechaDeNacimientoTurnAndExcept">Fecha de Nacimiento:</dt>
+                            <dd id="ddFechaDeNacimientoTurnAndExcept"></dd>
+                        </dl>
+                    </div>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal col-sm-12">
+        <br>
+
+        <div class="widget">
+            <div class="widget-simple themed-background-dark">
+                <a href="#" id="aFotoPerfilContactoPerTurnAndExcept"><img id="imgFotoPerfilContactoPerTurnAndExcept"
+                                                                          class="img-rounded pull-right img-perfil"></a>
+                <h4 class="widget-content">
+                    <div>
+                        <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                            <dt id="dtDireccionTurnAndExcept">Direcci&oacute;n:</dt>
+                            <dd id="ddDireccionTurnAndExcept"></dd>
+                            <dt id="dtTelefonoFijoTurnAndExcept">Tel&eacute;fono Fijo:</dt>
+                            <dd id="ddTelefonoFijoTurnAndExcept"></dd>
+                            <dt id="dtCelularPerTurnAndExcept">Celular Personal:</dt>
+                            <dd id="ddCelularPerTurnAndExcept"></dd>
+                            <dt id="dtEmailPerTurnAndExcept">E-Mail Personal:</dt>
+                            <dd id="ddEmailPerTurnAndExcept"></dd>
+                            <dt id="dtAuxiliar1TurnAndExcept">&nbsp;</dt>
+                            <dd id="ddAuxiliar1TurnAndExcept">&nbsp;</dd>
+                        </dl>
+                    </div>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal col-sm-12">
+        <br>
+
+        <div class="widget">
+            <div class="widget-simple themed-background-dark">
+                <a href="#" id="aFotoPerfilContactoInstTurnAndExcept"><img id="imgFotoPerfilContactoInstTurnAndExcept"
+                                                                           class="img-rounded pull-right img-perfil"></a>
+                <h4 class="widget-content">
+                    <div>
+                        <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                            <dt id="dtTelefonoInstTurnAndExcept">Tel&eacute;fono Inst.:</dt>
+                            <dd id="ddTelefonoInstTurnAndExcept"></dd>
+                            <dt id="dtCelularInstTurnAndExcept">Celular Corporativo:</dt>
+                            <dd id="ddCelularInstTurnAndExcept"></dd>
+                            <dt id="dtTelefonoFaxTurnAndExcept">Fax:</dt>
+                            <dd id="ddTelefonoFaxTurnAndExcept"></dd>
+                            <dt id="dtInternoInstTurnAndExcept">N&uacute;mero Interno:</dt>
+                            <dd id="ddInternoInstTurnAndExcept"></dd>
+                            <dt id="dtEmailInstTurnAndExcept">E-Mail Institucional:</dt>
+                            <dd id="ddEmailInstTurnAndExcept"></dd>
+                        </dl>
+                    </div>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<!-- Contenido referente al calendario laboral y gestión de horarios -->
+<div id="page-content">
+    <!-- FullCalendar Content -->
+    <div class="block block-alt-noborder full">
+        <div class="block-title">
+            <div class="block-options pull-right">
+                <a id="btnImprimirCalendarioLaboralAndExcept" class="btn btn-alt btn-sm btn-default" title="Imprimir Calendario" data-toggle="tooltip" href="javascript:void(0)" data-original-title="Imprimir">
+                    <i class="fa fa-print"></i>
+                </a>
+            </div>
+            <h2>
+                <strong><span id="spanPrefijoCalendarioLaboral"></span></strong>
+                Calendario de Turnos Laborales
+                <span id="spanSufijoCalendarioLaboral"></span>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="calendar"></div>
+            </div>
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <!-- Responsive Partial Title -->
+                    <div class="block-title">
+                        <h2><strong>Perfiles</strong> & Horarios</h2>
+                    </div>
+                    <!-- END Responsive Partial Title -->
+
+                    <!-- Responsive Partial Content -->
+                    <p>Cuadro descriptivo de horarios de asistencia en consideraci&oacute;n a los perfiles y horarios establecidos.</p>
+                    <table id="tblGrillaAsignacionSingle" class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Nro.</th>
+                            <th style="width: 150px;" class="text-center"><i class="gi gi-user"></i></th>
+                            <th class='text-center'>Grupo</th>
+                            <th class='text-center'>Calendario</th>
+                            <th class='text-center'>Fechas</th>
+                            <th class='text-center'>Ubicaci&oacute;n</th>
+                            <th class='text-center'>Estaci&oacute;n</th>
+                            <th class='text-center'>Horas</th>
+                            <th class='text-center'>Observaci&oacute;n</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody_asignacion_single">
+                        </tbody>
+                    </table>
+                    <!-- END Responsive Partial Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END FullCalendar Block -->
+<!-- END FullCalendar Content -->
+</form>
+</div>
+<div class="section" id="divMarcaciones">
+    <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>NOTA: </b>Debe seleccionar necesariamente las fechas para el rango en el cual se obtendr&aacute; el c&aacute;lculo.</h6>
+    <form class="navbar-form" id="formCalc">
+        <div class="col-md-10">
+            <!-- Input Grid Block -->
+            <div class="block">
+                <!-- Input Grid Title -->
+                <div class="block-title">
+
+                    <h2>Listado General para C&aacute;lculos</h2>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input id="txtFechaCalculo" name="txtFechaCalculo" class="form-control input-datepicker-close text-center" data-date-format="dd-mm-yyyy" placeholder="Fecha para el C&aacute;lculo" data-date-min="01-01-2015" data-date-max="31-01-2015" type="text">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-primary" type="button" id="btnCalcular" accesskey="c">
+                                    <i class="fa fa-gears"></i>
+                                    Calcular
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    </br>
+                    <div id='jqxWidget'>
+                        <div id="divGridControlCalculos"></div>
+                    </div>
+                </div>
+                <!-- END Input Grid Title -->
+                <button class="btn btn-sm btn-primary" type="button" id="btnExportarCalculosExcel" accesskey="i">
+                    <i class="fi fi-xls"></i>
+                    Exportar Excel
+                </button>
+                <button class="btn btn-sm btn-primary" type="button" id="btnExportarCalculosPDF" accesskey="i">
+                    <i class="fi fi-pdf"></i>
+                    Exportar PDF
+                </button>
+                <button class="btn btn-sm btn-primary" type="button" id="btnDesagrupartodocalculos">
+                    <i class="fa fa-chain-broken"></i>
+                    Desagrupar Todo
+                </button>
+                <button class="btn btn-sm btn-primary" type="button" id="btnDesfiltrartodocalculos">
+                    <i class="gi gi-sorting"></i>
+                    Desfiltrar Todo
+                </button>
+            </div>
+            <!-- END Input Grid Block -->
+        </div>
+        <div class="col-md-2">
+            <!-- Input Grid Block -->
+            <div class="block">
+                <!-- Input Grid Title -->
+                <div class="block-title">
+                    <h2>Mostrar</h2>
+                    <br>
+                </div>
+                <div id="divListBoxCalculos"></div>
+                <!-- END Input Grid Title -->
+            </div>
+            <!-- END Input Grid Block -->
+        </div>
+
+        <!--<div id="divGridControlMarcaciones"></div>-->
+
+    </form>
+    <form id="formHorariosYMarcacionesCal" method="post" target="_blank">
+        <textarea id="carnets" name="carnets" hidden="hidden"></textarea>
+        <input type="hidden" id="fecha_ini" name="fecha_ini">
+        <input type="hidden" id="fecha_fin" name="fecha_fin">
+        <input type="hidden" id="n_rows" name="n_rows">
+        <input type="hidden" id="columns" name="columns">
+        <input type="hidden" id="filters" name="filters">
+        <input type="hidden" id="groups" name="groups">
+        <input type="hidden" id="sorteds" name="sorteds">
+    </form>
+</div>
+</div>
+<!--</form></div>-->
+</body>
+<div class="modal fade bs-example-modal-lg" id="popupDescripcionHorario" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" id="testForm_perfil" data-toggle="validator" onsubmit="return false;"/>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title" id="tituloModal">Horario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                DATOS DEL HORARIO SELECCIONADO
+                            </div>
+                            <div class="panel-body form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="txtNombreHorario">Nombre Horario:</label>
+                                    <div class="col-md-6" form-group>
+                                        <input type="text" id="txtNombreHorario" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="divNombreAlternativoHorario">
+                                    <label class="col-sm-3 control-label" for="txtNombreAlternativoHorario">Nombre Alternativo:</label>
+                                    <div class="col-md-6" form-group>
+                                        <textarea id="txtNombreAlternativoHorario" class="form-control" readonly></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="divColorHorario">
+                                    <label class="col-sm-3 control-label" for="txtColorHorario">Color:</label>
+                                    <div class="col-md-6" form-group>
+                                        <input type="text" id="txtColorHorario" value="#FFFFFF" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <fieldset>
+                                    <legend><i class="fa fa-angle-right"></i> Horario Entrada / Salida</legend>
+                                    <div class="form-group">
+                                        <div class="div-calendario-laboral" id="divHoraEntHorario">
+                                            <label class="col-sm-2 control-label" for="txtHoraEntHorario">Entrada:</label>
+                                            <div class="col-md-2"  form-group>
+                                                <input id="txtHoraEntHorario" name="txtHoraEntHorario" placeholder="Hora de entrada." class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="div-calendario-laboral" id="divHoraSalHorario">
+                                            <label class="col-sm-2 control-label" for="txtHoraSalHorario">Salida:</label>
+                                            <div class="col-md-2"  form-group>
+                                                <input id="txtHoraSalHorario" name="txtHoraSalHorario" class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-2 control-label" for="txtHorasLaborales">Horas Laborales:</label>
+                                        <div class="col-md-2">
+                                            <input id="txtHorasLaborales" name="txtHorasLaborales" placeholder="Horas Laborales." type="text" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><i class="fa fa-angle-right"></i> Rango Control Marcaciones</legend>
+                                    <div class="form-group">
+                                        <div class="div-calendario-laboral" id="divHoraInicioRangoEnt">
+                                            <label class="col-sm-3 control-label" for="txtHoraInicioRangoEnt">Inicio Entrada:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHoraInicioRangoEnt" name="txtHoraInicioRangoEnt" placeholder="Hora de entrada." class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="div-calendario-laboral" id="divHoraFinalizacionRangoEnt">
+                                            <label class="col-sm-3 control-label" for="txtHoraFinalizacionRangoEnt">Finalizaci&oacute;n Entrada:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHoraFinalizacionRangoEnt" name="txtHoraFinalizacionRangoEnt" class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="div-calendario-laboral" id="divHoraInicioRangoSal">
+                                            <label class="col-sm-3 control-label" for="txtHoraInicioRangoSal">Inicio Salida:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHoraInicioRangoSal" name="txtHoraInicioRangoSal" placeholder="Hora de inicio de salida." class="form-control" type="text" readonly>
+                                            </div>
+
+                                        </div>
+                                        <div class="div-calendario-laboral" id="divHoraFinalizacionRangoSal">
+                                            <label class="col-sm-3 control-label" for="txtHoraFinalizacionRangoSal">Fin Salida:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHoraFinalizacionRangoSal" name="txtHoraFinalizacionRangoSal" placeholder="Hora de finalizaci&oacute;n de salida." class="form-control" type="text" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><i class="fa fa-angle-right"></i> Rango Fechas</legend>
+                                    <div class="form-group">
+                                        <div class="div-calendario-laboral" id="divHorarioFechaIni">
+                                            <label class="col-sm-3 control-label" for="txtHorarioFechaIni">Fecha Inicio:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHorarioFechaIni" name="txtHorarioFechaIni" class="form-control input-datepicker" placeholder="Desde" data-date-format="dd-mm-yyyy" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="div-calendario-laboral" id="divHorarioFechaFin">
+                                            <label class="col-sm-3 control-label" for="txtHorarioFechaFin">Fecha Fin:</label>
+                                            <div class="col-md-3">
+                                                <input id="txtHorarioFechaFin" name="txtHorarioFechaFin" class="form-control input-datepicker" placeholder="Hasta" data-date-format="dd-mm-yyyy" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend><i class="fa fa-angle-right"></i> Observaciones</legend>
+                                    <div class="form-group div-move-relab" id="divObservacion">
+                                        <label class="col-md-3 control-label" for="txtObservacion">Observaciones:</label>
+                                        <div class="col-md-6">
+                                            <textarea id="txtObservacion" name="txtObservacion" class="form-control" placeholder="Observaciones.." readonly></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCerrarHorario" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-compress"></i>Cerrar</button>
+                <button type="button" id="btnGuardarModificacionHorario" class="btn btn-primary"><i class="fa fa-pencil"></i>Guardar Modificaci&oacute;n de Fechas</button>
+                <button type="button" id="btnDescartarHorario" class="btn btn-primary"><i class="gi gi-bin"></i>Descartar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="divMsjeNotificacionError">
+    <div id="divMsjePorError">
+    </div>
+</div>
+<div id="divMsjeNotificacionWarning">
+    <div id="divMsjePorWarning">
+    </div>
+</div>
+<div id="divMsjeNotificacionSuccess">
+    <div id="divMsjePorSuccess">
+    </div>
+</div>
