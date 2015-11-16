@@ -29,22 +29,11 @@ $().ready(function () {
             }
         }
     });
-    $("#liList").click(function () {
+    $("#liAll").click(function () {
         $('#divTabAllIdeas').jqxTabs('enableAt', 0);
         $('#divTabAllIdeas').jqxTabs('disableAt', 1);
-        
-        
         $('#divTabAllIdeas').jqxTabs({selectedItem: 0});
-        $("#msjs-alert").hide();
-    });
-    $("#liIdeas").click(function () {
-        $('#divTabAllIdeas').jqxTabs('enableAt', 0);
-        $('#divTabAllIdeas').jqxTabs('enableAt', 1);
         
-        
-        $('#divTabAllIdeas').jqxTabs({selectedItem: 1});
-
-        $("#msjs-alert").hide();
     });
     /**
      * Control del evento de solicitud de guardar el registro de la Idea de Negocio.
@@ -55,133 +44,47 @@ $().ready(function () {
                 $("#popupClasificacion").modal("hide")
             }
     });
-
-    $("#btnCancelarNew").click(function () {
+     $("#btnVolverAlListadoPrincipalDesdeEdit").click(function (){
         $('#divTabAllIdeas').jqxTabs('enableAt', 0);
         $('#divTabAllIdeas').jqxTabs('disableAt', 1);
-        
-        
-        
-
-        $("#msjs-alert").hide();
-        //deshabilitarCamposParaNuevoRegistroDeRelacionLaboral();
-    });
-    $("#btnCancelarEdit").click(function () {
-        $('#divTabAllIdeas').jqxTabs('enableAt', 0);
-        $('#divTabAllIdeas').jqxTabs('disableAt', 1);
-        
-        
-        
-
-        $("#msjs-alert").hide();
-        //deshabilitarCamposParaEditarRegistroDeRelacionLaboral();
-    });
-    $("#btnVolverDesdeExcept").click(function (){
-        $('#divTabAllIdeas').jqxTabs('enableAt', 0);
-        $('#divTabAllIdeas').jqxTabs('disableAt', 1);
-        
-        
-        
-
-        $("#msjs-alert").hide();
+         $('#divTabAllIdeas').jqxTabs({selectedItem: 0});
     });
 
-    $("#btnExportarExcel").click(function () {
-        var items = $("#jqxlistbox").jqxListBox('getCheckedItems');
-        var numColumnas = 0;
-        $.each(items, function (index, value) {
-            numColumnas++;
-        });
-        if (numColumnas > 0) exportarReporte(1);
-        else {
-            alert("Debe seleccionar al menos una columna para la obtención del reporte solicitado.");
-            $("#jqxlistbox").focus();
+    $("#btnExportarAllExcel").click(function () {
+        var datainformations = $("#divGridIdeasAll").jqxGrid("getdatainformation");
+        var rowscounts = datainformations.rowscount;
+        if(rowscounts>0){
+            exportarReporteClasificacion(1);
+        }else{
+            $("#divMsjePorWarning").html("");
+            $("#divMsjePorWarning").append("Deve haber al menos un registro para posibilitar la exportaci&oacute;n en formato Excel.");
+            $("#divMsjeNotificacionWarning").jqxNotification("open");
         }
     });
-    $("#btnExportarPDF").click(function () {
-        var items = $("#jqxlistbox").jqxListBox('getCheckedItems');
-        var numColumnas = 0;
-        $.each(items, function (index, value) {
-            numColumnas++;
-        });
-        if (numColumnas > 0) exportarReporte(2);
-        else {
-            alert("Debe seleccionar al menos una columna para la obtención del reporte solicitado.");
-            $("#jqxlistbox").focus();
+    $("#btnExportarAllPDF").click(function () {
+        var datainformations = $("#divGridIdeasAll").jqxGrid("getdatainformation");
+        var rowscounts = datainformations.rowscount;
+        if(rowscounts>0){
+            exportarReporteClasificacion(2);
+        }else{
+            $("#divMsjePorWarning").html("");
+            $("#divMsjePorWarning").append("Deve haber al menos un registro para posibilitar la exportaci&oacute;n en formato PDF.");
+            $("#divMsjeNotificacionWarning").jqxNotification("open");
         }
+
     });
     $("#chkAllCols").click(function () {
         if (this.checked == true) {
-            $("#jqxlistbox").jqxListBox('checkAll');
+            $("#jqxlistboxall").jqxlistboxall('checkAll');
         } else {
-            $("#jqxlistbox").jqxListBox('uncheckAll');
+            $("#jqxlistboxall").jqxlistboxall('uncheckAll');
         }
     });
-    $("#btnImprimirCalendarioLaboralAndExcept").on("click",function(){
-        var opciones = {mode:"popup",popClose: false};
-        $("#page-content").printArea(opciones);
+    $('#btnDesfiltrarTodoAll').click(function () {
+        $("#divGridIdeasAll").jqxGrid('clearfilters');
     });
-    /**
-     * Control sobre el cambio en el listado de motivos de baja
-     */
-    $("#lstMotivosBajas").change(function () {
-        var res = this.value.split("_");
-        $("#hdnFechaRenBaja").val(res[0]);
-        $("#hdnFechaAceptaRenBaja").val(res[1]);
-        $("#hdnFechaAgraServBaja").val(res[2]);
-        if (res[0] > 0)defineFechasBajas(res[1], res[2], res[3]);
-        else $("#divFechasBaja").hide();
-    });
-    /**
-     * Control sobre el uso o no de a.i. en el cargo para movilidad de personal.
-     */
-    $("#chkAi").on("click", function () {
-        var cargo = $("#txtCargoMovilidad").val();
-        var sw = 0;
-        if (jQuery.type(cargo) == "object") {
-            cargo = String(cargo.label);
-        }
-        cargo = cargo + '';
-        if (cargo != null && cargo != '') {
-            if (this.checked == true) {
-                var n = cargo.indexOf("a.i.");
-                if (n < 0) {
-                    cargo = cargo + " a.i.";
-                    $('#txtCargoMovilidad').val(cargo);
-                    //$('#txtCargoMovilidad').jqxInput('val', {label: cargo, value: cargo});
-                }
-            } else {
-                var n = cargo.indexOf("a.i.");
-                if (n > 0) {
-                    cargo = cargo.replace("a.i.", "").trim();
-                    $('#txtCargoMovilidad').val(cargo);
-                    //$('#txtCargoMovilidad').jqxInput('val', {label: cargo, value: cargo});
-                }
-            }
-        }
-    });
-
-    $("#btnVolverAlListadoPrincipalDesdeNew,#btnVolverAlListadoPrincipalDesdeEdit,#btnCancelarIdeaEdit").click(function () {
-        $('#divTabAllIdeas').jqxTabs('enableAt', 0);
-        $('#divTabAllIdeas').jqxTabs('enableAt', 1);
-        $('#divTabAllIdeas').jqxTabs({selectedItem: 1});
-        
-        
-        
-
-        $("#msjs-alert").hide();
-    });
-    $('#btnDesfiltrartodo').click(function () {
-        $("#divGridRelaborales").jqxGrid('clearfilters');
-    });
-    $('#btnDesfiltrarTodoMovilidad').click(function () {
-        $("#divGridRelaboralesmovilidad").jqxGrid('clearfilters');
-    });
-    $('#btnDesagrupartodo').click(function () {
-        $('#divGridRelaborales').jqxGrid('cleargroups');
-    });
-    $('#btnDesagruparTodoMovilidad').click(function () {
-        $('#divGridRelaboralesmovilidad').jqxGrid('cleargroups');
+    $('#btnDesagruparTodoAll').click(function () {
+        $('#divGridIdeasAll').jqxGrid('cleargroups');
     });
     /*
      *   Función para la inserción obligatoria de datos numéricos en los campos de clase.
@@ -283,7 +186,7 @@ function definirGrillaParaListaRelaborales() {
     cargarRegistrosDeRelacionesLaborales();
     function cargarRegistrosDeRelacionesLaborales() {
         var theme = prepareSimulator("grid");
-        $("#divGridRelaborales").jqxGrid(
+        $("#divGridIdeasAll").jqxGrid(
             {
                 theme: theme,
                 width: '100%',
@@ -312,9 +215,9 @@ function definirGrillaParaListaRelaborales() {
                     /* Registrar nueva relación laboral.*/
                     $("#listrowbutton").off();
                     $("#listrowbutton").on('click', function () {
-                        var selectedrowindex = $("#divGridRelaborales").jqxGrid('getselectedrowindex');
+                        var selectedrowindex = $("#divGridIdeasAll").jqxGrid('getselectedrowindex');
                         if (selectedrowindex >= 0) {
-                            var dataRecord = $('#divGridRelaborales').jqxGrid('getrowdata', selectedrowindex);
+                            var dataRecord = $('#divGridIdeasAll').jqxGrid('getrowdata', selectedrowindex);
                             if (dataRecord != undefined) {
                                 var idRelaboral = dataRecord.id_relaboral;
                                 /*
@@ -404,7 +307,7 @@ function definirGrillaParaListaRelaborales() {
                         columntype: 'number',
                         cellsrenderer: function (rowline) {
                             ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
+                            var dataRecord = $("#divGridIdeasAll").jqxGrid('getrowdata', ctrlrow);
                             var sw = dataRecord.tiene_contrato_vigente;
                             if (sw == 0 || sw == -1) {
                                 return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-plus-square fa-2x text-info' title='Nuevo Registro.'/></i></div>";
@@ -423,7 +326,7 @@ function definirGrillaParaListaRelaborales() {
                         columntype: 'number',
                         cellsrenderer: function (rowline) {
                             ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
+                            var dataRecord = $("#divGridIdeasAll").jqxGrid('getrowdata', ctrlrow);
                             var estado = dataRecord.estado;
                             if (dataRecord.estado == 2) {
                                 return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-check-square fa-2x text-info' title='Aprobar registro'></i></a></div>";
@@ -442,7 +345,7 @@ function definirGrillaParaListaRelaborales() {
                         columntype: 'number',
                         cellsrenderer: function (rowline) {
                             ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
+                            var dataRecord = $("#divGridIdeasAll").jqxGrid('getrowdata', ctrlrow);
                             var estado = dataRecord.estado;
                             if (estado == 2) {
                                 return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-pencil-square fa-2x text-info' title='Modificar registro.'/></a></div>";
@@ -461,7 +364,7 @@ function definirGrillaParaListaRelaborales() {
                         columntype: 'number',
                         cellsrenderer: function (rowline) {
                             ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
+                            var dataRecord = $("#divGridIdeasAll").jqxGrid('getrowdata', ctrlrow);
                             var estado = dataRecord.estado;
                             if (estado == 1) {
                                 //return "<div style='width: 100%'><a href='#'><img src='/images/del.png' style='margin-left: 25%' title='Dar de baja al registro.'/></a></div>";
@@ -481,7 +384,7 @@ function definirGrillaParaListaRelaborales() {
                         columntype: 'number',
                         cellsrenderer: function (rowline) {
                             ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
+                            var dataRecord = $("#divGridIdeasAll").jqxGrid('getrowdata', ctrlrow);
                             var sw = dataRecord.tiene_contrato_vigente;
                             if (sw >= 0) {
                                 return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-tag fa-2x text-info' title='Movilidad de Personal.'/></i></div>";
@@ -500,7 +403,7 @@ function definirGrillaParaListaRelaborales() {
                         columntype: 'number',
                         cellsrenderer: function (rowline) {
                             ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
+                            var dataRecord = $("#divGridIdeasAll").jqxGrid('getrowdata', ctrlrow);
                             var sw = dataRecord.tiene_contrato_vigente;
                             if (sw >= 0) {
                                 return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-search fa-2x text-info' title='Vista Historial.'/></i></div>";
@@ -721,16 +624,16 @@ function definirGrillaParaListaRelaborales() {
             {label: 'Motivo Baja', value: 'motivo_baja', checked: true},
             {label: 'Observacion', value: 'observacion', checked: true}
         ];
-        $("#jqxlistbox").jqxListBox({source: listSource, width: "100%", height: 430, checkboxes: true});
-        $("#jqxlistbox").on('checkChange', function (event) {
-            $("#divGridRelaborales").jqxGrid('beginupdate');
+        $("#jqxlistboxall").jqxlistboxall({source: listSource, width: "100%", height: 430, checkboxes: true});
+        $("#jqxlistboxall").on('checkChange', function (event) {
+            $("#divGridIdeasAll").jqxGrid('beginupdate');
             if (event.args.checked) {
-                $("#divGridRelaborales").jqxGrid('showcolumn', event.args.value);
+                $("#divGridIdeasAll").jqxGrid('showcolumn', event.args.value);
             }
             else {
-                $("#divGridRelaborales").jqxGrid('hidecolumn', event.args.value);
+                $("#divGridIdeasAll").jqxGrid('hidecolumn', event.args.value);
             }
-            $("#divGridRelaborales").jqxGrid('endupdate');
+            $("#divGridIdeasAll").jqxGrid('endupdate');
         });
     }
 }
@@ -1586,7 +1489,7 @@ function cargarGrillaAsignacionIndividualFechasUbicacionEstacion(idPerfilLaboral
  */
 function definirListaAsignados(idPerfilRelaboral,idUbicacion,idEstacion,fechaIni,fechaFin){
     /*$("#lstBoxRegistrados").html("");
-    $("#lstBoxRegistrados").jqxListBox('render');
+    $("#lstBoxRegistrados").jqxlistboxall('render');
     $("#lstBoxRegistrados").prop("disabled",true);
     if(idUbicacion>0&&idUbicacion>0&&fechaIni!=""&&fechaFin!=""){
         var arrPersonal = [];
@@ -1619,7 +1522,7 @@ function definirListaAsignados(idPerfilRelaboral,idUbicacion,idEstacion,fechaIni
             dataAdapter = new $.jqx.dataAdapter(source);
             $("#lstBoxRegistrados").prop("disabled",false);
             $("#divPersonasAsignadas").show();
-            $("#lstBoxRegistrados").jqxListBox({ filterable: true,allowDrop: false, allowDrag: false, source: dataAdapter, width:  "100%", height: 500,
+            $("#lstBoxRegistrados").jqxlistboxall({ filterable: true,allowDrop: false, allowDrag: false, source: dataAdapter, width:  "100%", height: 500,
                 renderer: function (index, label, value) {
                     var datarecord = arrPersonal[index];
                     if(datarecord!=undefined){
@@ -1697,14 +1600,14 @@ function definirListaAsignados(idPerfilRelaboral,idUbicacion,idEstacion,fechaIni
                     }
                 },
                 ready:function(){
-                    var itemsB = $("#lstBoxRegistrados").jqxListBox('getItems');
+                    var itemsB = $("#lstBoxRegistrados").jqxlistboxall('getItems');
                     $("#spanContadorLstBoxRegistrados").text(itemsB.length);
                 }
             });
 
             $("#clearFilterRegistrados").jqxButton();
             $("#clearFilterRegistrados").click(function () {
-                $("#lstBoxRegistrados").jqxListBox('clearFilter');
+                $("#lstBoxRegistrados").jqxlistboxall('clearFilter');
             });
         }else{
             $("#divPersonasAsignadas").hide();

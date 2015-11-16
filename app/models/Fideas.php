@@ -132,6 +132,7 @@ class Fideas extends \Phalcon\Mvc\Model  {
      * @param string $group
      * @return Resultset
      */
+
     public function getAllFromOnePersonByGestion($idPersona,$gestion,$mes,$estado,$where='',$group=''){
         if($idPersona>=0&&$gestion>=0){
             $sql = "SELECT * FROM f_ideas_por_persona_en_gestion(".$idPersona.",".$gestion.",".$mes.",".$estado.")";
@@ -141,4 +142,4 @@ class Fideas extends \Phalcon\Mvc\Model  {
             return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
         }
     }
-} 
+}

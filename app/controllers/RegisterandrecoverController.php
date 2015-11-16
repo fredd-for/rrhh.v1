@@ -762,10 +762,10 @@ class RegisterandrecoverController extends ControllerBaseOut{
                                 var n = passA.length;
                                 if(n<8){
                                     ok = false;
-                                    $("#spanErrorPasswordA").html("La contrase&ntilde;a debe tener al menos 5 car&aacute;cteres.");
+                                    $("#spanErrorPasswordA").html("La contrase&ntilde;a debe tener al menos 8 car&aacute;cteres.");
                                     $("#divPasswordA").addClass("has-error");
                                     if(enfoque==null)enfoque = $("#txtPasswordA");
-                                    $("#spanErrorPasswordB").html("La contrase&ntilde;a debe tener al menos 5 car&aacute;cteres.");
+                                    $("#spanErrorPasswordB").html("La contrase&ntilde;a debe tener al menos 8 car&aacute;cteres.");
                                     $("#divPasswordB").addClass("has-error");
                                 }
                             }else {
