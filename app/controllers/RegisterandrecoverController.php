@@ -22,7 +22,7 @@ class RegisterandrecoverController extends ControllerBaseOut{
     public function indexAction()
     {
         $this->view->disable();
-        $this->response->redirect('/login');
+        //$this->response->redirect('/login');
     }
 
     /**
@@ -974,10 +974,9 @@ class RegisterandrecoverController extends ControllerBaseOut{
                 $cuerpo .= '</body>';
                 $cuerpo .= '</html>';
                 echo $cuerpo;
-
-
-            } else echo "errorrrr 5";
-        }else echo "errorrrr 10";
+            }
+        }
+        echo $cuerpo;
     }
 
     /**
