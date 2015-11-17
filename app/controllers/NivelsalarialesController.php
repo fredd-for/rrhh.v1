@@ -103,7 +103,7 @@ class NivelsalarialesController extends ControllerBase
 				'activo' => $v->activo,
 				'activo1' => $v->activo1,
 				'nivelsalarial_id_existente' => $v->nivelsalarial_id_existente,
-				//'fecha_ini' => date("Y-m-d",strtotime($v->fecha_ini))
+				'tipo_resolucion' => $v->tipo_resolucion
 				);
 		}
 		echo json_encode($customers);

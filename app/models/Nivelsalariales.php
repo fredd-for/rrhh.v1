@@ -129,12 +129,21 @@ class Nivelsalariales extends \Phalcon\Mvc\Model
 
     public function lista(){
         $sql = "SELECT n.id,n.resolucion_id,n.categoria,n.clase,n.nivel,n.denominacion,n.sueldo,n.activo,r.tipo_resolucion,r.numero_res, 
-CASE n.activo WHEN '1' THEN 'ACTIVO' ELSE 'INACTIVO' END as activo1, n.fecha_ini,n.fecha_fin,
-(SELECT id FROM nivelsalariales WHERE nivel=n.nivel AND baja_logica=1 AND activo=1) as nivelsalarial_id_existente
-FROM nivelsalariales n, resoluciones r 
-WHERE n.baja_logica=1 AND n.resolucion_id=r.id order by n.activo desc ,n.nivel asc";
+        CASE n.activo WHEN '1' THEN 'ACTIVO' ELSE 'INACTIVO' END as activo1, n.fecha_ini,n.fecha_fin,
+        (SELECT id FROM nivelsalariales WHERE nivel=n.nivel AND baja_logica=1 AND activo=1 ORDER BY fecha_ini DESC LIMIT 1) as nivelsalarial_id_existente
+        FROM nivelsalariales n, resoluciones r 
+        WHERE n.baja_logica=1 AND n.resolucion_id=r.id order by n.activo desc,n.resolucion_id DESC ,n.nivel asc";
         $this->_db = new Nivelsalariales();
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
+    }
+
+    public function listaSelect()
+    {
+        $sql = "SELECT n.id,CONCAT(denominacion,' ( ',sueldo,' Bs. ) ',' ',' ( ',tipo_resolucion,' )') as opcion
+        FROM nivelsalariales n, resoluciones r 
+        WHERE n.baja_logica=1 AND n.resolucion_id=r.id AND n.activo=1 order by n.activo desc,n.resolucion_id DESC ,n.nivel asc";
+        $this->_db = new Nivelsalariales();
+        return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));   
     }
 
     public function updateFecha($nivel,$nivelsalarial_id,$fecha_fin)
