@@ -46,7 +46,6 @@ class LoginController extends \Phalcon\Mvc\Controller {
                         }
                     }
                 }else{
-
                     if($user->nivel==0){
                         $ok=false;
                     }
@@ -57,7 +56,7 @@ class LoginController extends \Phalcon\Mvc\Controller {
                     $this->response->redirect('/');
                 }
             }
-            $this->flashSession->error('<b>Acceso denegado!</b> Usuario/Contraseña/Modalidad incorrectos');
+            else $this->flashSession->error('<b>Acceso denegado!</b> Usuario/Contraseña/Modalidad incorrectos');
         }
     }
 

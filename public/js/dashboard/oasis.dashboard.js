@@ -52,7 +52,7 @@ function obtenerGestionesPorPersona(idPersona) {
 function getDescuentosPorPersona(gestion){
     var result = null;
     $.ajax({
-        url: '/index/getdescuentospersonales/',
+        url: '/planillassal/getdescuentospersonales/',
         type: "POST",
         datatype: 'json',
         data:{gestion:gestion},

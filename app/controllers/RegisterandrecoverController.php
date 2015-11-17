@@ -977,7 +977,7 @@ class RegisterandrecoverController extends ControllerBaseOut{
 
 
             }
-        }
+        }else echo "errorrrr 10";
     }
 
     /**
