@@ -1799,4 +1799,52 @@ class PlanillassalController extends ControllerBase{
             #endregion Proceso de generación del documento PDF
         }
     }
+    /**
+     * Función para la obtención del listado de descuentos mensuales de una determinada persona
+     */
+    public function getdescuentospersonalesAction(){
+        $this->view->disable();
+        $descuentos = array();
+        $gestion = 0;
+        if(isset($_POST["gestion"])){
+            $gestion = $_POST["gestion"];
+        }
+        $idUsuario = $this->_user->id;
+        $usuario = Usuarios::findFirstById($idUsuario);
+        $objD = new Fdescuentos();
+        $result = $objD->getAllByPerson($usuario->persona_id,$gestion);
+        if($result->count()>0){
+            foreach ($result as $v) {
+                $descuentos[] = array(
+                    'id_descuento'=>$v->id_descuento,
+                    'relaboral_id'=>$v->relaboral_id,
+                    'gestion'=>$v->gestion,
+                    'mes'=>$v->mes,
+                    'mes_descripcion'=>$v->mes_descripcion,
+                    'faltas'=>$v->faltas,
+                    'atrasos'=>$v->atrasos,
+                    'faltas_atrasos'=>$v->faltas_atrasos,
+                    'lsgh'=>$v->lsgh,
+                    'abandono'=>$v->abandono,
+                    'omision'=>$v->omision,
+                    'retencion'=>$v->retencion,
+                    'otros'=>$v->otros,
+                    'total_descuentos'=>$v->total_descuentos,
+                    'observacion'=>$v->observacion,
+                    'motivo_anu'=>$v->motivo_anu,
+                    'estado'=>$v->estado,
+                    'baja_logica'=>$v->baja_logica,
+                    'agrupador'=>$v->agrupador,
+                    'user_reg_id'=>$v->user_reg_id,
+                    'fecha_reg'=>$v->fecha_reg,
+                    'user_mod_id'=>$v->user_mod_id,
+                    'fecha_mod'=>$v->fecha_mod,
+                    'user_anu_id'=>$v->user_anu_id,
+                    'fecha_anu'=>$v->fecha_anu
+                );
+            }
+
+        }
+        echo json_encode($descuentos);
+    }
 } 

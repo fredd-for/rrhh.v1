@@ -174,7 +174,7 @@ FROM seguimientos s
 INNER JOIN seguimientosestados se ON s.seguimiento_estado_id=se.id
 INNER JOIN pacs p ON s.pac_id=p.id
 INNER JOIN cargos c ON p.cargo_id=c.id
-INNER JOIN nivelsalariales n ON c.codigo_nivel=n.nivel AND n.activo=1
+INNER JOIN nivelsalariales n ON c.nivelsalarial_id=n.id 
 INNER JOIN organigramas o ON c.organigrama_id = o.id
 WHERE s.baja_logica=1 ORDER BY s.id ASC";
         $this->_db = new Procesoscontrataciones();

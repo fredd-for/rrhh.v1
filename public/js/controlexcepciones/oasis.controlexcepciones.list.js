@@ -208,7 +208,11 @@ function definirGrillaParaListaControlExcepcionesPorIdRelaboral(dataRecordRelabo
                                 /**
                                  * La modificación sólo es admisible si el registro de horario laboral tiene estado EN ELABORACIÓN O ELABORADO
                                  */
-                                if (dataRecord.controlexcepcion_estado == 1 || dataRecord.controlexcepcion_estado == 2) {
+                                /*if (dataRecord.controlexcepcion_estado == 1 || dataRecord.controlexcepcion_estado == 2) {*/
+                                /**
+                                 * Modificado eventualmente debido a requerimiento de RRHH
+                                 */
+                                if (dataRecord.controlexcepcion_estado >= 1) {
                                     $('#divTabControlExcepciones').jqxTabs('enableAt', 0);
                                     $('#divTabControlExcepciones').jqxTabs('enableAt', 1);
                                     $('#divTabControlExcepciones').jqxTabs('disableAt', 2);
@@ -217,7 +221,7 @@ function definirGrillaParaListaControlExcepcionesPorIdRelaboral(dataRecordRelabo
                                     $('#divTabControlExcepciones').jqxTabs({selectedItem: 3});
                                     $("#hdnIdRelaboralEdit").val(idRelaboral);
                                     $("#hdnIdControlExcepcionEdit").val(dataRecord.id);
-                                    limpiarMensajesErrorPorValidacionIdeas(2);
+                                    limpiarMensajesErrorPorValidacionControlExcepcion(2);
                                     inicializarFormularioControlExcepcionesNuevoEditar(2,idRelaboral,dataRecord.excepcion_id,dataRecord.fecha_ini,dataRecord.hora_ini,dataRecord.fecha_fin,dataRecord.hora_fin,dataRecord.justificacion,dataRecord.turno,dataRecord.entrada_salida,genero,dataRecord.controlexcepcion_observacion);
                                 } else {
                                     var msje = "Debe seleccionar un registro en estado ELABORADO necesariamente.";

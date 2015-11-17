@@ -22,6 +22,5 @@ class MicuentaController extends ControllerBase
         $this->assets->addJs('/js/pschecker/pschecker.js');
         $this->assets->addCss('/assets/css/pschecker.css');
         $this->assets->addJs('/js/micuenta/oasis.micuenta.index.js');
-
     }
 } 

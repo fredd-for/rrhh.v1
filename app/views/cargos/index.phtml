@@ -8,7 +8,10 @@ $('#codigo_nivel').change('select', function (event) {
 		type:'POST',
 		datatype: 'json',
 		data:{id:$('#codigo_nivel').val()},
-		success: function(data) { $("#sueldotxt").text(data);
+		success: function(data) { 
+			var obj = jQuery.parseJSON(data);
+			$("#sueldotxt").text(obj.sueldo);
+			$("#nivel").val(obj.nivel);
 												}, //mostramos el error
 												error: function() { alert('Se ha producido un error Inesperado'); }
 											});
@@ -29,6 +32,7 @@ function cargar(){
 		{ name: 'organigrama_id',type: 'string'},
 		{ name: 'depende_id',type: 'number'},
 		{ name: 'codigo_nivel',type: 'string'},
+		{ name: 'nivelsalarial_id',type: 'string'},
 		{ name: 'denominacion',type: 'string'},
 		{ name: 'codigo',type: 'string'},
 		{ name: 'ordenador',type: 'number'},
@@ -146,7 +150,8 @@ $("#jqxgrid").bind('rowselect', function (event) {
 	select_dependencia(dataRecord.organigrama_id,dataRecord.depende_id);
 	// select_fuentefinanciamiento(dataRecord.fin_partida_id);
 	$("#depende_id").val(dataRecord.depende_id);
-	$("#codigo_nivel").val(dataRecord.codigo_nivel);
+	$("#codigo_nivel").val(dataRecord.nivelsalarial_id);
+	$("#nivel").val(dataRecord.codigo_nivel);
 	$("#codigo").val(dataRecord.codigo);
 	$("#ordenador").val(dataRecord.ordenador);
 	$("#cargo").val(dataRecord.cargo);
@@ -362,11 +367,11 @@ $("#delete_pac").click(function(){
 
 /*******end segungo grid*********/
 
-$("#codigo_nivel").change(function(){
-	var element = $(this).find('option:selected'); 
-	var myTag = element.attr("sueldo"); 
-	$('#sueldotxt').text(myTag);
-});
+// $("#codigo_nivel").change(function(){
+// 	var element = $(this).find('option:selected'); 
+// 	var myTag = element.attr("sueldo"); 
+// 	$('#sueldotxt').text(myTag);
+// });
 
 /*************Select Dependiente*****************/
 $("#resolucion_ministerial_id").change(function () {
@@ -445,7 +450,7 @@ $('#testForm').validate({
 			url:'/cargos/save/',
 			type:'POST',
 			datatype: 'json',
-			data:{id:$("#id").val(),resolucion_ministerial_id:$('#resolucion_ministerial_id').val(),organigrama_id:$('#organigrama_id').val(),fin_partida_id:$('#fin_partida_id').val(),depende_id:$('#depende_id').val(),cargo:$("#cargo").val(),codigo_nivel:$("#codigo_nivel").val(),codigo:$('#codigo').val(),ordenador:$('#ordenador').val(),formacion_requerida:$("#formacion_requerida").val(),asistente:asistente,jefe:jefe},
+			data:{id:$("#id").val(),resolucion_ministerial_id:$('#resolucion_ministerial_id').val(),organigrama_id:$('#organigrama_id').val(),fin_partida_id:$('#fin_partida_id').val(),depende_id:$('#depende_id').val(),cargo:$("#cargo").val(),nivel:$("#nivel").val(),codigo_nivel:$("#codigo_nivel").val(),codigo:$('#codigo').val(),ordenador:$('#ordenador').val(),formacion_requerida:$("#formacion_requerida").val(),asistente:asistente,jefe:jefe},
 					success: function(data) { 
 												//cargar();
 												location.href="/cargos";	 //alert(data.msm); 
@@ -845,7 +850,7 @@ function exportarPacReporte(option){
         	<button class="btn btn-sm btn-danger" type="button" id="delete"><i class="fa fa-trash-o fa-fw"></i> Eliminar</button>
         	<button class="btn btn-sm btn-primary" type="button" id="add_pac"><i class="fa fa-sign-in fa-fw"></i> Asignar PACP</button>
         	<button class="btn btn-sm btn-primary" type="button" id="copy"><i class="fa fa-files-o fa-fw"></i> Copiar Cargo</button>
-        	<button class="btn btn-sm btn-primary" type="button" id="update_escala"><i class="fa fa-files-o fa-fw"></i> Actualizar Escala Salarial</button>
+        	<!-- <button class="btn btn-sm btn-primary" type="button" id="update_escala"><i class="fa fa-files-o fa-fw"></i> Actualizar Escala Salarial</button> -->
 
         	
         </div>
@@ -901,6 +906,7 @@ function exportarPacReporte(option){
 			<div class="modal-body">
 
 				<input id="id" name="id" type="hidden" />
+				<input id="nivel" name="nivel" type="hidden" />
 				<div class="form-group">
 					<label class="col-md-4 control-label" >Resolución</label>
 					<div class="col-md-8">

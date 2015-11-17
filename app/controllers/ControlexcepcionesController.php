@@ -634,7 +634,7 @@ class ControlexcepcionesController extends ControllerBase
             $objControlExcepciones = Controlexcepciones::findFirstById($_POST["id"]);
             if ($objControlExcepciones->id > 0 && $objControlExcepciones->estado == 2) {
                 try {
-                    $objControlExcepciones->estado = 4;
+                    $objControlExcepciones->estado = 6;
                     $objControlExcepciones->user_mod_id = $user_mod_id;
                     $objControlExcepciones->user_apr_id = $user_mod_id;
                     $objControlExcepciones->fecha_mod = $hoy;

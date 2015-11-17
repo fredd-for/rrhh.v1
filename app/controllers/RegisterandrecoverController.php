@@ -976,8 +976,8 @@ class RegisterandrecoverController extends ControllerBaseOut{
                 echo $cuerpo;
 
 
-            }
-        }
+            } else echo "errorrrr 5";
+        }else echo "errorrrr 10";
     }
 
     /**

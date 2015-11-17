@@ -16,7 +16,8 @@
 			{ name: 'fecha_fin',type: 'date'},
 			{ name: 'activo'},
 			{ name: 'activo1',type: 'string'},
-			{ name: 'nivelsalarial_id_existente'}
+			{ name: 'nivelsalarial_id_existente'},
+			{ name: 'tipo_resolucion',type:'string'},
 			],
 			url: '/nivelsalariales/list',
 			cache: false
@@ -48,11 +49,11 @@
                 		return "<div style='margin:4px;'>" + (value + 1) + "</div>";
                 	}
                 },
-			//{ text: 'Resolucion', datafield: 'resolucion_id', filtertype: 'input',width: '25%' },
-			{ text: 'Categoria', datafield: 'categoria', filtertype: 'input',width: '22%' },
+			{ text: 'Resolucion', datafield: 'tipo_resolucion', filtertype: 'checkedlist',width: '17%' },
+			{ text: 'Categoria', datafield: 'categoria', filtertype: 'input',width: '17%' },
 			{ text: 'Clase', datafield: 'clase', filtertype: 'number',width: '5%' },
 			{ text: 'Nivel', datafield: 'nivel', filtertype: 'number',width: '5%' },
-			{ text: 'Denominacion', datafield: 'denominacion', filtertype: 'input',width: '30%' },
+			{ text: 'Denominacion', datafield: 'denominacion', filtertype: 'input',width: '18%' },
 			{ text: 'Sueldo Bs.', datafield: 'sueldo', filtertype: 'number',width: '10%', cellsalign: 'center', align:'center'},
 			{ text: 'Fecha Inicio', datafield: 'fecha_ini', filtertype: 'range', width: '9%', cellsalign: 'center', cellsformat: 'dd-MM-yyyy',align:'center'},
 			{ text: 'Fecha Final', datafield: 'fecha_fin', filtertype: 'range', width: '9%', cellsalign: 'center', cellsformat: 'dd-MM-yyyy',align:'center'},
