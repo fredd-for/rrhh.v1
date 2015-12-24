@@ -196,6 +196,7 @@ function guardarFormulario110ImpRef(){
             type:'POST',
             datatype: 'json',
             async:false,
+            cache:false,
             data:{id:idForm110ImpRef,
                 id_relaboral:idRelaboral,
                 total_ganado:totalGanado,

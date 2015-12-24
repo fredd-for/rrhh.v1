@@ -68,7 +68,7 @@ class Usuarios extends \Phalcon\Mvc\Model {
         $sql .= "FROM relaborales r ";
         $sql .= "INNER JOIN personas p ON r.persona_id = p.id ";
         $sql .= "INNER JOIN usuarios u ON u.persona_id = p.id ";
-        $sql .= "WHERE r.estado>=1 AND u.id=".$idUsuario." ";
+        $sql .= "WHERE r.estado>=1 AND r.baja_logica=1 AND u.id=".$idUsuario." ";
         $sql .= "LIMIT 1";
         $this->_db = new usuarios();
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));

@@ -69,7 +69,7 @@ class CargosperfilesController extends ControllerBase
 			array(
 				'formacion_academica_id',
 				//Resoluciones::find(array('baja_logica=1',"order"=>"tipo_resolucion","columns" => "id,CONCAT(tipo_resolucion, ' - ', numero_res) as fullname")),
-				Parametros::find(array("baja_logica=1 and parametro='formacion_academica' and agrupador=0","order"=>"nivel ASC")),
+				parametros::find(array("baja_logica=1 and parametro='formacion_academica' and agrupador=0","order"=>"nivel ASC")),
 				'using' => array('id', "valor_1"),
 				'useEmpty' => true,
 				'emptyText' => '(Selecionar)',
@@ -82,7 +82,7 @@ class CargosperfilesController extends ControllerBase
 		$documento = $this->tag->select(
 			array(
 				'documento_id',
-				Parametros::find(array("baja_logica=1 and parametro='tipo_documento'","order"=>"nivel ASC")),
+				parametros::find(array("baja_logica=1 and parametro='tipo_documento'","order"=>"nivel ASC")),
 				'using' => array('id', "valor_1"),
 				'useEmpty' => true,
 				'emptyText' => '(Selecionar)',

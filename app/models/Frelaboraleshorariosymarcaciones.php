@@ -624,6 +624,27 @@ class Frelaboraleshorariosymarcaciones extends \Phalcon\Mvc\Model {
             return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
         }
     }
+
+    /**
+     * Función que se encarga de devolver en un solo resultado el conjunto de excepciones registradas para un registro de relación laboral determinado, considerando el
+     * filtro de un tipo de excepción específico, una fecha, hora de inicio y finalización. La diferencia con la función getExcepcionesEnDia se debe a que no es necesario recorrer el resultado
+     * sino simplemente mostrarlo.
+     * @param $idRelaboral
+     * @param $idExcepcion
+     * @param $gestion
+     * @param $mes
+     * @param $dia
+     * @param $idCalendariolaboral
+     * @param int $opcion
+     * @return Resultset
+     */
+    public function obtenerExcepcionesEnDia($idRelaboral,$idExcepcion,$gestion,$mes,$dia,$idCalendariolaboral,$opcion=0)
+    {   if($gestion>0&&$mes>0&&$dia>0&&$idCalendariolaboral>0) {
+            $sql = "SELECT f_excepciones_en_dia AS resultado FROM f_excepciones_en_dia($idRelaboral,$idExcepcion,$gestion,$mes,$dia,$idCalendariolaboral,$opcion) ";
+            $arr = new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
+            if(is_object($arr)&&$arr->count()>0)return $arr[0]->resultado;
+        }return "";
+    }
     /**
      * Función para la obtención en un sólo resultado el conjunto de feriados en un día en particular.
      * @param $gestion
@@ -637,5 +658,20 @@ class Frelaboraleshorariosymarcaciones extends \Phalcon\Mvc\Model {
            $sql = "SELECT f_feriados_en_dia FROM f_feriados_en_dia('$dia-$mes-$gestion',$opcion) ";
            return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
         }
+    }
+    /**
+     * Función para la obtención en un sólo resultado el conjunto de feriados en un día en particular.
+     * @param $gestion
+     * @param $mes
+     * @param $dia
+     * @param int $opcion
+     * @return Resultset
+     */
+    public function obtenerFeriadosEnDia($gestion,$mes,$dia,$opcion=0)
+    {   if($gestion>0&&$mes>0&&$dia>0) {
+            $sql = "SELECT f_feriados_en_dia AS resultado FROM f_feriados_en_dia('$dia-$mes-$gestion',$opcion) ";
+            $arr = new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
+            if(is_object($arr)&&$arr->count()>0)return $arr[0]->resultado;
+        } return "";
     }
 }

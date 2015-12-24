@@ -3,64 +3,42 @@
  *   Empresa Estatal de Transporte por Cable "Mi Teleférico"
  *   Versión:  1.0.0
  *   Usuario Creador: Lic. Javier Loza
- *   Fecha Creación:  09-11-2014
+ *   Fecha Creación:  12-11-2015
  */
-function exportarReporte(option){
+function exportarReporteClasificacion(option){
     columna = new Object();
     filtros = new Object();
     agrupados = new Object();
     ordenados = new Object();
-    ubicacion = $('#divGridRelaborales').jqxGrid('getcolumn','ubicacion');
-    condicion = $('#divGridRelaborales').jqxGrid('getcolumn','condicion');
-    estado_descripcion = $('#divGridRelaborales').jqxGrid('getcolumn','estado_descripcion');
-    nombres = $('#divGridRelaborales').jqxGrid('getcolumn','nombres');
-    ci = $('#divGridRelaborales').jqxGrid('getcolumn','ci');
-    expd = $('#divGridRelaborales').jqxGrid('getcolumn','expd');
-    /*num_complemento = $('#divGridRelaborales').jqxGrid('getcolumn','num_complemento');*/
-    gerencia_administrativa = $('#divGridRelaborales').jqxGrid('getcolumn','gerencia_administrativa');
-    cargo = $('#divGridRelaborales').jqxGrid('getcolumn','cargo');
-    sueldo = $('#divGridRelaborales').jqxGrid('getcolumn','sueldo');
-    departamento_administrativo = $('#divGridRelaborales').jqxGrid('getcolumn','departamento_administrativo');
-    area = $('#divGridRelaborales').jqxGrid('getcolumn','area');
-    fin_partida = $('#divGridRelaborales').jqxGrid('getcolumn','fin_partida');
-    proceso_codigo = $('#divGridRelaborales').jqxGrid('getcolumn','proceso_codigo');
-    nivelsalarial = $('#divGridRelaborales').jqxGrid('getcolumn','nivelsalarial');
-    fecha_ing = $('#divGridRelaborales').jqxGrid('getcolumn','fecha_ing');
-    fecha_ini = $('#divGridRelaborales').jqxGrid('getcolumn','fecha_ini');
-    fecha_incor = $('#divGridRelaborales').jqxGrid('getcolumn','fecha_incor');
-    fecha_fin = $('#divGridRelaborales').jqxGrid('getcolumn','fecha_fin'),
-    fecha_baja = $('#divGridRelaborales').jqxGrid('getcolumn','fecha_baja');
-    motivo_baja = $('#divGridRelaborales').jqxGrid('getcolumn','motivo_baja');
-    observacion = $('#divGridRelaborales').jqxGrid('getcolumn','observacion');
 
-    columna[ubicacion.datafield] = {text: ubicacion.text, hidden: ubicacion.hidden};
-    columna[condicion.datafield] = {text: condicion.text, hidden: condicion.hidden};
-    columna[estado_descripcion.datafield] = {text: estado_descripcion.text, hidden: estado_descripcion.hidden};
-    columna[nombres.datafield] = {text: nombres.text, hidden: nombres.hidden};
-    columna[ci.datafield] = {text: ci.text, hidden: ci.hidden};
-    columna[expd.datafield] = {text: expd.text, hidden: expd.hidden};
-    /*columna[num_complemento.datafield] = {text: num_complemento.text, hidden: num_complemento.hidden};*/
-    columna[gerencia_administrativa.datafield] = {text: gerencia_administrativa.text, hidden: gerencia_administrativa.hidden};
-    columna[departamento_administrativo.datafield] = {text: departamento_administrativo.text, hidden: departamento_administrativo.hidden};
-    columna[area.datafield] = {text: area.text, hidden: area.hidden};
-    columna[proceso_codigo.datafield] = {text: proceso_codigo.text, hidden: proceso_codigo.hidden};
-    columna[fin_partida.datafield] = {text: fin_partida.text, hidden: fin_partida.hidden};
-    columna[cargo.datafield] = {text: cargo.text, hidden: cargo.hidden};
-    columna[sueldo.datafield] = {text: sueldo.text, hidden: sueldo.hidden};
-    columna[fecha_ing.datafield] = {text: fecha_ing.text, hidden: fecha_ing.hidden};
-    columna[fecha_ini.datafield] = {text: fecha_ini.text, hidden: fecha_ini.hidden};
-    columna[fecha_incor.datafield] = {text: fecha_incor.text, hidden: fecha_incor.hidden};
-    columna[nivelsalarial.datafield] = {text: nivelsalarial.text, hidden: nivelsalarial.hidden};
-    columna[fecha_fin.datafield] = {text: fecha_fin.text, hidden: fecha_fin.hidden};
-    columna[fecha_baja.datafield] = {text: fecha_baja.text, hidden: fecha_baja.hidden};
-    columna[motivo_baja.datafield] = {text: motivo_baja.text, hidden: motivo_baja.hidden};
+    pseudonimo = $('#divGridIdeasAll').jqxGrid('getcolumn','pseudonimo');
+    tipo_negocio_descripcion = $('#divGridIdeasAll').jqxGrid('getcolumn','tipo_negocio_descripcion');
+    gestion = $('#divGridIdeasAll').jqxGrid('getcolumn','gestion');
+    mes_nombre = $('#divGridIdeasAll').jqxGrid('getcolumn','mes_nombre');
+    numero = $('#divGridIdeasAll').jqxGrid('getcolumn','numero');
+    titulo = $('#divGridIdeasAll').jqxGrid('getcolumn','titulo');
+    resumen = $('#divGridIdeasAll').jqxGrid('getcolumn','resumen');
+    descripcion = $('#divGridIdeasAll').jqxGrid('getcolumn','descripcion');
+    fecha_reg = $('#divGridIdeasAll').jqxGrid('getcolumn','fecha_reg');
+    observacion = $('#divGridIdeasAll').jqxGrid('getcolumn','observacion');
+    puntuacion_a = $('#divGridIdeasAll').jqxGrid('getcolumn','puntuacion_a');
+
+    columna[pseudonimo.datafield] = {text: pseudonimo.text, hidden: pseudonimo.hidden};
+    columna[tipo_negocio_descripcion.datafield] = {text: tipo_negocio_descripcion.text, hidden: tipo_negocio_descripcion.hidden};
+    columna[gestion.datafield] = {text: gestion.text, hidden: gestion.hidden};
+    columna[mes_nombre.datafield] = {text: mes_nombre.text, hidden: mes_nombre.hidden};
+    columna[numero.datafield] = {text: numero.text, hidden: numero.hidden};
+    columna[titulo.datafield] = {text: titulo.text, hidden: titulo.hidden};
+    columna[resumen.datafield] = {text: resumen.text, hidden: resumen.hidden};
+    columna[fecha_reg.datafield] = {text: fecha_reg.text, hidden: fecha_reg.hidden};
     columna[observacion.datafield] = {text: observacion.text, hidden: observacion.hidden};
+    columna[puntuacion_a.datafield] = {text: puntuacion_a.text, hidden: puntuacion_a.hidden};
 
-    var groups = $('#divGridRelaborales').jqxGrid('groups');
+    var groups = $('#divGridIdeasAll').jqxGrid('groups');
     if(groups==null||groups=='')groups='null';
-    //var sorteds = $('#divGridRelaborales').jqxGrid('getsortcolumn');
+    //var sorteds = $('#divGridIdeasAll').jqxGrid('getsortcolumn');
 
-    var sortinformation = $('#divGridRelaborales').jqxGrid('getsortinformation');
+    var sortinformation = $('#divGridIdeasAll').jqxGrid('getsortinformation');
     if(sortinformation.sortcolumn!=undefined){
         // The sortcolumn rep   resents the sort column's datafield. If there's no sort column, the sortcolumn is null.
         var sortcolumn = sortinformation.sortcolumn;
@@ -70,8 +48,8 @@ function exportarReporte(option){
     }else ordenados='';
 
 
-    var rows = $('#divGridRelaborales').jqxGrid('getrows');
-    var filterGroups = $('#divGridRelaborales').jqxGrid('getfilterinformation');
+    var rows = $('#divGridIdeasAll').jqxGrid('getrows');
+    var filterGroups = $('#divGridIdeasAll').jqxGrid('getfilterinformation');
     var counter = 0;
     for (var i = 0; i < filterGroups.length; i++) {
         var filterGroup = filterGroups[i];
@@ -100,11 +78,9 @@ function exportarReporte(option){
     json_sorteds= json_sorteds.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
     var ruta='';
     switch (option){
-        case 1: ruta="/relaborales/exportexcel/";break;
-        case 2: ruta="/relaborales/exportpdf/";break;
+        case 1: ruta="/clasificacionideas/exportexcel/";break;
+        case 2: ruta="/clasificacionideas/exportpdf/";break;
     }
-    /*if(option==1)ruta="/relaborales/print/";
-    elseif(option==2)ruta="/relaborales/print/";*/
     if(ruta!='')
         window.open(ruta+n_rows+"/"+json_columns+"/"+json_filter+"/"+json_groups+"/"+json_sorteds ,"_blank");
 }

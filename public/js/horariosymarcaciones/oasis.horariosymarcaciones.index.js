@@ -530,7 +530,7 @@ function definirGrillaParaListaRelaborales() {
                                     $("#imgFotoPerfilContactoPer").attr("src", rutaImagen);
                                     $("#imgFotoPerfilContactoInst").attr("src", rutaImagen);
                                     $("#imgFotoPerfil").attr("src", rutaImagen);
-                                    cargarPersonasContactosGestionIdeas(1,dataRecord.id_persona);
+                                    cargarPersonasContactosHorariosYMarcaciones(1,dataRecord.id_persona);
                                     $("#hdnIdRelaboralVista").val(idRelaboral);
                                     $("#hdnSwPrimeraVistaHistorial").val(0);
                                     $("#divContent_" + dataRecord.id_relaboral).focus().select();
@@ -772,7 +772,7 @@ function definirGrillaParaListaRelaborales() {
                                 $("#imgFotoPerfilContactoPerTurnAndExcept").attr("src", rutaImagen);
                                 $("#imgFotoPerfilContactoInstTurnAndExcept").attr("src", rutaImagen);
                                 $("#imgFotoPerfilTurnAndExcept").attr("src", rutaImagen);
-                                cargarPersonasContactosGestionIdeas(2,dataRecord.id_persona);
+                                cargarPersonasContactosHorariosYMarcaciones(2,dataRecord.id_persona);
 
                         } else {
                             var msje = "Debe seleccionar un registro necesariamente.";

@@ -12,7 +12,7 @@ class PpostulantesController extends ControllerBase
 	public function indexAction()
 	{
 			$this->assets
-                    ->addCss('/js/datatables/dataTables.bootstrap.css')
+                    // ->addCss('/js/datatables/dataTables.bootstrap.css')
                     ->addCss('/js/jqwidgets/styles/jqx.base.css')
                     ->addCss('/js/jqwidgets/styles/jqx.blackberry.css')
                     ->addCss('/js/jqwidgets/styles/jqx.windowsphone.css')

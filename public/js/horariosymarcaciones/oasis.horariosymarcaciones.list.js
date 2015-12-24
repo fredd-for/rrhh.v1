@@ -350,7 +350,7 @@ function definirGrillaParaListaControlMarcacionesDebidasYRealizadasPorIdRelabora
                                         $("#imgFotoPerfilContactoPerTurnAndExcept").attr("src", rutaImagen);
                                         $("#imgFotoPerfilContactoInstTurnAndExcept").attr("src", rutaImagen);
                                         $("#imgFotoPerfilTurnAndExcept").attr("src", rutaImagen);
-                                        cargarPersonasContactosGestionIdeas(2,idPersona);
+                                        cargarPersonasContactosHorariosYMarcaciones(2,idPersona);
                                         $("#hdnIdRelaboralVistaTurnAndExcept").val(idRelaboral);
                                         $("#hdnSwPrimeraVistaHistorialTurnAndExcept").val(0);
 

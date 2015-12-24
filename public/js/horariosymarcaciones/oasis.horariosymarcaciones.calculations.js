@@ -240,22 +240,14 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
                 pagerMode: 'advanced',
                 showfilterrow: true,
                 filterable: true,
-                showtoolbar: true,
+                showtoolbar: false,
                 autorowheight: true,
-                rendertoolbar: function (toolbar) {
+                /*rendertoolbar: function (toolbar) {
                     var me = this;
                     var container = $("<div></div>");
                     toolbar.append(container);
-                    /*container.append("<button title='Registrar nuevo control de excepci&oacute;n.' id='addcontrolexceptrowbutton' class='btn btn-sm btn-primary' type='button'><i class='fa fa-plus-square fa-2x text-info' title='Nuevo Registro.'/></i></button>");
-                     container.append("<button title='Aprobar registro de control de excepci&oacute;n.' id='approveexceptrowbutton'  class='btn btn-sm btn-primary' type='button' ><i class='fa fa-check-square fa-2x text-info' title='Aprobar registro'></i></button>");
-                     container.append("<button title='Modificar registro de control de excepci&oacute;n.' id='updateexceptrowbutton'  class='btn btn-sm btn-primary' type='button' ><i class='fa fa-pencil-square fa-2x text-info' title='Modificar registro.'/></button>");
-                     container.append("<button title='Dar de baja registro de control de excepci&oacute;n.' id='deleteexceptrowbutton' class='btn btn-sm btn-primary' type='button'><i class='fa fa-minus-square fa-2x text-info' title='Dar de baja al registro.'/></i></button>");*/
                     container.append("<button title='Ver calendario de turnos y permisos de manera global para la persona.' id='calendarrowbutton' class='btn btn-sm btn-primary' type='button'><i class='fa fa-calendar fa-2x text-info' title='Vista Turnos Laborales por Perfil.'/></i></button>");
 
-                    /*$("#addcontrolexceptrowbutton").jqxButton();
-                     $("#approveexceptrowbutton").jqxButton();
-                     $("#updateexceptrowbutton").jqxButton();
-                     $("#deleteexceptrowbutton").jqxButton();*/
                     $("#calendarrowbutton").jqxButton();
 
                     $("#hdnIdControlExcepcionEdit").val(0);
@@ -287,7 +279,7 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
                                     var contadorPerfiles = 0;
                                     var arrHorariosRegistrados = obtenerTodosHorariosRegistradosEnCalendarioRelaboralParaVerAsignaciones(idRelaboral,idPerfilLaboral,tipoHorario,false,fechaIni,fechaFin,contadorPerfiles);
                                     $("#calendar").html("");
-                                    var arrFechasPorSemana = iniciarCalendarioLaboralPorRelaboralTurnosYExcepcionesParaVerAsignaciones(dataRecordRelaboral,idRelaboral,5,idPerfilLaboral,tipoHorario,arrHorariosRegistrados,defaultGestion,defaultMes,defaultDia);
+                                    var arrFechasPorSemana = iniciarCalendarioLaboralPorRelaboralTurnosYExcepcionesParaVerAsignaciones(dataRecord,idRelaboral,5,idPerfilLaboral,tipoHorario,arrHorariosRegistrados,defaultGestion,defaultMes,defaultDia);
                                     sumarTotalHorasPorSemana(arrFechasPorSemana);
 
                                     $('#tabFichaPersonalTurnAndExcept').jqxTabs({
@@ -296,7 +288,6 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
                                         height: '100%',
                                         position: 'top'
                                     });
-                                    /*******************************************************************************************************/
                                     $('#tabFichaPersonalTurnAndExcept').jqxTabs({
                                         theme: 'oasis',
                                         width: '100%',
@@ -304,39 +295,39 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
                                         position: 'top'
                                     });
                                     $('#tabFichaPersonalTurnAndExcept').jqxTabs({selectedItem: 0});
-                                    $(".ddNombresTurnAndExcept").html(dataRecordRelaboral.nombres+"&nbsp;");
-                                    $(".ddCIAndNumComplementoExpdTurnAndExcept").html(dataRecordRelaboral.ci+dataRecordRelaboral.num_complemento+" "+dataRecordRelaboral.expd+"&nbsp;");
-                                    $("#ddCargoTurnAndExcept").html(dataRecordRelaboral.cargo+"&nbsp;");
-                                    $("#ddProcesoTurnAndExcept").html(dataRecordRelaboral.proceso_codigo+"&nbsp;");
-                                    $("#ddFinanciamientoTurnAndExcept").html(dataRecordRelaboral.condicion+" (Partida "+dataRecordRelaboral.partida+")");
-                                    $("#ddGerenciaTurnAndExcept").html(dataRecordRelaboral.gerencia_administrativa+"&nbsp;");
-                                    if(dataRecordRelaboral.departamento_administrativo!=""&&dataRecordRelaboral.departamento_administrativo!=null){
+                                    $(".ddNombresTurnAndExcept").html(dataRecord.nombres+"&nbsp;");
+                                    $(".ddCIAndNumComplementoExpdTurnAndExcept").html(dataRecord.ci+dataRecord.num_complemento+" "+dataRecord.expd+"&nbsp;");
+                                    $("#ddCargoTurnAndExcept").html(dataRecord.cargo+"&nbsp;");
+                                    $("#ddProcesoTurnAndExcept").html(dataRecord.proceso_codigo+"&nbsp;");
+                                    $("#ddFinanciamientoTurnAndExcept").html(dataRecord.condicion+" (Partida "+dataRecord.partida+")");
+                                    $("#ddGerenciaTurnAndExcept").html(dataRecord.gerencia_administrativa+"&nbsp;");
+                                    if(dataRecord.departamento_administrativo!=""&&dataRecord.departamento_administrativo!=null){
                                         $("#ddDepartamentoTurnAndExcept").show();
                                         $("#dtDepartamentoTurnAndExcept").show();
-                                        $("#ddDepartamentoTurnAndExcept").html(dataRecordRelaboral.departamento_administrativo+"&nbsp;");
+                                        $("#ddDepartamentoTurnAndExcept").html(dataRecord.departamento_administrativo+"&nbsp;");
                                     }
                                     else {
                                         $("#dtDepartamentoTurnAndExcept").hide();
                                         $("#ddDepartamentoTurnAndExcept").hide();
                                     }
-                                    $("#ddUbicacionTurnAndExcept").html(dataRecordRelaboral.ubicacion+"&nbsp;");
+                                    $("#ddUbicacionTurnAndExcept").html(dataRecord.ubicacion+"&nbsp;");
 
-                                    switch (dataRecordRelaboral.tiene_item) {
+                                    switch (dataRecord.tiene_item) {
                                         case 1:
                                             $("#dtItemTurnAndExcept").show();
                                             $("#ddItemTurnAndExcept").show();
-                                            $("#ddItemTurnAndExcept").html(dataRecordRelaboral.item+"&nbsp;");
+                                            $("#ddItemTurnAndExcept").html(dataRecord.item+"&nbsp;");
                                             break;
                                         case 0:
                                             $("#dtItemTurnAndExcept").hide();
                                             $("#ddItemTurnAndExcept").hide();
                                             break;
                                     }
-                                    $("#ddNivelSalarialTurnAndExcept").html(dataRecordRelaboral.nivelsalarial+"&nbsp;");
-                                    $("#ddHaberTurnAndExcept").html(dataRecordRelaboral.sueldo+"&nbsp;");
-                                    $("#ddFechaIngTurnAndExcept").html(fechaConvertirAFormato(dataRecordRelaboral.fecha_ing,"-")+"&nbsp;");
-                                    if(dataRecordRelaboral.fecha_incor!=null){
-                                        var fechaIncor = fechaConvertirAFormato(dataRecordRelaboral.fecha_incor,"-");
+                                    $("#ddNivelSalarialTurnAndExcept").html(dataRecord.nivelsalarial+"&nbsp;");
+                                    $("#ddHaberTurnAndExcept").html(dataRecord.sueldo+"&nbsp;");
+                                    $("#ddFechaIngTurnAndExcept").html(fechaConvertirAFormato(dataRecord.fecha_ing,"-")+"&nbsp;");
+                                    if(dataRecord.fecha_incor!=null){
+                                        var fechaIncor = fechaConvertirAFormato(dataRecord.fecha_incor,"-");
                                         $("#dtFechaIncorTurnAndExcept").show();
                                         $("#ddFechaIncorTurnAndExcept").show();
                                         $("#ddFechaIncorTurnAndExcept").html(fechaIncor+"&nbsp;");
@@ -344,8 +335,8 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
                                         $("#dtFechaIncorTurnAndExcept").hide();
                                         $("#ddFechaIncorTurnAndExcept").hide();
                                     }
-                                    $("#ddFechaIniTurnAndExcept").html(fechaConvertirAFormato(dataRecordRelaboral.fecha_ini,"-")+"&nbsp;");
-                                    switch (dataRecordRelaboral.tiene_item) {
+                                    $("#ddFechaIniTurnAndExcept").html(fechaConvertirAFormato(dataRecord.fecha_ini,"-")+"&nbsp;");
+                                    switch (dataRecord.tiene_item) {
                                         case 1:
                                             $("#dtFechaFinTurnAndExcept").hide();
                                             $("#ddFechaFinTurnAndExcept").hide();
@@ -353,25 +344,23 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
                                         case 0:
                                             $("#dtFechaFinTurnAndExcept").show();
                                             $("#ddFechaFinTurnAndExcept").show();
-                                            $("#ddFechaFinTurnAndExcept").html(fechaConvertirAFormato(dataRecordRelaboral.fecha_fin,"-")+"&nbsp;");
+                                            $("#ddFechaFinTurnAndExcept").html(fechaConvertirAFormato(dataRecord.fecha_fin,"-")+"&nbsp;");
                                             break;
                                     }
-                                    $("#ddEstadoDescripcionTurnAndExcept").html(dataRecordRelaboral.estado_descripcion+"&nbsp;");
-                                    if(dataRecordRelaboral.estado==0){
+                                    $("#ddEstadoDescripcionTurnAndExcept").html(dataRecord.estado_descripcion+"&nbsp;");
+                                    if(dataRecord.estado==0){
                                         $("#dtFechaBajaTurnAndExcept").show();
                                         $("#ddFechaBajaTurnAndExcept").show();
-                                        $("#ddFechaBajaTurnAndExcept").html(fechaConvertirAFormato(dataRecordRelaboral.fecha_baja,"-")+"&nbsp;");
+                                        $("#ddFechaBajaTurnAndExcept").html(fechaConvertirAFormato(dataRecord.fecha_baja,"-")+"&nbsp;");
                                         $("#dtMotivoBajaTurnAndExcept").show();
                                         $("#ddMotivoBajaTurnAndExcept").show();
-                                        $("#ddMotivoBajaTurnAndExcept").html(fechaConvertirAFormato(dataRecordRelaboral.motivo_baja,"-")+"&nbsp;");
+                                        $("#ddMotivoBajaTurnAndExcept").html(fechaConvertirAFormato(dataRecord.motivo_baja,"-")+"&nbsp;");
                                     }else{
                                         $("#dtFechaBajaTurnAndExcept").hide();
                                         $("#ddFechaBajaTurnAndExcept").hide();
                                         $("#dtMotivoBajaTurnAndExcept").hide();
                                         $("#ddMotivoBajaTurnAndExcept").hide();
                                     }
-                                    /*******************************************************************************************************/
-
                                     $('#tabFichaPersonalTurnAndExcept').jqxTabs({selectedItem: 0});
                                     $("#ddNombresTurnAndExcept").html(nombres);
                                     var rutaImagen = obtenerRutaFoto(ci, numComplemento);
@@ -398,7 +387,7 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
                             $("#divMsjeNotificacionError").jqxNotification("open");
                         }
                     });
-                },
+                },*/
                 columns: [
                     {
                         text: 'Nro.',
@@ -928,7 +917,7 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
                         hidden: false
                     },
                     {
-                        text: 'Omisi&oacute;n',
+                        text: 'Sin Marcaci&oacute;n',
                         filtertype: 'checkedlist',
                         datafield: 'omision',
                         width: 70,
@@ -1025,7 +1014,7 @@ function definirGrillaMarcacionesYCalculos(objParametros) {
             {label: 'Atrasados', value: 'atrasados', checked: true},
             {label: 'Faltas', value: 'faltas', checked: true},
             {label: 'Abandono', value: 'abandono', checked: true},
-            {label: 'Omisi&oacute;n', value: 'omision', checked: true},
+            {label: 'Sin Marcaci&oacute;n', value: 'omision', checked: true},
             {label: 'LSGH', value: 'lsgh', checked: true},
             {label: 'Marc. Previstas', value: 'agrupador', checked: true},
             {label: 'Descanso', value: 'descanso', checked: true},

@@ -55,10 +55,6 @@ $().ready(function () {
         var rowscounts = datainformations.rowscount;
         if(rowscounts>0){
             exportarReporteClasificacion(1);
-        }else{
-            $("#divMsjePorWarning").html("");
-            $("#divMsjePorWarning").append("Deve haber al menos un registro para posibilitar la exportaci&oacute;n en formato Excel.");
-            $("#divMsjeNotificacionWarning").jqxNotification("open");
         }
     });
     $("#btnExportarAllPDF").click(function () {
@@ -66,10 +62,6 @@ $().ready(function () {
         var rowscounts = datainformations.rowscount;
         if(rowscounts>0){
             exportarReporteClasificacion(2);
-        }else{
-            $("#divMsjePorWarning").html("");
-            $("#divMsjePorWarning").append("Deve haber al menos un registro para posibilitar la exportaci&oacute;n en formato PDF.");
-            $("#divMsjeNotificacionWarning").jqxNotification("open");
         }
 
     });

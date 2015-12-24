@@ -6,7 +6,7 @@
  *   Fecha Creación:  04-03-2015
  */
 
-function cargarPersonasContactosControlExcepciones(opcion,idPersona){
+function cargarPersonasContactosHorariosYMarcaciones(opcion,idPersona){
     var sufijo = ""
     if(opcion==2){
         sufijo = "TurnAndExcept"

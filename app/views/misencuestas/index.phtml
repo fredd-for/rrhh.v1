@@ -1,0 +1,270 @@
+</head>
+<body>
+<h2 style="padding-top: 0px; width: 100%;"><b>Mis Encuestas</h2>
+<input type="hidden" id="hdnIdRelaboralUsuario" name="hdnIdRelaboralUsuario" value="<?php echo $idRelaboral; ?>">
+<input type="hidden" id="hdnIdPersonaUsuario" name="hdnIdPersonaUsuario" value="<?php echo $idPersona; ?>">
+<input type="hidden" id="hdnNombresUsuario" name="hdnNombresUsuario" value="<?php echo $nombres; ?>">
+<input type="hidden" id="hdnCiUsuario" name="hdnciUsuario" value="<?php echo $ci; ?>">
+
+<div id='divTabEncuestas'>
+<ul>
+    <li id="liEncuestas">Encuestas</li>
+    <li id="liLlenado">Llenado</li>
+    <li id="liVer">Ver</li>
+</ul>
+<br>
+<div class="section" id="divEncuestas">
+    <form class="navbar-form" id="formEncuestas">
+        <div id="tabFichaPersonalEncuestas">
+            <ul style="margin-left: 30px;">
+                <li>Relaci&oacute;n Laboral</li>
+                <li>Datos Personales</li>
+                <li>Contacto Personal</li>
+                <li>Contacto Institucional</li>
+            </ul>
+            <div class="form-horizontal col-sm-12">
+                <br>
+
+                <div class="widget">
+                    <div class="widget-simple themed-background-dark">
+                        <a href="#" id="aFotoPerfilTurnAndExceptRelaboral">
+                            <img id="imgFotoPerfilTurnAndExceptRelaboral" class="img-rounded pull-right img-perfil">
+                        </a>
+                        <h4 class="widget-content">
+                            <div class="col-sm-5">
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt class="dtNombresTurnAndExcept">Nombres:</dt>
+                                    <dd class="ddNombresTurnAndExcept"></dd>
+                                    <dt class="dtCIAndNumComplementoExpdTurnAndExcept">CI:</dt>
+                                    <dd class="ddCIAndNumComplementoExpdTurnAndExcept"></dd>
+                                    <dt id="dtCargoTurnAndExcept">Cargo:</dt>
+                                    <dd id="ddCargoTurnAndExcept"></dd>
+                                    <dt id="dtProcesoTurnAndExcept">Proceso:</dt>
+                                    <dd id="ddProcesoTurnAndExcept"></dd>
+                                    <dt id="dtFinanciamientoTurnAndExcept">Financiamiento:</dt>
+                                    <dd id="ddFinanciamientoTurnAndExcept"></dd>
+                                    <dt id="dtGerenciaTurnAndExcept">Gerencia:</dt>
+                                    <dd id="ddGerenciaTurnAndExcept"></dd>
+                                    <dt id="dtDepartamentoTurnAndExcept">Departamento:</dt>
+                                    <dd id="ddDepartamentoTurnAndExcept"></dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-5">
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt id="dtUbicacionTurnAndExcept">Ubicaci&oacute;n:</dt>
+                                    <dd id="ddUbicacionTurnAndExcept"></dd>
+                                    <dt id="dtItemTurnAndExcept">&Iacute;tem:</dt>
+                                    <dd id="ddItemTurnAndExcept"></dd>
+                                    <dt id="dtNivelSalarialTurnAndExcept">Nivel Salarial:</dt>
+                                    <dd id="ddNivelSalarialTurnAndExcept"></dd>
+                                    <dt id="dtHaberTurnAndExcept">Haber:</dt>
+                                    <dd id="ddHaberTurnAndExcept"></dd>
+                                    <dt id="dtFechaIngTurnAndExcept">Fecha Ingreso:</dt>
+                                    <dd id="ddFechaIngTurnAndExcept"></dd>
+                                    <dt id="dtFechaIniTurnAndExcept">Fecha Inicio:</dt>
+                                    <dd id="ddFechaIniTurnAndExcept"></dd>
+                                    <dt id="dtFechaIncorTurnAndExcept">Fecha Incorporaci&oacute;n:</dt>
+                                    <dd id="ddFechaIncorTurnAndExcept"></dd>
+                                    <dt id="dtFechaFinTurnAndExcept">Fecha Finalizaci&oacute;n:</dt>
+                                    <dd id="ddFechaFinTurnAndExcept"></dd>
+                                    <dt id="dtEstadoDescripcionTurnAndExcept">Estado:</dt>
+                                    <dd id="ddEstadoDescripcionTurnAndExcept"></dd>
+                                    <dt id="dtFechaBajaTurnAndExcept">Fecha Baja:</dt>
+                                    <dd id="ddFechaBajaTurnAndExcept"></dd>
+                                    <dt id="dtMotivoBajaTurnAndExcept">Motivo Baja:</dt>
+                                    <dd id="ddMotivoBajaTurnAndExcept"></dd>
+                                    <dt id="dtObservacionTurnAndExcept">Observaciones:</dt>
+                                    <dd id="ddObservacionTurnAndExcept"></dd>
+                                </dl>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-sm-12">
+                <br>
+
+                <div class="widget">
+                    <div class="widget-simple themed-background-dark">
+                        <a href="#" id="aFotoPerfilTurnAndExcept">
+                            <img id="imgFotoPerfilTurnAndExcept" class="img-rounded pull-right img-perfil">
+                        </a>
+                        <h4 class="widget-content">
+                            <div>
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt id="dtNombresTurnAndExcept">Nombres y Apellidos:</dt>
+                                    <dd id="ddNombresTurnAndExcept"></dd>
+                                    <dt id="dtTipoDeDocumentoTurnAndExcept"></dt>
+                                    <dd id="ddNumeroDeDocumentoTurnAndExcept"></dd>
+                                    <dt id="dtNacionalidadTurnAndExcept">Nacionalidad:</dt>
+                                    <dd id="ddNacionalidadTurnAndExcept"></dd>
+                                    <dt id="dtLugarDeNacimientoTurnAndExcept">Lugar de Nacimiento:</dt>
+                                    <dd id="ddLugarDeNacimientoTurnAndExcept"></dd>
+                                    <dt id="dtFechaDeNacimientoTurnAndExcept">Fecha de Nacimiento:</dt>
+                                    <dd id="ddFechaDeNacimientoTurnAndExcept"></dd>
+                                </dl>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-sm-12">
+                <br>
+
+                <div class="widget">
+                    <div class="widget-simple themed-background-dark">
+                        <a href="#" id="aFotoPerfilContactoPerTurnAndExcept"><img
+                                id="imgFotoPerfilContactoPerTurnAndExcept"
+                                class="img-rounded pull-right img-perfil"></a>
+                        <h4 class="widget-content">
+                            <div>
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt id="dtDireccionTurnAndExcept">Direcci&oacute;n:</dt>
+                                    <dd id="ddDireccionTurnAndExcept"></dd>
+                                    <dt id="dtTelefonoFijoTurnAndExcept">Tel&eacute;fono Fijo:</dt>
+                                    <dd id="ddTelefonoFijoTurnAndExcept"></dd>
+                                    <dt id="dtCelularPerTurnAndExcept">Celular Personal:</dt>
+                                    <dd id="ddCelularPerTurnAndExcept"></dd>
+                                    <dt id="dtEmailPerTurnAndExcept">E-Mail Personal:</dt>
+                                    <dd id="ddEmailPerTurnAndExcept"></dd>
+                                    <dt id="dtAuxiliar1TurnAndExcept">&nbsp;</dt>
+                                    <dd id="ddAuxiliar1TurnAndExcept">&nbsp;</dd>
+                                </dl>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-sm-12">
+                <br>
+
+                <div class="widget">
+                    <div class="widget-simple themed-background-dark">
+                        <a href="#" id="aFotoPerfilContactoInstTurnAndExcept"><img
+                                id="imgFotoPerfilContactoInstTurnAndExcept"
+                                class="img-rounded pull-right img-perfil"></a>
+                        <h4 class="widget-content">
+                            <div>
+                                <dl class="dl-horizontal" STYLE="color: white;font-size: 13px;">
+                                    <dt id="dtTelefonoInstTurnAndExcept">Tel&eacute;fono Inst.:</dt>
+                                    <dd id="ddTelefonoInstTurnAndExcept"></dd>
+                                    <dt id="dtCelularInstTurnAndExcept">Celular Corporativo:</dt>
+                                    <dd id="ddCelularInstTurnAndExcept"></dd>
+                                    <dt id="dtTelefonoFaxTurnAndExcept">Fax:</dt>
+                                    <dd id="ddTelefonoFaxTurnAndExcept"></dd>
+                                    <dt id="dtInternoInstTurnAndExcept">N&uacute;mero Interno:</dt>
+                                    <dd id="ddInternoInstTurnAndExcept"></dd>
+                                    <dt id="dtEmailInstTurnAndExcept">E-Mail Institucional:</dt>
+                                    <dd id="ddEmailInstTurnAndExcept"></dd>
+                                </dl>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div id="divGridEncuestas"></div>
+        <div>
+        </div>
+    </form>
+</div>
+<div class="section" id="divLlenadoNew">
+    <h3 id="h3TituloEncuestaNew">Encuesta</h3>
+    <div class="form-horizontal col-sm-12">
+        <form id="formEncuestaLlenadoNew">
+            <div id="divCuerpoEncuestaNew"></div>
+            <fieldset>
+                <legend><i class="fa fa-angle-right"></i> &nbsp;</legend>
+                <div class="form-group div-mis-encuestas" id="divComentarioEncuestaNew">
+                    <label class="iObservacion col-md-3 control-label" for="txtComentarioEncuestaNew" id="lblComentarioEncuestaNew"><i class="iObservacion fa fa-question-circle" id="iComentarioEncuestaNew"></i> Comentario:</label>
+                    <div class="col-md-6">
+                        <textarea id="txtComentarioEncuestaNew" name="txtComentarioEncuestaNew" class="form-control"
+                                  placeholder="Comentario.."></textarea>
+                    </div>
+                    <span class="help-block" id="helpErrorComentarioEncuestaNew"></span>
+                </div>
+            </fieldset>
+            <div class="form-group form-actions">
+                <div class="col-md-8 col-md-offset-4">
+                    <button id="btnGuardarEncuestaNew" class="btn btn-sm btn-primary" type="button">
+                        <i class="fa fa-floppy-o"></i>
+                        Guardar
+                    </button>
+                    <button id="btnCancelarEncuestaNew" class="btn btn-sm btn-warning" type="button">
+                        <i class="fa fa-repeat"></i>
+                        Cancelar
+                    </button>
+                    <button class="btn btn-sm btn-warning" type="button" id="btnVolverAlListadoPrincipalDesdeNew">
+                        <i class="fa fa-reply"></i>
+                        Volver al Listado Principal
+                    </button>
+                </div>
+            </div>
+            <input type="hidden" id="hdnIdRelaboralNew" value="0">
+            <input type="hidden" id="hdnIdEncuestaNew" value="0">
+        </form>
+    </div>
+</div>
+<div class="section" id="divLlenadoView">
+    <h3 id="h3TituloEncuestaView">Listado General</h3>
+    <div class="form-horizontal col-sm-12">
+        <form id="formEncuestaLlenadoView">
+            <div id="divCuerpoEncuestaView"></div>
+            <fieldset>
+                <legend><i class="fa fa-angle-right"></i> &nbsp;</legend>
+                <div class="form-group div-control-excepciones" id="divComentarioEncuestaView">
+                    <label class="iObservacion col-md-3 control-label" for="txtComentarioEncuestaView" id="lblComentarioEncuestaView"><i class="iObservacion fa fa-question-circle" id="iComentarioEncuestaView"></i> Comentario:</label>
+                    <div class="col-md-6">
+                        <textarea id="txtComentarioEncuestaView" name="txtComentarioEncuestaView" class="form-control"
+                                  placeholder="Comentario.." readonly></textarea>
+                    </div>
+                    <span class="help-block" id="helpErrorComentarioEncuestaView"></span>
+                </div>
+            </fieldset>
+            <div class="form-group form-actions">
+                <div class="col-md-8 col-md-offset-4">
+                    <button class="btn btn-sm btn-warning" type="button" id="btnVolverAlListadoPrincipalDesdeView">
+                        <i class="fa fa-reply"></i>
+                        Volver al Listado Principal
+                    </button>
+                </div>
+            </div>
+            <input type="hidden" id="hdnIdRelaboralView" value="0">
+            <input type="hidden" id="hdnIdEncuestaView" value="0">
+        </form>
+    </div>
+</div>
+
+</div>
+<!--</form></div>-->
+</body>
+<div id="divModalInfografia" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="h4Title">Confirmation</h4>
+            </div>
+            <div class="modal-body" id="divModalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="divMsjeNotificacionError">
+    <div id="divMsjePorError">
+    </div>
+</div>
+<div id="divMsjeNotificacionWarning">
+    <div id="divMsjePorWarning">
+    </div>
+</div>
+<div id="divMsjeNotificacionSuccess">
+    <div id="divMsjePorSuccess">
+    </div>
+</div>

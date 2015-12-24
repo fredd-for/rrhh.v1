@@ -52,7 +52,7 @@ function definirGrillaParaListaGestionIdeasAll(gestion,mes) {
             {name: 'user_mod', type: 'string'},
             {name: 'fecha_mod', type: 'date'}
         ],
-        url: '/gestionideas/listall?gestion='+gestion+'&mes='+mes,
+        url: '/clasificacionideas/listall?gestion='+gestion+'&mes='+mes,
         cache: false
     };
     var dataAdapter = new $.jqx.dataAdapter(source);
@@ -72,10 +72,10 @@ function definirGrillaParaListaGestionIdeasAll(gestion,mes) {
                 pageable: true,
                 pagerMode: 'advanced',
                 pagesize:10,
-                virtualmode: true,
+                /*virtualmode: true,
                 rendergridrows: function (params) {
                     return params.data;
-                },
+                },*/
                 showfilterrow: true,
                 filterable: true,
                 showtoolbar: true,
@@ -125,7 +125,9 @@ function definirGrillaParaListaGestionIdeasAll(gestion,mes) {
                                     $("#lstGestionEdit").prop("disabled","disabled");
                                     $("#lstMesEdit").prop("disabled","disabled");
                                     $("#lstTiposDeNegocioEdit").prop("disabled","disabled");
-                                    $("#txtObservacionEdit").focus();
+                                    $("#txtObservacionEdit").prop("disabled","disabled");
+                                    /*$("#txtObservacionEdit").focus();*/
+                                    $("#btnVolverAlListadoPrincipalDesdeEdit").focus();
                                 } else {
                                     var msje = "Debe seleccionar un registro en estado EN ELABORACION necesariamente.";
                                     $("#divMsjePorError").html("");
@@ -310,35 +312,13 @@ function definirGrillaParaListaGestionIdeasAll(gestion,mes) {
                         text: 'Puntuaci&oacute;n',
                         filtertype: 'checkedlist',
                         datafield: 'puntuacion_a',
-                        width: 100,
+                        width: 50,
                         align: 'center',
                         cellsalign: 'center',
                         hidden: false
                     },
                 ]
             });
-        /*var listSource = [
-         *//*{label: 'Estado', value: 'estado_descripcion', checked: true},*//*
-         {label: 'Tipo Excepci&oacute;n', value: 'tipo_excepcion', checked: true},
-         {label: 'Excepci&oacute;n', value: 'excepcion', checked: true},
-         {label: 'C&oacute;digo', value: 'codigo', checked: true},
-         {label: 'Color', value: 'color', checked: true},
-         {label: 'G&eacute;nero', value: 'genero', checked: true},
-         {label: 'Frecuencia', value: 'frecuencia_descripcion', checked: true},
-         {label: 'Compensar Horas', value: 'compensatoria_descripcion', checked: true},
-         {label: 'Observaci&oacute;n', value: 'observacion', checked: true}
-         ];
-         $("#listBoxExcepciones").jqxListBox({source: listSource, width: "100%", height: 430, checkboxes: true});
-         $("#listBoxExcepciones").on('checkChange', function (event) {
-         $("#divGridExcepciones").jqxGrid('beginupdate');
-         if (event.args.checked) {
-         $("#divGridExcepciones").jqxGrid('showcolumn', event.args.value);
-         }
-         else {
-         $("#divGridExcepciones").jqxGrid('hidecolumn', event.args.value);
-         }
-         $("#divGridExcepciones").jqxGrid('endupdate');
-         });*/
     }
 }
 /**

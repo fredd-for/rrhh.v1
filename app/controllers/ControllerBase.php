@@ -114,6 +114,7 @@ class ControllerBase extends Controller {
                     ->addJs('/js/bootbox.js')
                     ->addJs('/js/select/bootstrap-select.js')
                     ->addJs('/js/select/ajax-bootstrap-select.js')
+                    ->addJs('/js/index/oasis.index.js')
             ;
             //menu
             $this->menu($this->_user->nivel);
@@ -214,7 +215,7 @@ class ControllerBase extends Controller {
      * @return mixed
      */
     public function obtenerPermisosPorControladorMasIdentificador($controlador,$identificador){
-        $resultado = '{"n":0,"v":1,"e":0,"b":0}';
+        $resultado = '{"n":0,"v":0,"e":0,"b":0}';
         $permisos = $this->session->get('permisos');
         foreach($permisos as $clave => $valor){
             if($valor["controlador"]==$controlador&&$valor["identificador"]==$identificador)

@@ -6,7 +6,6 @@
 *   Usuario Creador: Lic. Javier Loza
 *   Fecha Creación:  13-02-2015
 */
-
 class ExcepcionesController extends ControllerBase
 {
     public function initialize()
@@ -121,7 +120,7 @@ class ExcepcionesController extends ControllerBase
      */
     public function listtiposexcepcionesAction(){
         $this->view->disable();
-        $resul = Parametros::find(array("parametro LIKE 'TIPO_EXCEPCION' AND estado=1 AND baja_logica=1",'order' => 'valor_1 ASC'));
+        $resul = parametros::find(array("parametro LIKE 'TIPO_EXCEPCION' AND estado=1 AND baja_logica=1",'order' => 'valor_1 ASC'));
         $tiposexcepciones = Array();
         //comprobamos si hay filas
         if ($resul->count() > 0) {
@@ -143,7 +142,7 @@ class ExcepcionesController extends ControllerBase
      */
     public function listgenerosAction(){
         $this->view->disable();
-        $resul = Parametros::find(array("parametro LIKE 'GENERO_EXCEPCION' AND estado=1 AND baja_logica=1",'order' => 'valor_1 ASC'));
+        $resul = parametros::find(array("parametro LIKE 'GENERO_EXCEPCION' AND estado=1 AND baja_logica=1",'order' => 'valor_1 ASC'));
         $generos = Array();
         //comprobamos si hay filas
         if ($resul->count() > 0) {
@@ -165,7 +164,7 @@ class ExcepcionesController extends ControllerBase
      */
     public function listunidadesAction(){
         $this->view->disable();
-        $resul = Parametros::find(array("parametro LIKE 'UNIDAD_EXCEPCION' AND estado=1 AND baja_logica=1",'order' => 'nivel ASC'));
+        $resul = parametros::find(array("parametro LIKE 'UNIDAD_EXCEPCION' AND estado=1 AND baja_logica=1",'order' => 'nivel ASC'));
         $unidades = Array();
         //comprobamos si hay filas
         if ($resul->count() > 0) {
@@ -190,7 +189,7 @@ class ExcepcionesController extends ControllerBase
         $unidades = Array();
         if(isset($_POST["id_minima"])&&$_POST["id_minima"]>0){
             $idMinima = $_POST["id_minima"];
-            $resul = Parametros::find(array("parametro LIKE 'UNIDAD_EXCEPCION' AND estado=1 AND baja_logica=1 AND CAST(nivel AS integer)>".$idMinima,'order' => 'nivel ASC'));
+            $resul = parametros::find(array("parametro LIKE 'UNIDAD_EXCEPCION' AND estado=1 AND baja_logica=1 AND CAST(nivel AS integer)>".$idMinima,'order' => 'nivel ASC'));
             //comprobamos si hay filas
             if ($resul->count() > 0) {
                 foreach ($resul as $v) {

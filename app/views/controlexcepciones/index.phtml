@@ -11,6 +11,7 @@
     <li id="liExcept">Excepciones</li>
     <li id="liNew">Nuevo</li>
     <li id="liEdit">Modificaci&oacute;n</li>
+    <li id="liCount">Contabilizador</li>
     <li id="liTurnAndExcept">Turnos & Excepciones / Relaci&oacute;n Laboral</li>
 </ul>
 <br>
@@ -428,6 +429,83 @@
         </div>
         <input type="hidden" id="hdnIdRelaboralEdit" value="0">
         <input type="hidden" id="hdnIdControlExcepcionEdit" value="0">
+    </div>
+</div>
+<div class="section" id="divCount">
+    <div class="col-md-10">
+        <!-- Input Grid Block -->
+        <div class="block">
+            <!-- Input Grid Title -->
+            <div class="block-title">
+                <h2>Listado Global de Control de Excepciones</h2>
+                <div id='divWidgetControlExcepcionesCount'>
+                    <div class="row">
+                        <div class="col-sm-2" id="divGestionCount">
+                            <!--<div class="block">-->Gesti&oacute;n:
+                            <select class="form-control" id="lstGestionCount"><option value="">Seleccionar...</option></select>
+                            <!--</div>-->
+                            <span class="help-block" id="helpErrorGestionCount"></span>
+                        </div>
+                        <div class="col-sm-2" id="divMesCount">
+                            <!--<div class="block">-->Mes:
+                            <select id="lstMesCount" class="form-control"><option value="">Seleccionar...</option></select>
+                            <!--</div>-->
+                            <span class="help-block" id="helpErrorMesCount"></span>
+                        </div>
+                        <div class="col-sm-3" id="divBtnBuscar">
+                            <button class="btn btn-sm btn-primary" type="button" id="btnBuscarControlExcepcionesPorMes" accesskey="d">
+                                <i class="gi gi-search"></i>
+                                Buscar
+                            </button>
+                        </div>
+                    </div>
+                    <div align="right">
+                        <button class="btn btn-sm btn-primary" type="button" id="btnExportarExcelCount" accesskey="i">
+                            <i class="fi fi-xls"></i>
+                            Exportar Excel
+                        </button>
+                        <button class="btn btn-sm btn-primary" type="button" id="btnExportarPDFCount" accesskey="i">
+                            <i class="fi fi-pdf"></i>
+                            Exportar PDF
+                        </button>
+                        <button class="btn btn-sm btn-primary" type="button" id="btnDesagruparTodoCount">
+                            <i class="fa fa-chain-broken"></i>
+                            Desagrupar Todo
+                        </button>
+                        <button class="btn btn-sm btn-primary" type="button" id="btnDesfiltrarTodoCount">
+                            <i class="gi gi-sorting"></i>
+                            Desfiltrar Todo
+                        </button>
+                    </div>
+                    <div id="divControlExcepcionCount"></div>
+                    <div id="divCarga" style="display:none" align="center">
+                        <div id="divContador"></div>
+                        <img src="../images/barra_carga.gif" />
+                    </div>
+                </div>
+            </div>
+            <!-- END Input Grid Title -->
+        </div>
+        <!-- END Input Grid Block -->
+    </div>
+    <div class="col-md-2">
+        <!-- Input Grid Block -->
+        <div class="block">
+            <!-- Input Grid Title -->
+            <div class="block-title">
+                <h2>Mostrar</h2>
+                <br>
+                <!--<input type="checkbox" id="chkAllCols"> Todas / Ninguna-->
+
+                <!--<div id="hintWrapper">
+                    <div id="hintSection" class="hint">
+                    </div>
+                </div>-->
+            </div>
+            <div id="divControlExceptionListBox"></div>
+            <!-- END Input Grid Title -->
+        </div>
+        <!-- END Input Grid Block -->
     </div>
 </div>
 <div class="section" id="divTurnAndExcept">

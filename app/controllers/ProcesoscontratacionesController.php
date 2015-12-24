@@ -208,7 +208,7 @@ class ProcesoscontratacionesController extends ControllerBase
 		$tipo = $this->tag->select(
 			array(
 				'tipo',
-				Parametros::find(array("parametro='procesoscontrataciones_tipo' and baja_logica=1 ",'order'=>'nivel ASC')),
+				parametros::find(array("parametro='procesoscontrataciones_tipo' and baja_logica=1 ",'order'=>'nivel ASC')),
 				'using' => array('nivel', "valor_1"),
 				'useEmpty' => false,
 				'emptyText' => '(Seleccionar)',
@@ -240,7 +240,7 @@ public function editAction($id)
 	$tipo = $this->tag->select(
 		array(
 			'tipo',
-			Parametros::find(array("parametro='procesoscontrataciones_tipo' and baja_logica=1 ",'order'=>'nivel ASC')),
+			parametros::find(array("parametro='procesoscontrataciones_tipo' and baja_logica=1 ",'order'=>'nivel ASC')),
 			'using' => array('nivel', "valor_1"),
 			'useEmpty' => false,
 			'emptyText' => '(Seleccionar)',
@@ -657,7 +657,6 @@ public function verpostulantesAction($seguimiento_id)
 	$model = new Procesoscontrataciones();
 	$resul = $model->listaNoCalificados($seguimiento_id);
 	$this->view->setVar('nocalificados',$resul);		
-
 }
 
 	public function formulariopostulanteAction()

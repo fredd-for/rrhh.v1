@@ -6,5 +6,7 @@
  *   Fecha Creación:  14-10-2015
  */
 $().ready(function(){
-
+    $(".btn-menu-principal").on("click",function(){
+        App.sidebar('toggle-sidebar');
+    });
 });

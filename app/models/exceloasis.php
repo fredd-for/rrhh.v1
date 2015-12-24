@@ -675,17 +675,25 @@ class exceloasis extends PHPExcel{
         );
         $this->getActiveSheet()->getStyle($primeraLetra.$fila.':'.$ultimaLetra.$fila)->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_WHITE);
         $fila++;
+
         foreach ($arrListado as $clave2=>$valor2) {
             foreach($valor2 as $clave1 => $valor1){
                 foreach($valor1 as $clave=>$valor){
                     $j=0;
                     foreach($letrasUsadas as $letra){
+
                         if($letra==$primeraLetra){
                             $this->getActiveSheet()->getStyle($letra.$fila)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                             $this->getActiveSheet()->setCellValue($letra.$fila, $contador);
                         }else{
                             $this->getActiveSheet()->getStyle($letra.$fila)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-                            $this->getActiveSheet()->setCellValue($letra.$fila, $valor[$totalColSelecteds[$j]]);
+
+                            if(isset($valor[$totalColSelecteds[$j]])){
+                                $this->getActiveSheet()->setCellValue($letra.$fila, $valor[$totalColSelecteds[$j]]);
+                            }else {
+                                $this->getActiveSheet()->setCellValue($letra.$fila, NULL);
+                            }
+
                         }
                         $j++;
                     }

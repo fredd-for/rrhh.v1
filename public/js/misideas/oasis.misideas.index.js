@@ -133,7 +133,49 @@ $().ready(function () {
             }
         }
     });
+    $(".iGestion").on("click",function(){
+        var titulo = "Gesti&oacute;n";
+        var cuerpo = "La gesti&oacute;n o a&ntilde;o al cual corresponde la publicaci&oacute;n de la idea de negocio.";
+        var alerta = "Dato requerido obligatoriamente.";
+        despliegaModalInfografia(titulo,cuerpo,alerta);
+    });
+    $(".iMes").on("click",function(){
+        var titulo = "Mes";
+        var cuerpo = "El mes al cual corresponde la publicaci&oacute;n de la idea de negocio.";
+        var alerta = "Dato requerido obligatoriamente.";
+        despliegaModalInfografia(titulo,cuerpo,alerta);
+    });
+    $(".iTiposDeNegocio").on("click",function(){
+        var titulo = "Tipo de Negocio";
+        var cuerpo = "El tipo de negocio al cual corresponde la idea de negocio.";
+        var alerta = "Dato requerido obligatoriamente.";
+        despliegaModalInfografia(titulo,cuerpo,alerta);
+    });
 
+    $(".iTitulo").on("click",function(){
+        var titulo = "T&iacute;tulo";
+        var cuerpo = "Denominaci&oacute;n global de la idea de negocio.";
+        var alerta = "Dato requerido obligatoriamente.";
+        despliegaModalInfografia(titulo,cuerpo,alerta);
+    });
+    $(".iResumen").on("click",function(){
+        var titulo = "Resumen";
+        var cuerpo = "Resumen del Planteamiento de la idea de negocio.";
+        var alerta = "Dato requerido obligatoriamente.";
+        despliegaModalInfografia(titulo,cuerpo,alerta);
+    });
+    $(".iPlanteamiento").on("click",function(){
+        var titulo = "Planteamiento";
+        var cuerpo = "Detalle explicativo de la idea de negocio.";
+        var alerta = "Dato requerido obligatoriamente.";
+        despliegaModalInfografia(titulo,cuerpo,alerta);
+    });
+    $(".iObservacion").on("click",function(){
+        var titulo = "Observaci&oacute;n";
+        var cuerpo = "Observaci&oacute;n sobre la idea de negocio.";
+        var alerta = "";
+        despliegaModalInfografia(titulo,cuerpo,alerta);
+    });
     $('#btnDesfiltrartodo').click(function () {
         $("#divGridRelaborales").jqxGrid('clearfilters');
     });
@@ -1452,4 +1494,19 @@ function getOneRelaboralById(idRelaboral){
         });
         return arrPersonal;
     }
+}
+/**
+ * Función para la definición y despliegue de mensaje infográfico.
+ * @param titulo
+ * @param cuerpo
+ * @param alerta
+ */
+function despliegaModalInfografia(titulo,cuerpo,alerta){
+    $("#h4Title").html(titulo);
+    var body = "<p>"+cuerpo+"</p>";
+    if(alerta!=''){
+        body += "<p class='text-warning'><small>Dato requerido obligatoriamente.</small></p>";
+    }
+    $("#divModalBody").html(body);
+    $("#divModalInfografia").modal('show');
 }

@@ -103,7 +103,7 @@ input[type=text].jqx-input-mobile, input[type=password].jqx-input-mobile {
 
 .jqx-fill-state-normal-mobile, .jqx-fill-state-hover-mobile {
     font-size: 100%;
-    font-family: HelveticaNeue,sans-serif;
+    font-family: Arial,sans-serif;
     border-color: #f1f2f3;
     color: #040404;
     background: #f9f9fa;
@@ -209,9 +209,9 @@ input[type=text].jqx-input-mobile, input[type=password].jqx-input-mobile {
 }
 
 .jqx-fill-state-pressed-mobile {
-    border-color: #c0c3c7;
+    border-color: #1BBAE1;
     color: #000;
-    background-color: #c0c3c7;
+    background-color: #1BBAE1;
 }
 
 .jqx-combobox-multi-item-mobile {
@@ -239,7 +239,7 @@ input[type=text].jqx-input-mobile, input[type=password].jqx-input-mobile {
 
 .jqx-widget-mobile .jqx-grid-column-header-mobile, .jqx-grid-cell-mobile, .jqx-widget-mobile .jqx-grid-cell-mobile, .jqx-widget-mobile .jqx-grid-group-cell-mobile, .jqx-grid-group-cell-mobile {
     font-size: 100%;
-    font-family: HelveticaNeue,sans-serif;
+    font-family: Arial,sans-serif;
 }
 
 .jqx-widget-mobile .jqx-grid-cell-alt-mobile, .jqx-widget-mobile .jqx-grid-cell-sort-mobile, .jqx-widget-mobile .jqx-grid-cell-pinned-mobile, .jqx-widget-mobile .jqx-grid-cell-filter-mobile, .jqx-grid-cell-sort-alt-mobile, .jqx-grid-cell-filter-alt-mobile, .jqx-grid-cell-pinned-mobile, .jqx-grid-cell-alt-mobile, .jqx-grid-cell-sort-mobile {
@@ -324,26 +324,26 @@ input[type=text].jqx-input-mobile, input[type=password].jqx-input-mobile {
 }
 
 .jqx-radiobutton-check-checked-mobile {
-    background: #1c7efb;
+    background: #1BBAE1;
     border-color: #2078e9;
 }
 
 .jqx-scrollbar-thumb-state-normal-horizontal-mobile, .jqx-scrollbar-thumb-state-normal-mobile {
-    background: #b5b5b6;
-    border-color: #b5b5b6;
+    background: #4096C6;
+    border-color: #4096C6;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
 
 .jqx-scrollbar-thumb-state-hover-horizontal-mobile, .jqx-scrollbar-thumb-state-hover-mobile {
-    background: #b5b5b6;
-    border-color: #b5b5b6;
+    background: #4096C6;
+    border-color: #4096C6;
 }
 
 .jqx-scrollbar-thumb-state-pressed-horizontal-mobile, .jqx-scrollbar-thumb-state-pressed-mobile {
-    background: #1c7efb;
-    border-color: #1c7efb;
+    background: #1BBAE1;
+    border-color: #1BBAE1;
 }
 
 .jqx-scrollbar-button-state-normal-mobile {
@@ -357,8 +357,8 @@ input[type=text].jqx-input-mobile, input[type=password].jqx-input-mobile {
 }
 /*applied to the scrollbar buttons in pressed state.*/
 .jqx-scrollbar-button-state-pressed-mobile {
-    border: 1px solid #1c7efb;
-    background: #1c7efb;
+    border: 1px solid #1BBAE1;
+    background: #1BBAE1;
 }
 
 /*icons*/
@@ -603,7 +603,7 @@ input[type=text].jqx-input-mobile, input[type=password].jqx-input-mobile {
 .jqx-listmenu-header-mobile .jqx-button-mobile {
     background: transparent;
     border: none;
-    color: #1c7efb;
+    color: #1BBAE1;
     box-shadow: none;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;

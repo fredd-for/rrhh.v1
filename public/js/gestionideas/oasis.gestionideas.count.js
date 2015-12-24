@@ -63,9 +63,10 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
             {name: 'gestion', type: 'integer'},
             {name: 'mes', type: 'integer'},
             {name: 'mes_nombre', type: 'string'},
-            {name: 'publicaciones', type: 'integer'}
+            {name: 'publicaciones', type: 'numeric'},
+            {name: 'publicaciones_descripcion', type: 'string'}
         ],
-        url: '/gestionideas/listcount',
+        url: '/gestionideas/listcount?id_r='+idRelaboral+'&id_p='+idPersona+'&g='+gestion+'&m='+mes,
         cache: false
     };
     var dataAdapter = new $.jqx.dataAdapter(source);
@@ -97,75 +98,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                     $("#listrowbutton").jqxButton();
                     $("#countrowbutton").jqxButton();*/
 
-                    /* Listado de registros de relación laboral.*/
-                    $("#listrowbutton").off();
-                    $("#listrowbutton").on('click', function () {
-                        var selectedrowindex = $("#divGridRelaborales").jqxGrid('getselectedrowindex');
-                        if (selectedrowindex >= 0) {
-                            var dataRecord = $('#divGridRelaborales').jqxGrid('getrowdata', selectedrowindex);
-                            if (dataRecord != undefined) {
-                                var idRelaboral = dataRecord.id_relaboral;
-                                /*
-                                 *  La vista del historial se habilita para personas que tengan al menos un registro de relación sin importar su estado, ACTIVO, EN PROCESO o PASIVO.
-                                 *  De esta vista se excluyen a personas que no tengan ningún registro de relación laboral.
-                                 */
-                                $(".msjs-alert").hide();
-                                $("#hdnIdPersonaHistorial").val(dataRecord.id_persona);
-                                if (dataRecord.tiene_contrato_vigente >= 0) {
-                                    $('#divTabGestionIdeas').jqxTabs('enableAt', 0);
 
-                                    $('#divTabGestionIdeas').jqxTabs('disableAt', 2);
-                                    $('#divTabGestionIdeas').jqxTabs('disableAt', 3);
-                                    $('#divTabGestionIdeas').jqxTabs('disableAt', 4);
-
-                                    $('#divTabGestionIdeas').jqxTabs('enableAt', 1);
-                                    /**
-                                     * Trasladamos el item seleccionado al que corresponde, el de vistas.
-                                     */
-                                    $('#divTabGestionIdeas').jqxTabs({selectedItem: 1});
-                                    // Create jqxTabs.
-                                    $('#tabFichaPersonal').jqxTabs({
-                                        theme: 'oasis',
-                                        width: '100%',
-                                        height: '100%',
-                                        position: 'top'
-                                    });
-                                    $('#tabFichaPersonal').jqxTabs({selectedItem: 0});
-                                    $("#ddNombres").html(dataRecord.nombres);
-                                    var rutaImagen = obtenerRutaFoto(dataRecord.ci, dataRecord.num_complemento);
-                                    $("#imgFotoPerfilContactoPer").attr("src", rutaImagen);
-                                    $("#imgFotoPerfilContactoInst").attr("src", rutaImagen);
-                                    $("#imgFotoPerfil").attr("src", rutaImagen);
-                                    cargarPersonasContactosGestionIdeas(1,dataRecord.id_persona);
-                                    $("#hdnIdRelaboralVista").val(idRelaboral);
-                                    $("#hdnSwPrimeraVistaHistorial").val(0);
-                                    $("#divContent_" + dataRecord.id_relaboral).focus().select();
-                                    definirGrillaParaListaGestionIdeasPorPersona(dataRecord);
-                                } else {
-                                    var msje = "Para acceder a la vista del registro, la persona debe haber tenido al menos un registro de relaci&oacute,n laboral que implica un estado ACTIVO o PASIVO.";
-                                    $("#divMsjePorError").html("");
-                                    $("#divMsjePorError").append(msje);
-                                    $("#divMsjeNotificacionError").jqxNotification("open");
-                                }
-                            }
-                        } else {
-                            var msje = "Debe seleccionar un registro necesariamente.";
-                            $("#divMsjePorError").html("");
-                            $("#divMsjePorError").append(msje);
-                            $("#divMsjeNotificacionError").jqxNotification("open");
-                        }
-                    });
-
-                    /* Cuantificador de publicaciones mensuales de ideas*/
-                    $("#countrowbutton").off();
-                    $("#countrowbutton").on('click', function () {
-                        $('#divTabGestionIdeas').jqxTabs('enableAt', 0);
-                        $('#divTabGestionIdeas').jqxTabs('disableAt', 1);
-                        $('#divTabGestionIdeas').jqxTabs('disableAt', 2);
-                        $('#divTabGestionIdeas').jqxTabs('disableAt', 3);
-                        $('#divTabGestionIdeas').jqxTabs('enableAt', 4);
-                        $('#divTabGestionIdeas').jqxTabs({selectedItem: 4});
-                    });
                 },
                 columns: [
                     {
@@ -366,7 +299,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         text: 'Mes',
                         filtertype: 'checkedlist',
                         datafield: 'mes_nombre',
-                        width: 70,
+                        width: 150,
                         align: 'center',
                         cellsalign: 'center',
                         hidden: false
@@ -374,7 +307,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                     {
                         text: 'Publicaciones',
                         filtertype: 'checkedlist',
-                        datafield: 'publicaciones',
+                        datafield: 'publicaciones_descripcion',
                         width: 70,
                         align: 'center',
                         cellsalign: 'center',
@@ -386,7 +319,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         datafield: 'gerencia_administrativa',
                         width: 220,
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Departamento',
@@ -394,7 +327,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         datafield: 'departamento_administrativo',
                         width: 220,
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: '&Aacute;rea',
@@ -402,7 +335,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         datafield: 'area',
                         width: 220,
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Proceso',
@@ -411,7 +344,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         width: 220,
                         cellsalign: 'center',
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Fuente',
@@ -420,7 +353,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         width: 220,
                         cellsalign: 'center',
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Nivel Salarial',
@@ -428,7 +361,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         datafield: 'nivelsalarial',
                         width: 220,
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Cargo',
@@ -437,7 +370,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         datafield: 'cargo',
                         width: 215,
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Haber',
@@ -446,7 +379,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         width: 100,
                         cellsalign: 'right',
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Fecha Ingreso',
@@ -456,7 +389,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         cellsalign: 'center',
                         cellsformat: 'dd-MM-yyyy',
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Fecha Inicio',
@@ -466,7 +399,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         cellsalign: 'center',
                         cellsformat: 'dd-MM-yyyy',
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Fecha Incor.',
@@ -476,7 +409,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         cellsalign: 'center',
                         cellsformat: 'dd-MM-yyyy',
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Fecha Fin',
@@ -486,7 +419,7 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         cellsalign: 'center',
                         cellsformat: 'dd-MM-yyyy',
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
                     {
                         text: 'Fecha Baja',
@@ -496,10 +429,10 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
                         cellsalign: 'center',
                         cellsformat: 'dd-MM-yyyy',
                         align: 'center',
-                        hidden: false
+                        hidden: true
                     },
-                    {text: 'Motivo Baja', datafield: 'motivo_baja', width: 100, hidden: false},
-                    {text: 'Observacion', datafield: 'observacion', width: 100, hidden: false},
+                    {text: 'Motivo Baja', datafield: 'motivo_baja', width: 100, hidden: true},
+                    {text: 'Observacion', datafield: 'observacion', width: 100, hidden: true},
                 ]
             });
         var listSource = [
@@ -509,33 +442,147 @@ function definirGrillaParaListaRelaboralesConteoIdeas(idRelaboral,idPersona,gest
             {label: 'Nombres y Apellidos', value: 'nombres', checked: true},
             {label: 'CI', value: 'ci', checked: true},
             {label: 'Exp', value: 'expd', checked: true},
-            /*{label: 'N/C', value: 'num_complemento', checked: false},*/
-            {label: 'Gerencia', value: 'gerencia_administrativa', checked: true},
-            {label: 'Departamento', value: 'departamento_administrativo', checked: true},
-            {label: '&Aacute;rea', value: 'area', checked: true},
-            {label: 'proceso', value: 'proceso_codigo', checked: true},
-            {label: 'Fuente', value: 'fin_partida', checked: true},
-            {label: 'Nivel Salarial', value: 'nivelsalarial', checked: true},
-            {label: 'Cargo', value: 'cargo', checked: true},
-            {label: 'Haber', value: 'sueldo', checked: true},
-            {label: 'Fecha Ingreso', value: 'fecha_ing', checked: true},
-            {label: 'Fecha Inicio', value: 'fecha_ini', checked: true},
-            {label: 'Fecha Incor.', value: 'fecha_incor', checked: true},
-            {label: 'Fecha Fin', value: 'fecha_fin', checked: true},
-            {label: 'Fecha Baja', value: 'fecha_baja', checked: true},
-            {label: 'Motivo Baja', value: 'motivo_baja', checked: true},
-            {label: 'Observacion', value: 'observacion', checked: true}
+            {label: 'Gestion', value: 'gestion', checked: true},
+            {label: 'Mes', value: 'mes_nombre', checked: true},
+            {label: 'Publicaci&oacute;n', value: 'publicaciones_descripcion', checked: true},
+            {label: 'Gerencia', value: 'gerencia_administrativa', checked: false},
+            {label: 'Departamento', value: 'departamento_administrativo', checked: false},
+            {label: '&Aacute;rea', value: 'area', checked: false},
+            {label: 'proceso', value: 'proceso_codigo', checked: false},
+            {label: 'Fuente', value: 'fin_partida', checked: false},
+            {label: 'Nivel Salarial', value: 'nivelsalarial', checked: false},
+            {label: 'Cargo', value: 'cargo', checked: false},
+            {label: 'Haber', value: 'sueldo', checked: false},
+            {label: 'Fecha Ingreso', value: 'fecha_ing', checked: false},
+            {label: 'Fecha Inicio', value: 'fecha_ini', checked: false},
+            {label: 'Fecha Incor.', value: 'fecha_incor', checked: false},
+            {label: 'Fecha Fin', value: 'fecha_fin', checked: false},
+            {label: 'Fecha Baja', value: 'fecha_baja', checked: false},
+            {label: 'Motivo Baja', value: 'motivo_baja', checked: false},
+            {label: 'Observacion', value: 'observacion', checked: false}
         ];
-        $("#jqxlistbox").jqxListBox({source: listSource, width: "100%", height: 430, checkboxes: true});
-        $("#jqxlistbox").on('checkChange', function (event) {
-            $("#divGridRelaborales").jqxGrid('beginupdate');
+        $("#divListBoxConteo").jqxListBox({source: listSource, width: "100%", height: 430, checkboxes: true});
+        $("#divListBoxConteo").on('checkChange', function (event) {
+            $("#divGridRelaboralesConteo").jqxGrid('beginupdate');
             if (event.args.checked) {
-                $("#divGridRelaborales").jqxGrid('showcolumn', event.args.value);
+                $("#divGridRelaboralesConteo").jqxGrid('showcolumn', event.args.value);
             }
             else {
-                $("#divGridRelaborales").jqxGrid('hidecolumn', event.args.value);
+                $("#divGridRelaboralesConteo").jqxGrid('hidecolumn', event.args.value);
             }
-            $("#divGridRelaborales").jqxGrid('endupdate');
+            $("#divGridRelaboralesConteo").jqxGrid('endupdate');
         });
     }
+}
+/**
+ * Función para la carga del combo de gestiones en función de si es para la generación de nuevas planillas o para la vista de planillas generadas.
+ * Dada que la función es indistinta para planillas salariales y de refrigerio son usadas para este propósito.
+ * @param option
+ */
+function cargarGestionesParaCalculo(option,g){
+    var sufijo = "Count";
+    var lista = "";
+    $("#lstGestion"+sufijo).html("");
+    $("#lstGestion"+sufijo).append("<option value=''>Seleccionar</option>");
+    $("#lstGestion"+sufijo).prop("disabled",false);
+    var selected = "";
+    $.ajax({
+        url: '/planillassal/getgestionesgeneracion/',
+        type: "POST",
+        datatype: 'json',
+        async: false,
+        cache: false,
+        success: function (data) {
+            var res = jQuery.parseJSON(data);
+            if (res.length > 0) {
+                $.each(res, function (key, gestion) {
+                    if(g==gestion)selected="selected";
+                    else selected = "";
+                    lista += "<option value='"+gestion+"' "+selected+">"+gestion+"</option>";
+                });
+            }
+            return res;
+        }
+    });
+    if(lista!='')$("#lstGestion"+sufijo).append(lista);
+    else $("#lstGestion"+sufijo).prop("disabled",true);
+}
+/**
+ * Función para obtener el listado de meses disponibles para la generación de planillas de refrigerio
+ * en consideración a una gestion en particular.
+ * @param option
+ * @param g
+ * @param m
+ */
+function cargarMesesParaCalculo(option,g,m){
+    var sufijo = "Count";
+    var lista = "";
+    $("#lstMes"+sufijo).html("");
+    $("#lstMes"+sufijo).append("<option value=''>Seleccionar</option>");
+    $("#lstMes"+sufijo).prop("disabled",true);
+    var selected = "";
+    if(g>0){
+        $.ajax({
+            url: '/gestionideas/getmesesgeneracion/',
+            type: "POST",
+            datatype: 'json',
+            async: false,
+            cache: false,
+            data:{gestion:g},
+            success: function (data) {
+                var res = jQuery.parseJSON(data);
+                if (res.length > 0) {
+                    $.each(res, function (key, val) {
+                        if(m==val.mes)selected="selected";
+                        else selected = "";
+                        lista += "<option value='"+val.mes+"' "+selected+">"+val.mes_nombre+"</option>";
+                    });
+                }
+            }
+        });
+    }
+    if(lista!=''){
+        $("#lstMes"+sufijo).append(lista);
+        $("#lstMes"+sufijo).prop("disabled",false);
+    }
+    else $("#lstMes"+sufijo).prop("disabled",true);
+}
+/**
+ * Función para la validación del formulario de búsqueda de ideas por mes.
+ */
+function validarFormularioBusqueda(){
+    var ok=true;
+    $("#divGestionCount").removeClass("error");
+    $("#helpErrorGestionCount").removeClass("error");
+    $("#helpErrorGestionCount").html("");
+    $("#divMesCount").removeClass("error");
+    $("#helpErrorMesCount").removeClass("error");
+    $("#helpErrorMesCount").html("");
+    var gestion = 0;
+    var mes = 0;
+    var focable=null;
+    if($("#lstGestionCount").val()>0){
+        gestion = $("#lstGestionCount").val();
+    }
+    if($("#lstMesCount").val()>0){
+        mes = $("#lstMesCount").val();
+    }
+    if(gestion<=0){
+        ok=false;
+        $("#divGestionCount").addClass("error");
+        $("#helpErrorGestionCount").addClass("error");
+        $("#helpErrorGestionCount").html("Debe seleccionar la gesti&oacute;n necesariamente.");
+        focable = $("#divGestionCount");
+    }
+    if(mes<=0){
+        ok=false;
+        $("#divMesCount").addClass("error");
+        $("#helpErrorMesCount").addClass("error");
+        $("#helpErrorMesCount").html("Debe seleccionar el mes necesariamente.");
+        if(focable==null){
+            focable = $("#divMesCount");
+        }
+    }
+    if(focable!=null)focable.focus();
+    return ok;
 }

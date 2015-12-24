@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es" class="app">
     <head>
@@ -23,33 +22,33 @@
         <?php echo $this->assets->outputJs() ?>  
     </head>
     <body>
-
-        <div id="page-container" class="header-fixed-top  footer-fixed sidebar-full ">
+        <div id="page-container" class="header-fixed-top  footer-fixed sidebar-partial sidebar-visible-lg">
             <div id="sidebar" class="">
                 <div class="sidebar-scroll">
                     <div class="sidebar-content">
-                        <a href="./index.php" class="sidebar-brand">
+                        <a href="/" class="sidebar-brand">
                             <!--<i class="fa fa-refresh text-white"></i><strong>SIR-MT </strong>v1-->
                             <i class="fa fa-refresh text-white"></i><strong>Sist. RRHH </strong>v1.0
                         </a>
+                        <div style="padding: 10px">
+                            <a href="/"><img width="180" src="/images/logoMT2.png"></a>
+                        </div>
                         <div class="sidebar-section sidebar-user clearfix">
                             <div class="sidebar-user-avatar">
-                                <a href="#">
-                                    <!--<img src="/assets/img/placeholders/avatars/avatar2.jpg" alt="avatar" />-->
-                                    <!--<img src="/assets/img/placeholders/avatars/imagen_acefalo.jpg" alt="avatar" />-->
+                                <a href="/">
                                     <img src="<?php echo $ruta; ?>" alt="<?php echo $nombres; ?>" />
                                 </a>
                             </div>
                             <div class="sidebar-user-name"><?php echo $username; ?></div>
                             <div class="sidebar-user-links">
-                                <a href="../index.php" data-toggle="modal" class="enable-tooltip" data-placement="bottom" title="Inicio"><i class="fa fa-home"></i></a>
+                                <a href="/" data-toggle="modal" class="enable-tooltip" data-placement="bottom" title="Inicio"><i class="fa fa-home"></i></a>
                                 <a href="/usuario/logout" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión"><i class="fa fa-power-off"></i></a>
                             </div>
                         </div>
                         <ul class="sidebar-nav">
                             <li>
-                                <a href="../index.php">
-                                    <i class="hi hi-signal sidebar-nav-icon"></i>
+                                <a href="/">
+                                    <i class="fa-2x fa fa-bar-chart-o"></i>
                                     Dashboard
                                 </a>
                             </li>
@@ -76,9 +75,9 @@
 
                                         <li>
                                             <?php if ($controller == $m->controlador): ?>
-                                                <a href="#" class="sidebar-nav-menu active" class1="" ><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="<?php echo $m->icon ?> "></i> <?php echo $m->menu; ?></a>
+                                                <a href="#" class="sidebar-nav-menu active" class1="" ><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="<?php echo $m->icon ?> "></i>&nbsp;<?php echo $m->menu; ?></a>
                                             <?php else: ?>
-                                                <a href="#" class="sidebar-nav-menu" class1="" ><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="<?php echo $m->icon ?> "></i> <?php echo $m->menu; ?></a>
+                                                <a href="#" class="sidebar-nav-menu" class1="" ><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="<?php echo $m->icon ?> "></i>&nbsp;<?php  echo $m->menu; ?></a>
                                             <?php endif; ?>
 
                                             <ul>
@@ -115,7 +114,7 @@
                 <header class="navbar navbar-default navbar-fixed-top">
                     <ul class="nav navbar-nav-custom">
                         <li class="hidden-xs hidden-sm">
-                            <a onclick="App.sidebar('toggle-sidebar');" href="javascript:void(0)">
+                            <a class="btn-menu-principal">
                                 <i class="fa fa-bars fa-fw"></i>
                             </a>
                             <!--<a href="javascript:void(0)" id="sidebar-toggle-lg">
@@ -123,15 +122,15 @@
                             </a>-->
                         </li>
                         <li class="hidden-md hidden-lg">
-                            <a href="javascript:void(0)" id="sidebar-toggle-sm">
+                            <a id="sidebar-toggle-sm"  class="btn-menu-principal">
                                 <i class="fa fa-bars fa-fw"></i>
                             </a>
                         </li>
-                        <li class="hidden-md hidden-lg">
-                            <a href="./index.php.html">
+                        <!--<li class="hidden-md hidden-lg">
+                            <a>
                                 <i class="gi gi-stopwatch fa-fw"></i>
                             </a>
-                        </li>
+                        </li>-->
                     </ul>
                     <form action="page_ready_search_results.php" method="post" class="navbar-form-custom" role="search" />
                     <div class="form-group">
@@ -139,32 +138,6 @@
                     </div>
                     </form>
                     <ul class="nav navbar-nav-custom pull-right">
-                        <!--<li class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="gi gi-settings"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-custom dropdown-options dropdown-menu-right">
-                                <li class="dropdown-header text-center">Header Style</li>
-                                <li>
-                                    <div class="btn-group btn-group-justified btn-group-sm">
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="options-header-default">Light</a>
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="options-header-inverse">Dark</a>
-                                    </div>
-                                </li>
-                                <li class="dropdown-header text-center">Page Style</li>
-                                <li>
-                                    <div class="btn-group btn-group-justified btn-group-sm">
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="options-main-style">Default</a>
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="options-main-style-alt">Alternative</a>
-                                    </div>
-                                </li>
-                                <li class="dropdown-header text-center">Main Layout</li>
-                                <li>
-                                    <button class="btn btn-sm btn-block btn-primary" id="options-header-top">Fixed Side/Header (Top)</button>
-                                    <button class="btn btn-sm btn-block btn-primary" id="options-header-bottom">Fixed Side/Header (Bottom)</button>
-                                </li>
-                            </ul>
-                        </li>-->
                         <li class="dropdown">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                 <!--<img src="/assets/img/placeholders/avatars/avatar2.jpg" alt="<?php /*echo $user->nombre */?>" /> <i class="fa fa-angle-down"></i>-->
@@ -172,7 +145,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                                 <li>
-                                    <a href="../micuenta" id="aMiCuenta"><i class="fa fa-asterisk fa-fw pull-right"></i>Modifcar Contrase&ntilde;a</a>
+                                    <a href="../micuenta" id="aMiCuenta"><i class="fa fa-asterisk fa-fw pull-right"></i>Modificar Contrase&ntilde;a</a>
                                     </li>
                                 <li class="divider"></li>
                                 <li>
@@ -189,195 +162,3 @@
         </div>
     </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="es" class="app">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="Ivan Marcelo">
-        <meta name="keyword" content="">
-        <link rel="shortcut icon" href="img/favicon.png">
-        <?php echo $this->tag->getTitle(); ?>
-        <style>
-            body{font-family:Roboto,Arial,sans-serif;font-size:11px;font-weight:400;text-decoration:none}
-        </style>
-        <!-- CSS -->
-       <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
-        <!--[if IE 8]><script src="/assets/js/helpers/excanvas.min.js"></script><![endif]-->
-        <!-- <link rel="stylesheet" href="/media/css/styles.css"> -->
-        
-        <?php $this->assets->outputCss(); ?>
-        <!--[if lt IE 9]> <script src="/assets/js/ie/html5shiv.js"></script> <script src="/assets/js/ie/respond.min.js"></script> <script src="/assets/js/ie/excanvas.js"></script> <![endif]-->
-        <script src="/assets/js/vendor/jquery-1.11.0.min.js"></script>
-        <?php echo $this->assets->outputJs() ?>  
-    </head>
-    <body>
-
-        <div id="page-container" class="header-fixed-top  footer-fixed sidebar-full ">
-            <div id="sidebar" class="">
-                <div class="sidebar-scroll">
-                    <div class="sidebar-content">
-                        <a href="./index.php" class="sidebar-brand">
-                            <!--<i class="fa fa-refresh text-white"></i><strong>SIR-MT </strong>v1-->
-                            <i class="fa fa-refresh text-white"></i><strong>Sist. RRHH </strong>v1.0
-                        </a>
-                        <div class="sidebar-section sidebar-user clearfix">
-                            <div class="sidebar-user-avatar">
-                                <a href="#">
-                                    <!--<img src="/assets/img/placeholders/avatars/avatar2.jpg" alt="avatar" />-->
-                                    <!--<img src="/assets/img/placeholders/avatars/imagen_acefalo.jpg" alt="avatar" />-->
-                                    <img src="<?php echo $ruta; ?>" alt="<?php echo $nombres; ?>" />
-                                </a>
-                            </div>
-                            <div class="sidebar-user-name"><?php echo $username; ?></div>
-                            <div class="sidebar-user-links">
-                                <a href="../index.php" data-toggle="modal" class="enable-tooltip" data-placement="bottom" title="Inicio"><i class="fa fa-home"></i></a>
-                                <a href="/usuario/logout" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión"><i class="fa fa-power-off"></i></a>
-                            </div>
-                        </div>
-                        <ul class="sidebar-nav">
-                            <li>
-                                <a href="../index.php">
-                                    <i class="hi hi-signal sidebar-nav-icon"></i>
-                                    Dashboard
-                                </a>
-                            </li>
-                            <?php
-                            // Creating a router
-                            $router = new \Phalcon\Mvc\Router();
-                            $router->handle();
-                            $controller = $router->getControllerName();
-                            $menu = array();
-                            $id = 0;
-                            foreach ($menus as $m):
-                                $menu[$m->id][$m->id_submenu]['id'] = $m->id_submenu;
-                                $menu[$m->id][$m->id_submenu]['submenu'] = $m->submenu;
-                                $menu[$m->id][$m->id_submenu]['accion'] = $m->accion;
-                                $menu[$m->id][$m->id_submenu]['descripcion'] = $m->descripcion;
-                            endforeach;
-                            $sm = 0;
-                            ?>
-                            <?php foreach ($menus as $m): ?>
-
-                                <?php if ($id != $m->id): ?>
-
-                                    <?php if (count($menu[$m->id]) > 1): ?>
-
-                                        <li>
-                                            <?php if ($controller == $m->controlador): ?>
-                                                <a href="#" class="sidebar-nav-menu active" class1="" ><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="<?php echo $m->icon ?> "></i> <?php echo $m->menu; ?></a>
-                                            <?php else: ?>
-                                                <a href="#" class="sidebar-nav-menu" class1="" ><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="<?php echo $m->icon ?> "></i> <?php echo $m->menu; ?></a>
-                                            <?php endif; ?>
-
-                                            <ul>
-                                                <?php
-                                                ksort($menu[$m->id]);
-                                                foreach ($menu[$m->id] as $k => $v):
-                                                    ?>
-                                                    <li>
-                                                        <a href="/<?php echo $m->controlador; ?>/<?php echo $menu[$m->id][$k]['accion']; ?>" title="<?php echo $menu[$m->id][$k]['descripcion']; ?>"><?php echo $menu[$m->id][$k]['submenu']; ?></a>
-                                                    </li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </li>
-                                    <?php else: ?>
-                                        <li>
-                                            <?php if ($controller == $m->controlador): ?>
-                                                <a href="/<?php echo $m->controlador; ?>" class="active " ><i class="<?php echo $m->icon ?> "></i> <?php echo $m->menu; ?></a>
-                                            <?php else: ?>
-                                                <a href="/<?php echo $m->controlador; ?>" class=" " ><i class="<?php echo $m->icon ?> "></i> <?php echo $m->menu; ?></a>
-                                            <?php endif; ?>
-
-                                        </li>
-                                    <?php endif; ?>
-                                    <?php
-                                    $id = $m->id;
-                                endif;
-                                ?>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="main-container">
-                <header class="navbar navbar-default navbar-fixed-top">
-                    <ul class="nav navbar-nav-custom">
-                        <li class="hidden-xs hidden-sm">
-                            <a onclick="App.sidebar('toggle-sidebar');" href="javascript:void(0)">
-                                <i class="fa fa-bars fa-fw"></i>
-                            </a>
-                            <!--<a href="javascript:void(0)" id="sidebar-toggle-lg">
-                                <i class="fa fa-list-ul fa-fw"></i>
-                            </a>-->
-                        </li>
-                        <li class="hidden-md hidden-lg">
-                            <a href="javascript:void(0)" id="sidebar-toggle-sm">
-                                <i class="fa fa-bars fa-fw"></i>
-                            </a>
-                        </li>
-                        <li class="hidden-md hidden-lg">
-                            <a href="./index.php.html">
-                                <i class="gi gi-stopwatch fa-fw"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <form action="page_ready_search_results.php" method="post" class="navbar-form-custom" role="search" />
-                    <div class="form-group">
-                        <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Buscar.." />
-                    </div>
-                    </form>
-                    <ul class="nav navbar-nav-custom pull-right">
-                        <!--<li class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="gi gi-settings"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-custom dropdown-options dropdown-menu-right">
-                                <li class="dropdown-header text-center">Header Style</li>
-                                <li>
-                                    <div class="btn-group btn-group-justified btn-group-sm">
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="options-header-default">Light</a>
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="options-header-inverse">Dark</a>
-                                    </div>
-                                </li>
-                                <li class="dropdown-header text-center">Page Style</li>
-                                <li>
-                                    <div class="btn-group btn-group-justified btn-group-sm">
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="options-main-style">Default</a>
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="options-main-style-alt">Alternative</a>
-                                    </div>
-                                </li>
-                                <li class="dropdown-header text-center">Main Layout</li>
-                                <li>
-                                    <button class="btn btn-sm btn-block btn-primary" id="options-header-top">Fixed Side/Header (Top)</button>
-                                    <button class="btn btn-sm btn-block btn-primary" id="options-header-bottom">Fixed Side/Header (Bottom)</button>
-                                </li>
-                            </ul>
-                        </li>-->
-                        <li class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                <!--<img src="/assets/img/placeholders/avatars/avatar2.jpg" alt="<?php /*echo $user->nombre */?>" /> <i class="fa fa-angle-down"></i>-->
-                                <img src="<?php echo $ruta; ?>" alt="<?php echo $nombres; ?>" alt="<?php /*echo $user->nombre */?>"/><i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                                <li>
-                                    <a href="../micuenta" id="aMiCuenta"><i class="fa fa-asterisk fa-fw pull-right"></i>Modifcar Contrase&ntilde;a</a>
-                                    </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="/usuario/logout"><i class="fa fa-power-off fa-fw pull-right"></i> Cerrar Sesi&oacute;n</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </header>
-                <div id="page-content">                
-                    <?php echo $this->getContent(); ?>                  
-                </div>                
-            </div>
-        </div>
-    </body>
-</html>
->>>>>>> refs/remotes/origin/master

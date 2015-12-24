@@ -434,7 +434,7 @@ class pdfoasis extends fpdf{
             $verificador = $objCe->controlexcepcion_user_verificador;
             $usuarioVerificador = usuarios::findFirstById($objCe->controlexcepcion_user_ver_id);
             if(is_object($usuarioVerificador)){
-                $relaboral = relaborales::findFirst(array("persona_id=".$usuarioVerificador->persona_id." AND estado>=1"));
+                $relaboral = Relaborales::findFirst(array("persona_id=".$usuarioVerificador->persona_id." AND estado>=1"));
                 if(is_object($relaboral)){
                     $objRelaboralVerificador = new Frelaborales();
                     $objRV = $objRelaboralVerificador->getOneRelaboralConsiderandoUltimaMovilidad($relaboral->id);
@@ -461,7 +461,7 @@ class pdfoasis extends fpdf{
             $aprobador = $objCe->controlexcepcion_user_aprobador;
             $usuarioAprobador = usuarios::findFirstById($objCe->controlexcepcion_user_apr_id);
             if(is_object($usuarioAprobador)){
-                $relaboral = relaborales::findFirst(array("persona_id=".$usuarioAprobador->persona_id." AND estado>=1"));
+                $relaboral = Relaborales::findFirst(array("persona_id=".$usuarioAprobador->persona_id." AND estado>=1"));
                 if(is_object($relaboral)){
                     $objRelaboralAprobador = new Frelaborales();
                     $objRA = $objRelaboralAprobador->getOneRelaboralConsiderandoUltimaMovilidad($relaboral->id);
@@ -562,7 +562,7 @@ class pdfoasis extends fpdf{
                 $verificador = $objCe->controlexcepcion_user_verificador;
                 $usuarioVerificador = usuarios::findFirstById($objCe->controlexcepcion_user_ver_id);
                 if(is_object($usuarioVerificador)){
-                    $relaboral = relaborales::findFirst(array("persona_id=".$usuarioVerificador->persona_id." AND estado>=1"));
+                    $relaboral = Relaborales::findFirst(array("persona_id=".$usuarioVerificador->persona_id." AND estado>=1"));
                     if(is_object($relaboral)){
                         $objRelaboralVerificador = new Frelaborales();
                         $objRV = $objRelaboralVerificador->getOneRelaboralConsiderandoUltimaMovilidad($relaboral->id);
@@ -577,7 +577,7 @@ class pdfoasis extends fpdf{
             $aprobador = $objCe->controlexcepcion_user_aprobador;
             $usuarioAprobador = usuarios::findFirstById($objCe->controlexcepcion_user_apr_id);
             if(is_object($usuarioAprobador)){
-                $relaboral = relaborales::findFirst(array("persona_id=".$usuarioAprobador->persona_id." AND estado>=1"));
+                $relaboral = Relaborales::findFirst(array("persona_id=".$usuarioAprobador->persona_id." AND estado>=1"));
                 if(is_object($relaboral)){
                     $objRelaboralAprobador = new Frelaborales();
                     $objRA = $objRelaboralAprobador->getOneRelaboralConsiderandoUltimaMovilidad($relaboral->id);
@@ -610,14 +610,20 @@ class pdfoasis extends fpdf{
         if($objCe->id_controlexcepcion>0){
             $idControlExcepcionCodificado = rtrim(strtr(base64_encode($objCe->id_controlexcepcion), '+/', '-_'), '=');
             $param = parametros::findFirst(array("parametro LIKE 'RUTA_APLICACION' AND estado=1 AND baja_logica=1"));
-            $ruta = 'http://rrhh.local/controlexcepcionesvistobueno/vistobueno/';
+            $ruta = 'http://rrhh.local/controlexcepcionesvistobueno/detail/';
             if(is_object($param)){
-                $ruta = 'http://'.$param->nivel.'/controlexcepcionesvistobueno/details/';
+                $ruta = 'http://'.$param->nivel.'/controlexcepcionesvistobueno/detail/';
             }
             $codeContents=$ruta.$idControlExcepcionCodificado;
-            if (file_exists($tempDir.$objCe->id_controlexcepcion.'.png'))
-                unlink($tempDir.$objCe->id_controlexcepcion.'.png');
-            QRcode::png($codeContents, $tempDir.$objCe->id_controlexcepcion.'.png', QR_ECLEVEL_L, 3);
+            try{
+                if (file_exists($tempDir.$objCe->id_controlexcepcion.'.png')){
+                    unlink($tempDir.$objCe->id_controlexcepcion.'.png');
+                }
+                QRcode::png($codeContents, $tempDir.$objCe->id_controlexcepcion.'.png', QR_ECLEVEL_L, 3);
+            } catch(Exception $e){
+                return false;
+            }
+
         }
     }
     /*

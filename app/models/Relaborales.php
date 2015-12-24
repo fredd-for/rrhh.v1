@@ -307,4 +307,23 @@ class Relaborales  extends \Phalcon\Mvc\Model {
             return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
         }
     }
+
+    /**
+     * Función para la obtención de la cantidad de personal con contrato activo en una determinada condición.
+     * @param $idCondicion
+     * @return mixed
+     */
+    public function getCantidadPersonalActivoPorCondicion($idCondicion){
+        if($idCondicion>0){
+            $sql = "SELECT COUNT(*) AS resultado FROM relaborales r ";
+            $sql .= "INNER JOIN finpartidas f ON f.id = r.finpartida_id ";
+            $sql .= "WHERE r.estado>=1 AND r.baja_logica=1 ";
+            $sql .= "AND f.condicion_id = ".$idCondicion;
+            $this->_db = new Gestiones();
+            $arr = new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
+            if(is_object($arr))return $arr[0]->resultado;
+        }
+        return 0;
+    }
+
 }

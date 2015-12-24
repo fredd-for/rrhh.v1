@@ -184,90 +184,6 @@ class Fcontrolexcepciones extends \Phalcon\Mvc\Model {
         if($group!='')$sql .= $group;
         $this->_db = new Fcontrolexcepciones();
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
-        /*$sql = "SELECT ";
-        $sql .= "ce.id as id_controlexcepcion,";
-        $sql .= "ce.relaboral_id as id_relaboral,";
-        $sql .= "ce.fecha_ini,";
-        $sql .= "ce.hora_ini,";
-        $sql .= "ce.fecha_fin,";
-        $sql .= "ce.hora_fin,";
-        $sql .= "ce.turno,";
-        $sql .= "ce.entrada_salida,";
-        $sql .= "ce.justificacion,";
-        $sql .= "ce.observacion AS controlexcepcion_observacion,";
-        $sql .= "ce.estado AS controlexcepcion_estado,";
-        $sql .= "pa.valor_1 AS controlexcepcion_estado_descripcion,";
-        $sql .= "ce.user_reg_id as controlexcepcion_user_reg_id,";
-        $sql .= "REPLACE(p1.p_apellido||' '||";
-        $sql .= "CASE WHEN p1.s_apellido IS NOT NULL AND p1.s_apellido !='' THEN p1.s_apellido ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p1.c_apellido IS NOT NULL THEN ' '||p1.c_apellido ELSE NULL END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p1.p_nombre IS NOT NULL THEN ' '||p1.p_nombre ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p1.s_nombre IS NOT NULL THEN ' '||p1.s_nombre ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p1.t_nombre IS NOT NULL THEN ' '||p1.t_nombre ELSE '' END,'  ',' ')";
-        $sql .= "AS controlexcepcion_user_registrador,";
-        $sql .= "ce.fecha_reg as controlexcepcion_fecha_reg,";
-        $sql .= "ce.user_ver_id as controlexcepcion_user_ver_id,";
-        $sql .= "REPLACE(p2.p_apellido||' '||";
-        $sql .= "CASE WHEN p2.s_apellido IS NOT NULL THEN p2.s_apellido ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p2.c_apellido IS NOT NULL THEN ' '||p2.c_apellido ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p2.p_nombre IS NOT NULL THEN ' '||p2.p_nombre ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p2.s_nombre IS NOT NULL THEN ' '||p2.s_nombre ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p2.t_nombre IS NOT NULL THEN ' '||p2.t_nombre ELSE '' END,'  ',' ')";
-        $sql .= "AS controlexcepcion_user_verificador,";
-        $sql .= "ce.fecha_ver as controlexcepcion_fecha_ver,";
-        $sql .= "ce.user_apr_id as controlexcepcion_user_apr_id,";
-        $sql .= "REPLACE(p3.p_apellido||' '||";
-        $sql .= "CASE WHEN p3.s_apellido IS NOT NULL THEN p3.s_apellido ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p3.c_apellido IS NOT NULL THEN ' '||p3.c_apellido ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p3.p_nombre IS NOT NULL THEN ' '||p3.p_nombre ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p3.s_nombre IS NOT NULL THEN ' '||p3.s_nombre ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p3.t_nombre IS NOT NULL THEN ' '||p3.t_nombre ELSE '' END,'  ',' ')";
-        $sql .= "AS controlexcepcion_user_aprobador,";
-        $sql .= "ce.fecha_apr as controlexcepcion_fecha_apr,";
-        $sql .= "ce.user_mod_id as controlexcepcion_user_mod_id,";
-        $sql .= "REPLACE(p4.p_apellido||' '||";
-        $sql .= "CASE WHEN p4.s_apellido IS NOT NULL THEN p4.s_apellido ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p4.c_apellido IS NOT NULL THEN ' '||p4.c_apellido ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p4.p_nombre IS NOT NULL THEN ' '||p4.p_nombre ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p4.s_nombre IS NOT NULL THEN ' '||p4.s_nombre ELSE '' END";
-        $sql .= "||";
-        $sql .= "CASE WHEN p4.t_nombre IS NOT NULL THEN ' '||p4.t_nombre ELSE '' END,'  ',' ')";
-        $sql .= "AS controlexcepcion_user_modificador,";
-        $sql .= "ce.fecha_mod as controlexcepcion_fecha_mod,";
-        $sql .= "fe.* ";
-        $sql .= "FROM controlexcepciones ce ";
-        $sql .= "INNER JOIN f_excepciones_por_id(ce.excepcion_id) fe ON fe.id_excepcion>0 ";
-        $sql .= "INNER JOIN parametros pa ON pa.parametro LIKE 'ESTADO_CONTROLEXCEPCIONES' AND ce.estado = CAST(pa.nivel AS integer) ";
-        $sql .= "INNER JOIN usuarios u1 ON u1.id = ce.user_reg_id ";
-        $sql .= "LEFT JOIN personas p1 ON p1.id = u1.persona_id ";
-        $sql .= "LEFT JOIN usuarios u2 ON u2.id = ce.user_ver_id ";
-        $sql .= "LEFT JOIN personas p2 ON p2.id = u2.persona_id ";
-        $sql .= "LEFT JOIN usuarios u3 ON u3.id = ce.user_apr_id ";
-        $sql .= "LEFT JOIN personas p3 ON p3.id = u3.persona_id ";
-        $sql .= "LEFT JOIN usuarios u4 ON u4.id = ce.user_mod_id ";
-        $sql .= "LEFT JOIN personas p4 ON p4.id = u4.persona_id ";
-        $sql .= "WHERE ce.baja_logica=1 AND ce.relaboral_id = ".$idRelaboral." ";
-        $sql .= "ORDER BY ce.fecha_ini DESC,ce.hora_ini DESC ";
-        if($offset!=''&&$offset!=null)$sql .= " OFFSET ".$offset;
-        if($limit!=''&&$limit!=null)$sql .= " LIMIT  ".$limit;
-        if($group!='')$sql .= $group;
-        $this->_db = new Fmarcaciones();
-        return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));*/
     }
 
     /**
@@ -302,4 +218,20 @@ class Fcontrolexcepciones extends \Phalcon\Mvc\Model {
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
     }
 
+    /**
+     * Función para la obtención de los registros de excepción relacionados a sus cargos en una determinada gestión y mes.
+     * @param $idRelaboral
+     * @param $gestion
+     * @param $mes
+     * @return Resultset
+     */
+    public function getAllByYearAndMonth($idRelaboral,$gestion,$mes,$where,$group)
+    {   if($idRelaboral>=0&&$gestion>0&$mes>0){
+        $sql = "SELECT * FROM f_controlexcepciones_relaboral_gestion_mes($idRelaboral,$gestion,$mes)";
+        if($where!='')$sql .= $where;
+        if($group!='')$sql .= $group;
+        $this->_db = new Frelaborales();
+        return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
+        }
+    }
 } 

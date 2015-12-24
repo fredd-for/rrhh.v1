@@ -161,7 +161,7 @@ class Form110imprefController extends ControllerBase{
             $totalGanado = $_POST['total_ganado'];
             $observacion = $_POST['observacion'];
             $fechaForm = $_POST['fecha_form'];
-            $objMontoDiario = Parametros::FindFirst("parametro='MONTO_REFRIGERIO_DIARIO' AND estado=1");
+            $objMontoDiario = parametros::FindFirst("parametro='MONTO_REFRIGERIO_DIARIO' AND estado=1");
             $montoDiario = 0;
             if(is_object($objMontoDiario)>0){
                 $montoDiario = $objMontoDiario->readAttribute('nivel');

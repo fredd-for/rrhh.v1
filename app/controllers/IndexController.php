@@ -28,30 +28,41 @@ class IndexController extends ControllerBase
             /**
              * Cantidad de Personal
              */
-            $relaborales = Relaborales::find("estado>=1 AND finpartida_id IN (1,4,7)");
-            $this->view->setVar('permanentes', $relaborales->count());
+            $objRelab = new Relaborales();
+            $contratoPlazoFijo = $objRelab->getCantidadPersonalActivoPorCondicion(7);
+            $contratoPlazoIndefinido = $objRelab->getCantidadPersonalActivoPorCondicion(6);
+            $contratoConsultoria = $objRelab->getCantidadPersonalActivoPorCondicion(3);
 
-            $relaborales = Relaborales::find("estado>=1 AND finpartida_id IN (2,5,8)");
-            $this->view->setVar('eventuales', $relaborales->count());
+            $this->view->setVar('permanentes', $contratoPlazoIndefinido);
 
-            $relaborales = Relaborales::find("estado>=1 AND finpartida_id IN (3,6,9)");
-            $this->view->setVar('consultores', $relaborales->count());
+            $this->view->setVar('eventuales', $contratoPlazoFijo);
 
-            $this->assets->addJs('/js/index/oasis.index.js');
+            $this->view->setVar('consultores', $contratoConsultoria);
+
+            $this->view->setVar('total_personal', ($contratoPlazoIndefinido+$contratoPlazoFijo+$contratoConsultoria));
+
             /**
              * Procesos Pendientes de Conclusión
              */
             $hoy = date("d-m-Y");
             $procesos_pendientes = Procesoscontrataciones::find("fecha_concl>='".$hoy."' AND normativamod_id IN (1,2,5,6) AND tipoconvocatoria_id=1");
+            $procesos_concluidos = Procesoscontrataciones::find("fecha_concl<'".$hoy."' AND normativamod_id IN (1,2,5,6) AND tipoconvocatoria_id=1");
             $this->view->setVar('procesos_pendientes', $procesos_pendientes->count());
+            $this->view->setVar('procesos_concluidos', $procesos_concluidos->count());
         }else {
             $objFR = new Frelaborales();
             $this->view->setVar('id_persona', $persona->id);
             $lstAntiguedad = $objFR->getListAntiguedadPorPeriodos($persona->id);
             $this->view->setVar('antiguedad', $lstAntiguedad);
             $this->view->setVar('descuentos', array());
-            $this->view->setVar('boletasSinEnvio', "11");
-            $this->view->setVar('boletasPendientesDeRespuesta', "10");
+            $objRel = Relaborales::findFirst(array("persona_id=".$persona->id." AND estado=1 AND baja_logica=1"));
+            if(is_object($objRel)){
+                $list = Controlexcepciones::find(array("relaboral_id = ".$objRel->id." AND estado>0 AND baja_logica=1"));
+                $this->view->setVar('boletasExcepcionesRegistradas', $list->count());
+            }else $this->view->setVar('boletasExcepcionesRegistradas', "0");
+            $objIdeas = new Fideas();
+            $listIdeas = $objIdeas->getAllFromOnePersonByGestion($persona->id,0,0,100);
+            $this->view->setVar('ideasPublicadas', count($listIdeas));
         }
         $ci_usuario = $persona->ci;
         $ruta = "";
@@ -118,5 +129,33 @@ class IndexController extends ControllerBase
 
         }
         echo json_encode($descuentos);
+    }
+    /*
+     * Función para la obtención del detalle de cantidades por respuesta de acuerdo a una pregunta.
+     */
+    public function getdatospieAction(){
+        $this->view->disable();
+        $encuestas = array();
+        if(isset($_POST["id_encuesta"])&&isset($_POST["id_pregunta"])){
+            $idEncuesta = $_POST["id_encuesta"];
+            $idPregunta = $_POST["id_pregunta"];
+            $obj = new Fencuestas();
+            $result = $obj->getCountByQuestionsOptionsRestricted($idEncuesta,$idPregunta);
+            if($result->count()>0){
+                foreach ($result as $v) {
+                    $encuestas[] = array(
+                        'id_pregunta'=>$v->id_pregunta,
+                        'orden'=>$v->orden,
+                        'id_opcionrespuesta'=>$v->id_opcionrespuesta,
+                        'opcion_respuesta'=>$v->opcion_respuesta,
+                        'cantidad'=>$v->cantidad,
+                        'total'=>0,
+                        'porcentaje'=>0
+                    );
+                }
+
+            }
+        }
+        echo json_encode($encuestas);
     }
 }

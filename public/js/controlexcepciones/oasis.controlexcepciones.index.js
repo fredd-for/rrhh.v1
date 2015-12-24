@@ -15,6 +15,7 @@ $().ready(function () {
     $('#divTabControlExcepciones').jqxTabs('disableAt', 2);
     $('#divTabControlExcepciones').jqxTabs('disableAt', 3);
     $('#divTabControlExcepciones').jqxTabs('disableAt', 4);
+    $('#divTabControlExcepciones').jqxTabs('disableAt', 5);
 
     definirGrillaParaListaRelaborales();
     /**
@@ -51,42 +52,21 @@ $().ready(function () {
             }
         }
     });
-    $("#btnGuardarBaja").click(function () {
-        var ok = validaFormularioPorBajaRegistro();
-        if (ok) {
-            guardarRegistroBaja();
-        }
-    });
     /**
-     * Control sobre la solicitud de guardar registro de movilidad de personal por nuevo, edición y baja.
+     * Función para la búsqueda de controles de excepción para una gestión y mes determinados.
      */
-    $("#btnGuardarMovilidad").click(function () {
-        var idRelaboralMovilidadBaja = $("#hdnIdRelaboralMovilidadBaja").val();
-        if (idRelaboralMovilidadBaja == 0) {
-            /**
-             * Si se solicita nuevo registro o modificación.
-             * @type {boolean}
-             */
-            var ok = validaFormularioPorRegistroMovilidad();
-            if (ok) {
-                var okk = guardarRegistroMovilidad();
-                if (okk) {
-                    $("#popupWindowNuevaMovilidad").jqxWindow('close');
-                }
-            }
-        } else {
-            /**
-             * Si se ha solicitado realizar una baja.
-             */
-            var ok = validaFormularioPorBajaRegistroMovilidad();
-            if (ok) {
-                var okk = bajaRegistroMovilidad();
-                if (okk) {
-                    $("#popupWindowNuevaMovilidad").jqxWindow('close');
-                }
-            }
-        }
+    $("#btnBuscarControlExcepcionesPorMes").on("click", function () {
+        var ok = validarFormularioBusqueda();
+        if (ok) {
+            var gestion = $("#lstGestionCount").val();
+            var mes = $("#lstMesCount").val();
+            $("#divControlExcepcionCount").jqxGrid("clear");
+            definirGrillaParaListaControlExcepcionesGeneral(gestion, mes);
+        } else $("#divControlExcepcionCount").jqxGrid("clear");
+
     });
+
+
     $("#btnCancelarNew").click(function () {
         $('#divTabControlExcepciones').jqxTabs('enableAt', 0);
         $('#divTabControlExcepciones').jqxTabs('disableAt', 1);
@@ -149,6 +129,20 @@ $().ready(function () {
             $("#jqxlistbox").focus();
         }
     });
+    $("#btnExportarExcelCount").click(function () {
+        var items = $("#divControlExceptionListBox").jqxListBox('getCheckedItems');
+        var numColumnas = 0;
+        $.each(items, function (index, value) {
+            numColumnas++;
+        });
+        var gestion = $("#lstGestionCount").val();
+        var mes = $("#lstMesCount").val();
+        if (numColumnas > 0) exportarReporteExcepcionesCount(1,gestion,mes);
+        else {
+            alert("Debe seleccionar al menos una columna para la obtención del reporte solicitado.");
+            $("#divControlExceptionListBox").focus();
+        }
+    });
     $("#btnExportarPDF").click(function () {
         var items = $("#jqxlistbox").jqxListBox('getCheckedItems');
         var numColumnas = 0;
@@ -159,6 +153,20 @@ $().ready(function () {
         else {
             alert("Debe seleccionar al menos una columna para la obtención del reporte solicitado.");
             $("#jqxlistbox").focus();
+        }
+    });
+    $("#btnExportarPDFCount").click(function () {
+        var items = $("#divControlExceptionListBox").jqxListBox('getCheckedItems');
+        var numColumnas = 0;
+        $.each(items, function (index, value) {
+            numColumnas++;
+        });
+        var gestion = $("#lstGestionCount").val();
+        var mes = $("#lstMesCount").val();
+        if (numColumnas > 0) exportarReporteExcepcionesCount(2,gestion,mes);
+        else {
+            alert("Debe seleccionar al menos una columna para la obtención del reporte solicitado.");
+            $("#divControlExceptionListBox").focus();
         }
     });
     $("#chkAllCols").click(function () {
@@ -219,7 +227,7 @@ $().ready(function () {
         $('#divTabControlExcepciones').jqxTabs('disableAt', 2);
         $('#divTabControlExcepciones').jqxTabs('disableAt', 3);
         $('#divTabControlExcepciones').jqxTabs('disableAt', 4);
-        
+
         $("#msjs-alert").hide();
     });
     $("#liExcept").click(function () {
@@ -376,9 +384,11 @@ function definirGrillaParaListaRelaborales() {
                     var container = $("<div></div>");
                     toolbar.append(container);
                     container.append("<button id='listrowbutton' class='btn btn-sm btn-primary' type='button'  title='Listado de Excepciones por Relaci&oacute;n Laboral.'><i class='fa fa-list-alt fa-2x text-info' title='Listado de Excepciones por Relaci&oacute;n Laboral.'/></i></button>");
+                    container.append("<button id='listcountbutton' class='btn btn-sm btn-primary' type='button'  title='Contabilizador de Excepciones.'><i class='fa fa-tasks fa-2x text-info' title='Contabilizador de Excepciones.'/></i></button>");
                     container.append("<button title='Ver calendario de turnos y permisos de manera global para la persona.' id='turnrowbutton' class='btn btn-sm btn-primary' type='button'><i class='fa fa-calendar fa-2x text-info' title='Vista Turnos Laborales por relaci&oacute;n laboral.'/></i></button>");
 
                     $("#listrowbutton").jqxButton();
+                    $("#listcountbutton").jqxButton();
                     $("#turnrowbutton").jqxButton();
 
                     /* Registrar nueva relación laboral.*/
@@ -401,6 +411,7 @@ function definirGrillaParaListaRelaborales() {
                                     $('#divTabControlExcepciones').jqxTabs('disableAt', 2);
                                     $('#divTabControlExcepciones').jqxTabs('disableAt', 3);
                                     $('#divTabControlExcepciones').jqxTabs('disableAt', 4);
+                                    $('#divTabControlExcepciones').jqxTabs('disableAt', 5);
                                     $('#divTabControlExcepciones').jqxTabs('enableAt', 1);
                                     /**
                                      * Trasladamos el item seleccionado al que corresponde, el de vistas.
@@ -438,7 +449,33 @@ function definirGrillaParaListaRelaborales() {
                             $("#divMsjeNotificacionError").jqxNotification("open");
                         }
                     });
-
+                    $("#listcountbutton").off();
+                    $("#listcountbutton").on('click', function () {
+                        $('#divTabControlExcepciones').jqxTabs('enableAt', 0);
+                        $('#divTabControlExcepciones').jqxTabs('disableAt', 1);
+                        $('#divTabControlExcepciones').jqxTabs('disableAt', 2);
+                        $('#divTabControlExcepciones').jqxTabs('disableAt', 3);
+                        $('#divTabControlExcepciones').jqxTabs('enableAt', 4);
+                        $('#divTabControlExcepciones').jqxTabs({selectedItem: 4});
+                        $('#divTabControlExcepciones').jqxTabs('disableAt', 5);
+                        definirGrillaParaListaControlExcepcionesGeneral(0,0);
+                        $("#divControlExcepcionCount").jqxGrid("clear");
+                        var hoy = new Date();
+                        var gestion = hoy.getFullYear();
+                        var mes = hoy.getMonth()+1;
+                        cargarGestionesParaCalculo(1, gestion);
+                        cargarMesesParaCalculo(1, gestion, mes);
+                        $("#lstGestionCount").focus();
+                        $("#lstGestionCount").off();
+                        $("#lstGestionCount").on("change", function () {
+                            cargarMesesParaCalculo(1, $("#lstGestionCount").val(), 0);
+                            $("#divControlExcepcionCount").jqxGrid("clear");
+                        });
+                        $("#lstMesCount").off();
+                        $("#lstMesCount").on("change", function () {
+                            $("#divControlExcepcionCount").jqxGrid("clear");
+                        });
+                    });
                     /* Ver registro.*/
                     $("#turnrowbutton").off();
                     $("#turnrowbutton").on('click', function () {
@@ -452,9 +489,10 @@ function definirGrillaParaListaRelaborales() {
                                 $('#divTabControlExcepciones').jqxTabs('disableAt', 1);
                                 $('#divTabControlExcepciones').jqxTabs('disableAt', 2);
                                 $('#divTabControlExcepciones').jqxTabs('disableAt', 3);
-                                $('#divTabControlExcepciones').jqxTabs('enableAt', 4);
+                                $('#divTabControlExcepciones').jqxTabs('disableAt', 4);
+                                $('#divTabControlExcepciones').jqxTabs('enableAt', 5);
 
-                                $('#divTabControlExcepciones').jqxTabs({selectedItem: 4});
+                                $('#divTabControlExcepciones').jqxTabs({selectedItem: 5});
 
                                 var idPerfilLaboral=0;
                                 var tipoHorario=3;
@@ -559,7 +597,7 @@ function definirGrillaParaListaRelaborales() {
                                 $("#imgFotoPerfilContactoPerTurnAndExcept").attr("src", rutaImagen);
                                 $("#imgFotoPerfilContactoInstTurnAndExcept").attr("src", rutaImagen);
                                 $("#imgFotoPerfilTurnAndExcept").attr("src", rutaImagen);
-                                cargarPersonasContactosGestionIdeas(2,dataRecord.id_persona);
+                                cargarPersonasContactosControlExcepciones(2,dataRecord.id_persona);
 
                         } else {
                             var msje = "Debe seleccionar un registro necesariamente.";
@@ -583,121 +621,6 @@ function definirGrillaParaListaRelaborales() {
                         cellsalign: 'center',
                         align: 'center',
                         cellsrenderer: rownumberrenderer
-                    },
-                    {
-                        text: '',
-                        datafield: 'nuevo',
-                        width: 10,
-                        sortable: false,
-                        showfilterrow: false,
-                        filterable: false,
-                        columntype: 'number',
-                        cellsrenderer: function (rowline) {
-                            ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
-                            var sw = dataRecord.tiene_contrato_vigente;
-                            if (sw == 0 || sw == -1) {
-                                return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-plus-square fa-2x text-info' title='Nuevo Registro.'/></i></div>";
-                            }
-                            else return "";
-                        },
-                        hidden: true //Se oculta esta columna con el boton nuevo dejándolo disponible en caso de requerirse
-                    },
-                    {
-                        text: '',
-                        datafield: 'aprobar',
-                        width: 10,
-                        sortable: false,
-                        showfilterrow: false,
-                        filterable: false,
-                        columntype: 'number',
-                        cellsrenderer: function (rowline) {
-                            ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
-                            var estado = dataRecord.estado;
-                            if (dataRecord.estado == 2) {
-                                return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-check-square fa-2x text-info' title='Aprobar registro'></i></a></div>";
-                            }
-                            else return "";
-                        },
-                        hidden: true //Se oculta esta columna con el boton aprobar dejándolo disponible en caso de requerirse
-                    },
-                    {
-                        text: '',
-                        datafield: 'editar',
-                        width: 10,
-                        sortable: false,
-                        showfilterrow: false,
-                        filterable: false,
-                        columntype: 'number',
-                        cellsrenderer: function (rowline) {
-                            ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
-                            var estado = dataRecord.estado;
-                            if (estado == 2) {
-                                return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-pencil-square fa-2x text-info' title='Modificar registro.'/></a></div>";
-                            }
-                            else return "";
-                        },
-                        hidden: true //Se oculta esta columna con el boton editar dejándolo disponible en caso de requerirse
-                    },
-                    {
-                        text: '',
-                        datafield: 'eliminar',
-                        width: 10,
-                        sortable: false,
-                        showfilterrow: false,
-                        filterable: false,
-                        columntype: 'number',
-                        cellsrenderer: function (rowline) {
-                            ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
-                            var estado = dataRecord.estado;
-                            if (estado == 1) {
-                                //return "<div style='width: 100%'><a href='#'><img src='/images/del.png' style='margin-left: 25%' title='Dar de baja al registro.'/></a></div>";
-                                return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-minus-square fa-2x text-info' title='Dar de baja al registro.'/></i></div>";
-                            }
-                            else return "";
-                        },
-                        hidden: true //Se oculta esta columna con el boton baja dejándolo disponible en caso de requerirse
-                    },
-                    {
-                        text: '',
-                        datafield: 'mover',
-                        width: 10,
-                        sortable: false,
-                        showfilterrow: false,
-                        filterable: false,
-                        columntype: 'number',
-                        cellsrenderer: function (rowline) {
-                            ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
-                            var sw = dataRecord.tiene_contrato_vigente;
-                            if (sw >= 0) {
-                                return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-tag fa-2x text-info' title='Movilidad de Personal.'/></i></div>";
-                            }
-                            else return "";
-                        },
-                        hidden: true //Se oculta esta columna con el boton vista dejándolo disponible en caso de requerirse
-                    },
-                    {
-                        text: '',
-                        datafield: 'ver',
-                        width: 10,
-                        sortable: false,
-                        showfilterrow: false,
-                        filterable: false,
-                        columntype: 'number',
-                        cellsrenderer: function (rowline) {
-                            ctrlrow = rowline
-                            var dataRecord = $("#divGridRelaborales").jqxGrid('getrowdata', ctrlrow);
-                            var sw = dataRecord.tiene_contrato_vigente;
-                            if (sw >= 0) {
-                                return "<div style='width: 100%' align='center'><a href='#'><i class='fa fa-search fa-2x text-info' title='Vista Historial.'/></i></div>";
-                            }
-                            else return "";
-                        },
-                        hidden: true //Se oculta esta columna con el boton vista dejándolo disponible en caso de requerirse
                     },
                     {
                         text: 'Ubicaci&oacute;n',

@@ -1,10 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrador
- * Date: 26/10/2015
- * Time: 02:57 PM
- */
+/*
+*   Oasis - Sistema de Gestión para Recursos Humanos
+*   Empresa Estatal de Transporte por Cable "Mi Teleférico"
+*   Versión:  1.0.0
+*   Usuario Creador: Lic. Javier Loza
+*   Fecha Creación:  02-12-2015
+*/
 
 class MisideasController extends ControllerBase{
     public function initialize()
@@ -40,7 +41,7 @@ class MisideasController extends ControllerBase{
         $this->assets->addJs('/js/misideas/oasis.misideas.send.js');
         $this->assets->addJs('/js/ckeditor/ckeditor.js');
         $auth = $this->session->get('auth');
-        $objUsr = new Usuarios();
+        $objUsr = new usuarios();
         $relaboral = $objUsr->getOneRelaboralActivo($auth['id']);
         if(is_object($relaboral)){
             $this->view->setVar('idRelaboral', $relaboral[0]->id_relaboral);
@@ -63,7 +64,7 @@ class MisideasController extends ControllerBase{
             $idRelaboral = $_GET["id"];
             $gestion = $_GET["gestion"];
             $where = "";
-            $relaborales = relaborales::findFirstById($idRelaboral);
+            $relaborales = Relaborales::findFirstById($idRelaboral);
             if($idRelaboral>0&&is_object($relaborales)&&$relaborales->persona_id>0){
                 $resul = $obj->getAllFromOnePersonByGestion($relaborales->persona_id,$gestion,0,100,$where,"");
                 //comprobamos si hay filas
@@ -220,7 +221,7 @@ class MisideasController extends ControllerBase{
                 $objIdea->fecha_reg=$hoy;
                 try{
                     if ($objIdea->save())  {
-                        $msj = array('result' => 1, 'msj' => '&Eacute;xito: Se realiz&oacute; el registro de la Idea de Negocio de modo satisfactorio.');
+                        $msj = array('result' => 1, 'msj' => '&Eacute;xito: Se realiz&oacute; el registro de la Idea de Negocio de modo satisfactorio. Se agradece el registro de su idea de negocio.');
                     } else {
                         $msj = array('result' => 0, 'msj' => 'Error: No se pudo realizar el registro de la Idea de Negocio.');
                     }
