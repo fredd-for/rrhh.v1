@@ -159,6 +159,8 @@ class RelaboralesController extends ControllerBase
                     'cargo' => $v->cargo,
                     'cargo_resolucion_ministerial_id' => $v->cargo_resolucion_ministerial_id,
                     'cargo_resolucion_ministerial' => $v->cargo_resolucion_ministerial,
+                    'cargo_gestion' => $v->cargo_gestion,
+                    'cargo_correlativo' => $v->cargo_correlativo,
                     'id_nivelessalarial' => $v->id_nivelessalarial,
                     'nivelsalarial' => $v->nivelsalarial,
                     'nivelsalarial_resolucion_id' => $v->nivelsalarial_resolucion_id,
@@ -989,6 +991,8 @@ class RelaboralesController extends ControllerBase
                     'departamento_administrativo' => $v->departamento_administrativo,
                     'id_organigrama' => $v->id_organigrama,
                     'unidad_administrativa' => $v->unidad_administrativa,
+                    'gestion' => $v->gestion,
+                    'correlativo' => $v->correlativo
                 );
             }
         }
@@ -1120,20 +1124,24 @@ class RelaboralesController extends ControllerBase
             $id_organigrama = $cargo->organigrama_id;
             $id_finpartida = $cargo->fin_partida_id;
             #region Modificación realizada a objeto de implementar el uso de la variable codigo_nivel en la tabla cargos
-            $objNS = new Nivelsalariales();
+            /*$objNS = new Nivelsalariales();
             $nsArr = $objNS->getNivelSalarialActivoByCodigoNivel($cargo->codigo_nivel);
-            if(count($nsArr)>0){
-                $nivelsalariales = $nsArr[0];
-                $id_nivelsalarial = $nivelsalariales->id;
+            if(count($nsArr)>0){*/
+                /*$nivelsalariales = $nsArr[0];
+                $id_nivelsalarial = $nivelsalariales->id;*/
                 /**
                  * En la modificación es necesario verificar que no se haya cambiado de cargo, si así fue,
                  * sólo en ese caso se cambia el nivel salarial,
                  * en caso contrarío no se modifica el nivel salarial.
+                 * -- Ya no se considera --
                  */
-                if($id_cargo!=$objRelaboral->cargo_id){
+                /*if($id_cargo!=$objRelaboral->cargo_id){
                     $objRelaboral->nivelsalarial_id = $id_nivelsalarial;
-                }
-                /*$id_nivelsalarial = $cargo->nivelsalarial_id;*/
+                }*/
+                /**
+                 *  El nivel salarial es establecido por el cargo.
+                 */
+                $id_nivelsalarial = $cargo->nivelsalarial_id;
                 $id_relaboral = null;
                 $finpartida = Finpartidas::findFirstById($id_finpartida);
                 $id_condicion = $finpartida->condicion_id;
@@ -1182,6 +1190,7 @@ class RelaboralesController extends ControllerBase
                         $objRelaboral->certificacionitem_id = null;
                         $objRelaboral->finpartida_id = $id_finpartida;
                         $objRelaboral->condicion_id = $id_condicion;
+                        $objRelaboral->nivelsalarial_id = $id_nivelsalarial;
                         $objRelaboral->carrera_adm = 0;
                         $objRelaboral->pagado = 0;
                         $objRelaboral->fecha_ini = $fecha_ini;
@@ -1309,9 +1318,9 @@ class RelaboralesController extends ControllerBase
                 } else {
                     $msj = array('result' => -1, 'msj' => 'Error cr&iacute;tico: No se guard&oacute; el registro debido a datos erroneos de la persona o cargo.');
                 }
-            } else {
+            /*} else {
                 $msj = array('result' => -1, 'msj' => 'Error cr&iacute;tico: No se hall&oacute; el registro correspondiente al nivel salarial para el registro de realaci&oacute;n laboral.');
-            }
+            }*/
             #endregion Modificación realizada a objeto de implementar el uso de la variable codigo_nivel en la tabla cargos
         } else {
             /**
@@ -1327,11 +1336,12 @@ class RelaboralesController extends ControllerBase
                 $id_organigrama = $cargo->organigrama_id;
                 $id_finpartida = $cargo->fin_partida_id;
                 #region Modificación realizada a objeto de implementar el uso de la variable codigo_nivel en la tabla cargos
-                $objNS = new Nivelsalariales();
+                /*$objNS = new Nivelsalariales();
                 $nsArr = $objNS->getNivelSalarialActivoByCodigoNivel($cargo->codigo_nivel);
-                if(count($nsArr)>0){
-                    $nivelsalariales = $nsArr[0];
-                    $id_nivelsalarial = $nivelsalariales->id;
+                if(count($nsArr)>0){*/
+                    /*$nivelsalariales = $nsArr[0];
+                    $id_nivelsalarial = $nivelsalariales->id;*/
+                    $id_nivelsalarial = $cargo->nivelsalarial_id;
                     $id_relaboral = null;
                     $finpartida = Finpartidas::findFirstById($id_finpartida);
                     $id_condicion = $finpartida->condicion_id;
@@ -1461,9 +1471,9 @@ class RelaboralesController extends ControllerBase
                     } else {
                         $msj = array('result' => -1, 'msj' => 'Error cr&iacute;tico: No se guard&oacute; el registro debido a datos erroneos de la persona o cargo.');
                     }
-                }else {
+                /*}else {
                     $msj = array('result' => -1, 'msj' => 'Error cr&iacute;tico: No se hall&oacute; el registro correspondiente al nivel salarial para el registro de realaci&oacute;n laboral.');
-                }
+                }*/
                 #endregion Modificación realizada a objeto de implementar el uso de la variable codigo_nivel en la tabla cargos
 
             } else {

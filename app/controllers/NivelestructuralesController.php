@@ -2,7 +2,7 @@
 /**
 * 
 */
-
+require_once('../app/libs/nusoap/nusoap.php');
 class NivelestructuralesController extends ControllerBase
 {
 	public function initialize() {
@@ -116,6 +116,64 @@ public function deleteAction(){
 	$this->view->disable();
 	echo json_encode();
 }
+
+public function wsclienteAction()
+{
+	$this->view->disable();
+	$servicio="http://localhost/nusoap/suma.php?wsdl"; //url del servicio
+	$parametros=array(); //parametros de la llamada
+	$var1=1;
+	$var2=3;
+	$client = new SoapClient($servicio);
+	$result = $client->add($var1,$var2);//llamamos al métdo que nos interesa con los parámetros
+	echo var_dump($result);
+}
+
+public function wsclientearrayAction()
+{
+	$this->view->disable();
+	$servicio="http://localhost/nusoap/datosarray.php?wsdl"; //url del servicio
+	$var1='Luis Freddy';
+	$client = new SoapClient($servicio);
+	echo $result = $client->hello($var1);//llamamos al métdo que nos interesa con los parámetros
+	echo "<br>";
+	$usuario='fvelasco';
+	$pass='sistemas';
+	$client = new SoapClient($servicio);
+	$result = $client->login($usario,$pass);//llamamos al métdo que nos interesa con los parámetros
+	echo var_dump($result);
+
+}
+
+public function wsop1verificaAction()
+{
+	$this->view->disable();
+	$servicio="http://192.168.100.116/wsservicios/wsoperacion1.php?wsdl"; //url del servicio
+	$llave="1";
+	$var1="psalinas";
+	$var2="b6c56905f53fbea5b1acb6f28d4e8d61940b7c99c80b5e765e9762fc069f13f9";
+	$client = new SoapClient($servicio);
+	$result = $client->verificar($llave,$var1,$var2);//llamamos al métdo que nos interesa con los parámetros
+	echo var_dump($result);
+}
+
+
+public function wsop1datosAction()
+{
+	$this->view->disable();
+	$servicio="http://192.168.100.116/wsservicios/wsoperacion1.php?wsdl"; //url del servicio
+	$usuario='wquispe';
+	$pass='sistemas';
+	$client = new SoapClient($servicio);
+	$result = $client->getdatos($usuario);//llamamos al métdo que nos interesa con los parámetros
+	echo var_dump($result);
+	
+	
+	
+}
+
+
+
 
 }
 ?>

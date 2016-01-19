@@ -129,6 +129,18 @@ class Cargos extends \Phalcon\Mvc\Model
     public $nivelsalarial_id;
 
     /**
+     *
+     * @var integer
+     */
+    public $gestion;
+
+    /**
+     *
+     * @var integer
+     */
+    public $correlativo;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
@@ -163,6 +175,8 @@ class Cargos extends \Phalcon\Mvc\Model
             'resolucion_ministerial_id' => 'resolucion_ministerial_id',
             'ordenador' => 'ordenador',
             'nivelsalarial_id' => 'nivelsalarial_id',
+            'gestion' => 'gestion',
+            'correlativo' => 'correlativo',
         );
     }
 
@@ -260,7 +274,7 @@ class Cargos extends \Phalcon\Mvc\Model
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
     }
 
-    public function listPersonal($organigrama_id = '', $depende_id = 0)
+    public function listPersonal($organigrama_id = '', $depende_id = 0,$gestion=0)
     {
         $where = "";
         if ($organigrama_id > 0) {
@@ -270,7 +284,13 @@ class Cargos extends \Phalcon\Mvc\Model
         $sql = "SELECT c.*, r.estado as estado1
                 FROM cargos c
                 LEFT JOIN relaborales r ON c.id = r.cargo_id AND r.baja_logica = 1 AND r.estado = 1
-                WHERE c.baja_logica = 1 AND c.depende_id = '$depende_id' " . $where;
+                WHERE c.baja_logica = 1 and c.gestion='$gestion' AND c.depende_id = '$depende_id' " . $where;
+        $this->_db = new Cargos();
+        return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
+    }
+    
+    public function countDepende($depende) {
+        $sql = "SELECT  cast(count(id) as integer) as cantidad from cargos where depende_id='$depende'";
         $this->_db = new Cargos();
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
     }
@@ -285,11 +305,11 @@ class Cargos extends \Phalcon\Mvc\Model
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));   
     }
 
-    public function dependientes($organigrama_id='')
+    public function dependientes($organigrama_id='',$gestion=0)
     {
-        $sql="SELECT id,cargo FROM cargos WHERE organigrama_id=(SELECT padre_id FROM organigramas WHERE id=".$organigrama_id.") AND jefe=1 AND baja_logica = 1
+        $sql="SELECT id,cargo,gestion FROM cargos WHERE organigrama_id=(SELECT padre_id FROM organigramas WHERE id=".$organigrama_id.") AND jefe=1 AND baja_logica = 1 AND gestion = '$gestion'
         UNION ALL
-        SELECT id,cargo FROM cargos WHERE organigrama_id=".$organigrama_id." AND baja_logica = 1 ORDER BY cargo ASC";
+        SELECT id,cargo,gestion FROM cargos WHERE organigrama_id=".$organigrama_id." AND baja_logica = 1 AND gestion = '$gestion' ORDER BY cargo ASC";
         $this->_db = new Cargos();
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));   
     }
@@ -353,5 +373,23 @@ class Cargos extends \Phalcon\Mvc\Model
     {
         $this->_db = new Cargos();
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
+    }
+
+    public function getGestiones($organigrama_id='0')
+    {
+        $sql = "SELECT DISTINCT (gestion) FROM cargos WHERE organigrama_id = '$organigrama_id' ORDER BY gestion DESC";
+        $this->_db = new Cargos();
+        return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));   
+    }
+
+    public function getGestion($fin_partida_id)
+    {
+        $sql = "SELECT cp.gestion
+        FROM finpartidas fp
+        INNER JOIN financiamientos f ON fp.financiamiento_id = f.id
+        INNER JOIN categoriasprog cp ON f.categoriaprog_id = cp.id
+        WHERE fp.id = '".$fin_partida_id."'";
+        $this->_db = new Cargos();
+        return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));   
     }
 }

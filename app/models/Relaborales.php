@@ -289,7 +289,7 @@ class Relaborales  extends \Phalcon\Mvc\Model {
      * @return array
      */
     public function getCol($id_persona){
-        $sql = "select distinct gestion from f_listado_gestiones(".$id_persona.")";
+        $sql = "select distinct gestion from f_listado_gestiones(".$id_persona.") ORDER BY gestion DESC";
         $this->_db = new Gestiones();
         return new Resultset(null, $this->_db, $this->_db->getReadConnection()->query($sql));
     }

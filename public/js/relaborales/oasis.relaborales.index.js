@@ -350,6 +350,8 @@ function definirGrillaParaListaRelaborales() {
             {name: 'nivelsalarial', type: 'string'},
             {name: 'nivelsalarial_resolucion', type: 'string'},
             {name: 'cargo', type: 'string'},
+            {name: 'cargo_gestion', type: 'integer'},
+            {name: 'cargo_correlativo', type: 'string'},
             {name: 'sueldo', type: 'numeric'},
             {name: 'fecha_ini', type: 'date'},
             {name: 'fecha_incor', type: 'date'},
@@ -482,6 +484,7 @@ function definirGrillaParaListaRelaborales() {
                      }
                      });*/
                     /* Modificar registro.*/
+                    $("#updaterowbutton").off();
                     $("#updaterowbutton").on('click', function () {
                         var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
                         if (selectedrowindex >= 0) {
@@ -561,7 +564,8 @@ function definirGrillaParaListaRelaborales() {
                                     var idUbicacionPrederminada = 0;
                                     if (dataRecord.id_ubicacion != null)idUbicacionPrederminada = dataRecord.id_ubicacion;
                                     cargarUbicacionesParaEditar(idUbicacionPrederminada);
-                                    agregarCargoSeleccionadoEnGrillaParaEditar(dataRecord.id_cargo, dataRecord.cargo_codigo, dataRecord.id_finpartida, dataRecord.finpartida, dataRecord.cargo_resolucion_ministerial_id,dataRecord.cargo_resolucion_ministerial,dataRecord.id_condicion, dataRecord.condicion, dataRecord.id_organigrama, dataRecord.gerencia_administrativa, dataRecord.departamento_administrativo, dataRecord.id_area, dataRecord.nivelsalarial, dataRecord.cargo, dataRecord.sueldo,dataRecord.nivelsalarial_resolucion_id,dataRecord.nivelsalarial_resolucion);
+                                    //.id_cargo, dataRecord.cargo_codigo, dataRecord.id_finpartida, dataRecord.finpartida, dataRecord.cargo_resolucion_ministerial_id,dataRecord.cargo_resolucion_ministerial,dataRecord.id_condicion, dataRecord.condicion, dataRecord.id_organigrama, dataRecord.gerencia_administrativa, dataRecord.departamento_administrativo, dataRecord.id_area, dataRecord.nivelsalarial, dataRecord.cargo, dataRecord.sueldo,dataRecord.nivelsalarial_resolucion_id,dataRecord.nivelsalarial_resolucion
+                                    agregarCargoSeleccionadoEnGrillaParaEditar(dataRecord);
                                 } else {
                                     var msje = "Debe seleccionar un registro con estado EN PROCESO o ACTIVO para posibilitar la modificaci&oacute;n del registro";
                                     $("#divMsjePorError").html("");
@@ -658,7 +662,8 @@ function definirGrillaParaListaRelaborales() {
                                     $("#hdnFechaRenBaja").val(0);
                                     $("#hdnFechaAceptaRenBaja").val(0);
                                     $("#hdnFechaAgraServBaja").val(0);
-                                    agregarCargoSeleccionadoEnGrillaParaBaja(dataRecord.id_cargo, dataRecord.cargo_codigo, dataRecord.cargo_resolucion_ministerial_id, dataRecord.cargo_resolucion_ministerial,dataRecord.id_finpartida, dataRecord.finpartida, dataRecord.id_condicion, dataRecord.condicion, dataRecord.id_organigrama, dataRecord.gerencia_administrativa, dataRecord.departamento_administrativo, dataRecord.nivelsalarial, dataRecord.cargo, dataRecord.sueldo,dataRecord.nivelsalarial_resolucion_id,dataRecord.nivelsalarial_resolucion);
+                                    //dataRecord.id_cargo, dataRecord.cargo_codigo, dataRecord.cargo_resolucion_ministerial_id, dataRecord.cargo_resolucion_ministerial,dataRecord.id_finpartida, dataRecord.finpartida, dataRecord.id_condicion, dataRecord.condicion, dataRecord.id_organigrama, dataRecord.gerencia_administrativa, dataRecord.departamento_administrativo, dataRecord.nivelsalarial, dataRecord.cargo, dataRecord.sueldo,dataRecord.nivelsalarial_resolucion_id,dataRecord.nivelsalarial_resolucion
+                                    agregarCargoSeleccionadoEnGrillaParaBaja(dataRecord);
                                     cargarMotivosBajas(0, dataRecord.id_condicion);
                                     //habilitarCamposParaBajaRegistroDeRelacionLaboral(dataRecord.id_organigrama,dataRecord.id_fin_partida,dataRecord.id_condicion);
                                     var rutaImagen = obtenerRutaFoto(dataRecord.ci, dataRecord.num_complemento);
@@ -722,6 +727,7 @@ function definirGrillaParaListaRelaborales() {
                         }
                     });
                     /* Ver registro.*/
+                    $("#viewrowbutton").off();
                     $("#viewrowbutton").on('click', function () {
 
                         var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');

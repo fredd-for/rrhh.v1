@@ -103,7 +103,7 @@ class CargosController extends ControllerBase
 				'using' => array('id', "denominacion"),
 				'useEmpty' => true,
 				'emptyText' => '(Selecionar)',
-				'emptyValue' => '',
+				'emptyValue' => '0',
 				'class' => 'form-control'
 				)
 			);
@@ -225,6 +225,7 @@ public function listAction()
 			'organismo' => $v->organismo,
 			'asistente' => $v->asistente,
 			'jefe' => $v->jefe,
+			'gestion' => $v->gestion,
 			);
 	}
 	echo json_encode($customers);
@@ -281,6 +282,17 @@ public function getSueldoAction()
 	echo json_encode($datos);
 }
 
+public function getGestionAction()
+{
+		$resul=new Cargos();
+		$model = $resul->getGestion($_POST['fin_partida_id']);
+		$datos=array(
+			'gestion' => $model[0]->gestion
+			);
+		$this->view->disable();
+	echo json_encode($datos);
+}
+
 public function saveAction()
 {
 	if (isset($_POST['id'])) {
@@ -305,6 +317,7 @@ public function saveAction()
 			$resul->asistente=$_POST['asistente'];
 			$resul->jefe=$_POST['jefe'];
 			$resul->resolucion_ministerial_id=$_POST['resolucion_ministerial_id'];
+			$resul->gestion=$_POST['gestion_fp'];
 			$resul->save();
 		}
 		else{
@@ -333,6 +346,7 @@ public function saveAction()
 			$resul->poa_id=1;
 			$resul->formacion_requerida=$_POST['formacion_requerida'];
 			$resul->resolucion_ministerial_id=$_POST['resolucion_ministerial_id'];
+			$resul->gestion=$_POST['gestion_fp'];
 			if ($resul->save()) {
 				$msm = array('msm' => 'Exito: Se guardo correctamente' );
 			}else{
@@ -2016,7 +2030,7 @@ public function exportarPdfAction($n_rows, $columns, $filtros,$groups,$sorteds)
 	{
 		$resul = Organigramas::find(array('baja_logica=1 and resolucion_ministerial_id='.$_POST["elegido"],'order' => 'unidad_administrativa ASC'));
 		$this->view->disable();
-		$options = '<option value="">(Seleccionar)</option>';
+		$options = '<option value="0">(Seleccionar)</option>';
 		foreach ($resul as $v) {
 			$checked='';
 			// if($organigrama_id==$v->id)
@@ -2047,7 +2061,7 @@ public function exportarPdfAction($n_rows, $columns, $filtros,$groups,$sorteds)
 	public function select_dependenciaAction()
 	{
 		$model = new Cargos();
-	 	$resul = $model->dependientes($_POST["elegido"]);
+	 	$resul = $model->dependientes($_POST["elegido"],$_POST["gestion"]);
 		$this->view->disable();
 		$options = '<option value="">(Seleccionar)</option>';
 		foreach ($resul as $v) {
@@ -2056,7 +2070,7 @@ public function exportarPdfAction($n_rows, $columns, $filtros,$groups,$sorteds)
 			// {
 			// 	$checked='selected=selected';
 			// }				
-			$options.='<option value="'.$v->id.'" '.$checked.'>'.$v->cargo.'</option>';
+			$options.='<option value="'.$v->id.'" '.$checked.'>'.$v->cargo.' ('.$v->gestion.')</option>';
 		}
                 echo $options; 
 	}

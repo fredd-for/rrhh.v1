@@ -8,37 +8,39 @@
 /**
  * Función para definir el contenido de la grilla de cargos acéfalos de acuerdo a los datos enviados como parámetros.
  */
-function definirGrillaParaSeleccionarCargoAcefalo(numCertificacion,codCargo){
+function definirGrillaParaSeleccionarCargoAcefalo(numCertificacion, codCargo) {
     var theme = prepareSimulator("grid");
     var sourceCargo =
     {
         datatype: "json",
         datafields: [
-            { name: 'seleccionable', type: 'string' },
-            { name: 'codigo', type: 'string' },
+            {name: 'seleccionable', type: 'string'},
+            {name: 'codigo', type: 'string'},
             /*{ name: 'finpartida', type: 'string' },*/
-            { name: 'id_condicion', type: 'string' },
-            { name: 'condicion', type: 'string' },
-            { name: 'id_organigrama', type: 'integer' },
-            { name: 'id_cargo', type: 'string' },
-            { name: 'gerencia_administrativa', type: 'string' },
-            { name: 'departamento_administrativo', type: 'string' },
-            { name: 'nivelsalarial', type: 'string' },
-            { name: 'cargo', type: 'string' },
-            { name: 'sueldo', type: 'numeric' },
-            { name: 'asistente', type: 'integer' },
-            { name: 'jefe', type: 'integer' },
-            { name: 'id_resolucion_ministerial', type: 'integer' },
-            { name: 'resolucion_ministerial', type: 'string' },
-            { name: 'nivelsalarial_resolucion_id', type: 'integer' },
-            { name: 'nivelsalarial_resolucion', type: 'string' }
+            {name: 'id_condicion', type: 'string'},
+            {name: 'condicion', type: 'string'},
+            {name: 'id_organigrama', type: 'integer'},
+            {name: 'id_cargo', type: 'string'},
+            {name: 'gerencia_administrativa', type: 'string'},
+            {name: 'departamento_administrativo', type: 'string'},
+            {name: 'nivelsalarial', type: 'string'},
+            {name: 'cargo', type: 'string'},
+            {name: 'sueldo', type: 'numeric'},
+            {name: 'asistente', type: 'integer'},
+            {name: 'jefe', type: 'integer'},
+            {name: 'id_resolucion_ministerial', type: 'integer'},
+            {name: 'resolucion_ministerial', type: 'string'},
+            {name: 'nivelsalarial_resolucion_id', type: 'integer'},
+            {name: 'nivelsalarial_resolucion', type: 'string'},
+            {name: 'gestion', type: 'integer'},
+            {name: 'correlativo', type: 'string'}
         ],
         url: '/relaborales/listcargos',
         cache: false
     };
     var dataAdapterCargo = new $.jqx.dataAdapter(sourceCargo);
     cargarRegistrosDeCargos();
-    function cargarRegistrosDeCargos(){
+    function cargarRegistrosDeCargos() {
         $("#divGrillaParaSeleccionarCargo").jqxGrid(
             {
                 //theme: theme,
@@ -67,8 +69,9 @@ function definirGrillaParaSeleccionarCargoAcefalo(numCertificacion,codCargo){
                         if (selectedrowindex >= 0) {
                             var dataRecord = $('#divGrillaParaSeleccionarCargo').jqxGrid('getrowdata', selectedrowindex);
                             if (dataRecord != undefined) {
-                                agregarCargoSeleccionadoEnGrilla(dataRecord.id_cargo,dataRecord.codigo,dataRecord.id_finpartida,dataRecord.finpartida,dataRecord.id_resolucion_ministerial,dataRecord.resolucion_ministerial,dataRecord.id_condicion,dataRecord.condicion,dataRecord.id_organigrama,dataRecord.gerencia_administrativa,dataRecord.departamento_administrativo,dataRecord.nivelsalarial,dataRecord.cargo,dataRecord.sueldo,dataRecord.nivelsalarial_resolucion_id,dataRecord.nivelsalarial_resolucion);
-                            }else{
+                                //agregarCargoSeleccionadoEnGrilla(dataRecord.id_cargo, dataRecord.codigo, dataRecord.id_finpartida, dataRecord.finpartida, dataRecord.id_resolucion_ministerial, dataRecord.resolucion_ministerial, dataRecord.id_condicion, dataRecord.condicion, dataRecord.id_organigrama, dataRecord.gerencia_administrativa, dataRecord.departamento_administrativo, dataRecord.nivelsalarial, dataRecord.cargo, dataRecord.sueldo, dataRecord.nivelsalarial_resolucion_id, dataRecord.nivelsalarial_resolucion);
+                                agregarCargoSeleccionadoEnGrilla(dataRecord);
+                            } else {
                                 var msje = "Debe seleccionar un cargo necesariamente.";
                                 $("#divMsjePorError").html("");
                                 $("#divMsjePorError").append(msje);
@@ -82,18 +85,96 @@ function definirGrillaParaSeleccionarCargoAcefalo(numCertificacion,codCargo){
                         }
                     });
                 },
-                    columns: [
-                        { text: 'Nro.',sortable: false,filterable: false,editable: false,groupable: false,draggable: false,resizable: false,columntype: 'number',width: 50,cellsalign: 'center',align: 'center',cellsrenderer: rownumberrenderer},
-                        { text: '&Iacute;tem/C&oacute;digo', filtertype: 'input', datafield: 'codigo', cellsalign: 'center',align: 'center',width: 100},
-                        /*{ text: 'Fuente', filtertype: 'checkedlist', datafield: 'finpartida', width: 200},*/
-                        { text: 'Cargo', columntype: 'textbox', filtertype: 'input', datafield: 'cargo', align: 'center',width: 200 },
-                        { text: 'Nivel Salarial', filtertype: 'checkedlist', datafield: 'nivelsalarial', align: 'center',width: 200},
-                        { text: 'Haber', filtertype: 'checkedlist', datafield: 'sueldo', align: 'center',cellsalign:'center',width: 70},
-                        { text: 'Gerencia', filtertype: 'checkedlist', datafield: 'gerencia_administrativa', align: 'center',width: 200},
-                        { text: 'Departamento', filtertype: 'checkedlist', datafield: 'departamento_administrativo', align: 'center',width: 200},
-                        { text: 'Condici&oacute;n', filtertype: 'checkedlist', datafield: 'condicion', align: 'center',width: 100},
-                        { text: 'Resoluci&oacute;n Organigrama', filtertype: 'checkedlist', datafield: 'resolucion_ministerial', align: 'center',width: 200},
-                        { text: 'Resoluci&oacute;n Escala', filtertype: 'checkedlist', datafield: 'nivelsalarial_resolucion', align: 'center',width: 200},
+                columns: [
+                    {
+                        text: 'Nro.',
+                        sortable: false,
+                        filterable: false,
+                        editable: false,
+                        groupable: false,
+                        draggable: false,
+                        resizable: false,
+                        columntype: 'number',
+                        width: 50,
+                        cellsalign: 'center',
+                        align: 'center',
+                        cellsrenderer: rownumberrenderer
+                    },
+                    {
+                        text: '&Iacute;tem/C&oacute;digo',
+                        filtertype: 'input',
+                        datafield: 'codigo',
+                        cellsalign: 'center',
+                        align: 'center',
+                        width: 100
+                    },
+                    /*{ text: 'Fuente', filtertype: 'checkedlist', datafield: 'finpartida', width: 200},*/
+                    {
+                        text: 'Gestion',
+                        columntype: 'textbox',
+                        filtertype: 'checkedlist',
+                        datafield: 'gestion',
+                        align: 'center',
+                        width: 200
+                    },
+                    {
+                        text: 'Cargo',
+                        columntype: 'textbox',
+                        filtertype: 'input',
+                        datafield: 'cargo',
+                        align: 'center',
+                        width: 200
+                    },
+                    {
+                        text: 'Nivel Salarial',
+                        filtertype: 'checkedlist',
+                        datafield: 'nivelsalarial',
+                        align: 'center',
+                        width: 200
+                    },
+                    {
+                        text: 'Haber',
+                        filtertype: 'checkedlist',
+                        datafield: 'sueldo',
+                        align: 'center',
+                        cellsalign: 'center',
+                        width: 70
+                    },
+                    {
+                        text: 'Gerencia',
+                        filtertype: 'checkedlist',
+                        datafield: 'gerencia_administrativa',
+                        align: 'center',
+                        width: 200
+                    },
+                    {
+                        text: 'Departamento',
+                        filtertype: 'checkedlist',
+                        datafield: 'departamento_administrativo',
+                        align: 'center',
+                        width: 200
+                    },
+                    {
+                        text: 'Condici&oacute;n',
+                        filtertype: 'checkedlist',
+                        datafield: 'condicion',
+                        align: 'center',
+                        width: 100
+                    },
+                    {
+                        text: 'Resoluci&oacute;n Organigrama',
+                        filtertype: 'checkedlist',
+                        datafield: 'resolucion_ministerial',
+                        align: 'center',
+                        width: 200
+                    },
+                    {
+                        text: 'Resoluci&oacute;n Escala',
+                        filtertype: 'checkedlist',
+                        datafield: 'nivelsalarial_resolucion',
+                        align: 'center',
+                        width: 200
+                    },
                 ]
             });
     }
@@ -106,61 +187,78 @@ var rownumberrenderer = function (row, columnfield, value, defaulthtml, columnpr
  * Función para la carga del combo de ubicaciones de trabajo (Oficinas o Paradas de Línea).
  * @param idUbicacionPredeterminada Identificador de la ubicación de la oficina o Parada de Línea en la cual trabajará el empleado.
  */
-function cargarUbicaciones(idUbicacionPredeterminada){
+function cargarUbicaciones(idUbicacionPredeterminada) {
     var ubicacion = [
-        { value: 1, label: "OFICINA CENTRAL" },
-        { value: 2, label: "LÍNEA ROJA" },
-        { value: 3, label: "LÍNEA AMARILLA" },
-        { value: 4, label: "LÍNEA VERDE" },
+        {value: 1, label: "OFICINA CENTRAL"},
+        {value: 2, label: "LÍNEA ROJA"},
+        {value: 3, label: "LÍNEA AMARILLA"},
+        {value: 4, label: "LÍNEA VERDE"},
     ];
-    $("#ubicacion").jqxComboBox({ selectedIndex:0,autoComplete:true,enableBrowserBoundsDetection: true, autoDropDownHeight: true, promptText: "Seleccione una ubicacion", source: ubicacion, height: 22, width: '100%' });
+    $("#ubicacion").jqxComboBox({
+        selectedIndex: 0,
+        autoComplete: true,
+        enableBrowserBoundsDetection: true,
+        autoDropDownHeight: true,
+        promptText: "Seleccione una ubicacion",
+        source: ubicacion,
+        height: 22,
+        width: '100%'
+    });
 }
 
 /**
  * Función para cargar los departamentos en el combo especificado.
  * @param idDepartamentoPrefijado Identificador del departamento prefijado por defecto.
  */
-function cargarDepartamentos(idDepartamentoPrefijado){
+function cargarDepartamentos(idDepartamentoPrefijado) {
     var departamento = [
-        { value: 0, label: "La Paz" },
-        { value: 1, label: "Cochabamba" },
-        { value: 2, label: "Sucre" },
-        { value: 3, label: "Oruro" },
-        { value: 4, label: "Potosí" },
-        { value: 5, label: "Santa Cruz" },
-        { value: 6, label: "Tarija" },
-        { value: 7, label: "Trinidad" },
-        { value: 8, label: "Cobija" }
+        {value: 0, label: "La Paz"},
+        {value: 1, label: "Cochabamba"},
+        {value: 2, label: "Sucre"},
+        {value: 3, label: "Oruro"},
+        {value: 4, label: "Potosí"},
+        {value: 5, label: "Santa Cruz"},
+        {value: 6, label: "Tarija"},
+        {value: 7, label: "Trinidad"},
+        {value: 8, label: "Cobija"}
     ];
 
-    $("#departamento").jqxComboBox({ enableBrowserBoundsDetection: true, autoDropDownHeight: true, promptText: "Seleccione un departamento o ciudad", source: departamento, height: 22, width: '100%' });
+    $("#departamento").jqxComboBox({
+        enableBrowserBoundsDetection: true,
+        autoDropDownHeight: true,
+        promptText: "Seleccione un departamento o ciudad",
+        source: departamento,
+        height: 22,
+        width: '100%'
+    });
 }
 /**
  * Función para cargar el combo de áreas en caso de existir para el organigrama correspondiente al cargo.
  * @param idPadre Identificador del organigrama padre del cual se desea conocer las áreas disponibles.
  */
-function cargarAreasAdministrativas(idPadre,idAreaPredeterminada){
+function cargarAreasAdministrativas(idPadre, idAreaPredeterminada) {
     $('#divAreas').hide();
     $('#lstAreas').html("");
-    var ok=false;
+    var ok = false;
     var selected = "";
-    if(idPadre>0){
+    if (idPadre > 0) {
         $.ajax({
-            url:'/relaborales/listareas',
-            type:'POST',
+            url: '/relaborales/listareas',
+            type: 'POST',
             datatype: 'json',
-            async:false,
-            data:{id_padre:idPadre
+            async: false,
+            data: {
+                id_padre: idPadre
             },
-            success: function(data) {
+            success: function (data) {
                 var res = jQuery.parseJSON(data);
-                if(res.length>0){
+                if (res.length > 0) {
                     $('#divAreas').show();
                     $('#lstAreas').append("<option value='0'>Seleccionar..</option>");
-                    $.each( res, function( key, val ) {
-                        ok=true;
-                        if(idAreaPredeterminada==val.id_area)selected="selected";else selected="";
-                        $('#lstAreas').append("<option value="+val.id_area+" "+selected+">"+val.unidad_administrativa+"</option>");
+                    $.each(res, function (key, val) {
+                        ok = true;
+                        if (idAreaPredeterminada == val.id_area)selected = "selected"; else selected = "";
+                        $('#lstAreas').append("<option value=" + val.id_area + " " + selected + ">" + val.unidad_administrativa + "</option>");
                     });
                 }
             }
@@ -173,63 +271,84 @@ function cargarAreasAdministrativas(idPadre,idAreaPredeterminada){
  * @param idFinPartida Identificador del registro de financiamiento por partida.
  * @param idProcesoPrefijado Identificador del proceso prefijado por defecto.
  */
-function cargarProcesos(idCondicion){
+function cargarProcesos(idCondicion) {
     $.ajax({
-        url:'/relaborales/listprocesos',
-        type:'POST',
+        url: '/relaborales/listprocesos',
+        type: 'POST',
         datatype: 'json',
-        data:{id_condicion:idCondicion
+        data: {
+            id_condicion: idCondicion
         },
-        success: function(data) {
+        success: function (data) {
             var res = jQuery.parseJSON(data);
             $('#lstProcesos').html("");
             $('#lstProcesos').append("<option value='0'>Seleccionar..</option>");
-            $.each( res, function( key, valo ) {
-                $('#lstProcesos').append("<option value="+valo.id+">"+valo.codigo_proceso+"</option>");
+            $.each(res, function (key, valo) {
+                $('#lstProcesos').append("<option value=" + valo.id + ">" + valo.codigo_proceso + "</option>");
             });
         }
     });
 }
-function cargaCategorias(idCategoriaPredeterminada){
+function cargaCategorias(idCategoriaPredeterminada) {
     var categoria = [
-        { value: 1, label: "ADMINISTRATIVO" },
-        { value: 2, label: "TECNICO" },
-        { value: 3, label: "JURIDICO" },
+        {value: 1, label: "ADMINISTRATIVO"},
+        {value: 2, label: "TECNICO"},
+        {value: 3, label: "JURIDICO"},
     ];
 
-    $("#categoria").jqxComboBox({ enableBrowserBoundsDetection: true, autoDropDownHeight: true, promptText: "Seleccione una categoria", source: categoria, height: 22, width: '100%' });
+    $("#categoria").jqxComboBox({
+        enableBrowserBoundsDetection: true,
+        autoDropDownHeight: true,
+        promptText: "Seleccione una categoria",
+        source: categoria,
+        height: 22,
+        width: '100%'
+    });
 }
 /**
  * Función para la definición de las fechas para el registro de la relación laboral.
  */
-function defineFechas(){
-    $("#FechaIni").jqxDateTimeInput({ enableBrowserBoundsDetection: true, height: 24, formatString:'dd-MM-yyyy' });
-    $("#FechaIncor").jqxDateTimeInput({ enableBrowserBoundsDetection: true, height: 24, formatString:'dd-MM-yyyy' });
+function defineFechas() {
+    $("#FechaIni").jqxDateTimeInput({enableBrowserBoundsDetection: true, height: 24, formatString: 'dd-MM-yyyy'});
+    $("#FechaIncor").jqxDateTimeInput({enableBrowserBoundsDetection: true, height: 24, formatString: 'dd-MM-yyyy'});
 }
 /**
  * Función para agregar un cargo a la grilla correspondiente para determinar donde trabajará la persona.
- * @param id_cargo Identificador del cargo.
- * @param codigo Código del cargo seleccionado.
- * @param finpartida Financiamiento por partida.
- * @param condicion Condición de contrato / relación laboral.
- * @param gerencia_administrativa Gerencia Administrativa a la cual corresponde el cargo.
- * @param departamento_administrativo Departamento administrativo al cual corresponde el cargo.
- * @param nivelsalarial Nivel salarial correspondiente para el cargo.
- * @param cargo Nombre del cargo.
- * @param haber Haber mensual para el cargo.
+ * @param dataRecordCargo
  */
-function agregarCargoSeleccionadoEnGrilla(id_cargo,codigo,id_finpartida,finpartida,id_resolucion_ministerial,resolucion_ministerial,id_condicion,condicion,id_organigrama,gerencia_administrativa,departamento_administrativo,nivelsalarial,cargo,haber,nivelsalarial_resolucion_id,nivelsalarial_resolucion){
+function agregarCargoSeleccionadoEnGrilla(dataRecordCargo) {
+    var id_cargo =dataRecordCargo.id_cargo;
+    var codigo =dataRecordCargo.codigo;
+    var id_finpartida =dataRecordCargo.id_finpartida;
+    var finpartida =dataRecordCargo.finpartida;
+    var id_resolucion_ministerial =dataRecordCargo.id_resolucion_ministerial;
+    var resolucion_ministerial =dataRecordCargo.resolucion_ministerial;
+    var id_condicion =dataRecordCargo.id_condicion;
+    var condicion =dataRecordCargo.condicion;
+    var id_organigrama =dataRecordCargo.id_organigrama;
+    var gerencia_administrativa =dataRecordCargo.gerencia_administrativa;
+    var departamento_administrativo =dataRecordCargo.departamento_administrativo;
+    var nivelsalarial =dataRecordCargo.nivelsalarial;
+    var cargo =dataRecordCargo.cargo;
+    var sueldo =dataRecordCargo.sueldo;
+    var nivelsalarial_resolucion_id =dataRecordCargo.nivelsalarial_resolucion_id;
+    var nivelsalarial_resolucion=dataRecordCargo.nivelsalarial_resolucion;
+    var gestion="";
+    if(dataRecordCargo.gestion!=''&&dataRecordCargo.gestion!=null){
+        gestion=dataRecordCargo.gestion;
+    }
+    var correlativo=dataRecordCargo.correlativo;
     $("#tr_cargo_seleccionado").html("");
-    var btnDescartar = "<td  class='text-center'><a class='btn btn-danger btnDescartarCargoSeleccionado' title='Descartar cargo seleccionado.' data-toggle='tooltip' data-original-title='Descartar' id='btn_"+id_cargo+"' alt='Descartar cargo para el contrato'>";
+    var btnDescartar = "<td  class='text-center'><a class='btn btn-danger btnDescartarCargoSeleccionado' title='Descartar cargo seleccionado.' data-toggle='tooltip' data-original-title='Descartar' id='btn_" + id_cargo + "' alt='Descartar cargo para el contrato'>";
     btnDescartar += "<i class='fa fa-times'></i></a></td>";
-    var grilla = "<td class='text-center'>"+codigo+"</td><td class='text-center'>"+resolucion_ministerial+"</td><td class='text-center'>"+nivelsalarial_resolucion+"</td><td class='text-center'>"+condicion+"</td><td>"+gerencia_administrativa+
-        "</td><td>"+departamento_administrativo+"</td><td>"+nivelsalarial+"</td><td>"+cargo+"</td><td  class='text-right'>"+haber+"</td>";
-    $("#tr_cargo_seleccionado").append(btnDescartar+grilla);
+    var grilla = "<td class='text-center'>" + codigo + "</td><td class='text-center'>" + gestion + "</td><td class='text-center'>" + resolucion_ministerial + "</td><td class='text-center'>" + nivelsalarial_resolucion + "</td><td class='text-center'>" + condicion + "</td><td>" + gerencia_administrativa +
+        "</td><td>" + departamento_administrativo + "</td><td>" + nivelsalarial + "</td><td>" + cargo + "</td><td  class='text-right'>" + sueldo + "</td>";
+    $("#tr_cargo_seleccionado").append(btnDescartar + grilla);
     $("#hdnIdCargoNuevoSeleccionado").val(id_cargo);
     $("#hdnIdOrganigramaSeleccionado").val(id_organigrama);
     $("#hdnIdCondicionNuevaSeleccionada").val(id_condicion);
     $("#divProcesos").show();
-    var okArea = cargarAreasAdministrativas(id_organigrama,0);
+    var okArea = cargarAreasAdministrativas(id_organigrama, 0);
     cargarProcesos(id_condicion);
     /*$("#popupWindowCargo").jqxWindow('close');*/
     $('#popupGrillaCargo').modal('hide');
@@ -237,18 +356,18 @@ function agregarCargoSeleccionadoEnGrilla(id_cargo,codigo,id_finpartida,finparti
     /**
      * Un número de contrato es requerido si es eventual o consultor o contrato a plazo fijo.
      */
-    if(id_condicion==2||id_condicion==3||id_condicion==7){
+    if (id_condicion == 2 || id_condicion == 3 || id_condicion == 7) {
         $("#divNumContratos").show();
-        if(!okArea)$("#txtNumContrato").focus();
+        if (!okArea)$("#txtNumContrato").focus();
         else $("#lstAreas").focus();
         $("#divFechasFin").show();
-        $("#FechaFin").jqxDateTimeInput({ enableBrowserBoundsDetection: true, height: 24, formatString:'dd-MM-yyyy' });
-    }else{
-        if(!okArea)$("#lstUbicaciones").focus();
+        $("#FechaFin").jqxDateTimeInput({enableBrowserBoundsDetection: true, height: 24, formatString: 'dd-MM-yyyy'});
+    } else {
+        if (!okArea)$("#lstUbicaciones").focus();
         else $("#lstAreas").focus();
     }
     $(".btnDescartarCargoSeleccionado").off();
-    $(".btnDescartarCargoSeleccionado").click(function(){
+    $(".btnDescartarCargoSeleccionado").click(function () {
         $("#tr_cargo_seleccionado").html("");
         $("#hdnIdCargoNuevoSeleccionado").val(0);
         $("#hdnIdOrganigramaSeleccionado").val(0);
@@ -272,13 +391,13 @@ function agregarCargoSeleccionadoEnGrilla(id_cargo,codigo,id_finpartida,finparti
  * @param idOrganigrama Identificador del organigrama.
  * @param idFinPartida Identificador del financiamiento por partida.
  */
-function habilitarCamposParaNuevoRegistroDeRelacionLaboral(idOrganigrama,idFinPartida){
+function habilitarCamposParaNuevoRegistroDeRelacionLaboral(idOrganigrama, idFinPartida) {
     defineFechas();
 }
 /**
  * Función para deshabilitar los campos correspondientes en el formulario de registro de una nueva relación laboral.
  */
-function deshabilitarCamposParaNuevoRegistroDeRelacionLaboral(){
+function deshabilitarCamposParaNuevoRegistroDeRelacionLaboral() {
     $("#tr_cargo_seleccionado").html("");
     $("#hdnIdPersonaSeleccionada").val(0);
     $("#NombreParaNuevoRegistro").html("");
@@ -287,7 +406,7 @@ function deshabilitarCamposParaNuevoRegistroDeRelacionLaboral(){
  * Función para validar los datos del formulario de nuevo registro de relación laboral.
  * @returns {boolean} True: La validación fue correcta; False: La validación anuncia que hay errores en el formulario.
  */
-function validaFormularioPorNuevoRegistro(){
+function validaFormularioPorNuevoRegistro() {
     var ok = true;
     var msje = "";
     $(".msjs-alert").hide();
@@ -304,54 +423,54 @@ function validaFormularioPorNuevoRegistro(){
     /**
      * Sólo para el caso de condición consultor será necesario registrar la fecha de finalización
      */
-    if(id_condicion==2||id_condicion==3||id_condicion==7){
+    if (id_condicion == 2 || id_condicion == 3 || id_condicion == 7) {
         fechaFin = $("#FechaFin").jqxDateTimeInput('getText');
     }
     var idCargo = $("#hdnIdCargoNuevoSeleccionado").val();
-    if(idCargo==0||idCargo==null){
+    if (idCargo == 0 || idCargo == null) {
         $("#divMsjeError").show();
         $("#divMsjeError").addClass('alert alert-danger alert-dismissable');
         $("#aMsjeError").html("Debe seleccionar el cargo necesariamente.");
-        ok=false;
+        ok = false;
     }
     id_condicion = parseInt(id_condicion);
-    var enfoque=null;
-    if(fechaIni==null||fechaIni==""){
-        ok=false;
+    var enfoque = null;
+    if (fechaIni == null || fechaIni == "") {
+        ok = false;
         msje = "Debe introducir la fecha de inicio.";
         $("#divFechasIni").addClass("has-error");
         $("#helpErrorFechasIni").html(msje);
-        if(enfoque==null)enfoque =$("#FechaIni");
+        if (enfoque == null)enfoque = $("#FechaIni");
     }
-    if(fechaIncor==null||fechaIncor==""){
-        ok=false;
+    if (fechaIncor == null || fechaIncor == "") {
+        ok = false;
         msje = "Debe introducir la fecha de incorporaci&oacute;n.";
         $("#divFechasIncor").addClass("has-error");
         $("#helpErrorFechasIncor").html(msje);
-        if(enfoque==null)enfoque =$("#FechaIncor");
+        if (enfoque == null)enfoque = $("#FechaIncor");
     }
-    var sep='-';
-    if(procesaTextoAFecha(fechaIncor,sep)<procesaTextoAFecha(fechaIni,sep)){
-        ok=false;
+    var sep = '-';
+    if (procesaTextoAFecha(fechaIncor, sep) < procesaTextoAFecha(fechaIni, sep)) {
+        ok = false;
         msje = "La fecha de incorporaci&oacute;n debe ser igual o superior a la fecha de inicio.";
         $("#divFechasIni").addClass("has-error");
         $("#divFechasIncor").addClass("has-error");
         $("#helpErrorFechasIni").html(msje);
         $("#helpErrorFechasIncor").html(msje);
-        if(enfoque==null)enfoque =$("#FechaIni");
+        if (enfoque == null)enfoque = $("#FechaIni");
     }
-    if(id_condicion==2||id_condicion==3||id_condicion==7){
-        if(fechaFin==""||fechaFin==null){
-            ok=false;
+    if (id_condicion == 2 || id_condicion == 3 || id_condicion == 7) {
+        if (fechaFin == "" || fechaFin == null) {
+            ok = false;
             msje = "Debe introducir la fecha de finalizaci&oacute;n del contrato.";
             $("#divFechasFin").show();
             $("#divFechasFin").addClass("has-error");
             $("#helpErrorFechasFin").html(msje);
-            if(enfoque==null)enfoque =$("#FechaFin");
+            if (enfoque == null)enfoque = $("#FechaFin");
         }
-        var sep='-';
-        if(procesaTextoAFecha(fechaFin,sep)<procesaTextoAFecha(fechaIni,sep)){
-            ok=false;
+        var sep = '-';
+        if (procesaTextoAFecha(fechaFin, sep) < procesaTextoAFecha(fechaIni, sep)) {
+            ok = false;
             msje = "La fecha de inicio no puede ser superior a la fecha de finalizaci&oacute;n.";
             $("#divFechasIni").show();
             $("#divFechasIni").addClass("has-error");
@@ -359,10 +478,10 @@ function validaFormularioPorNuevoRegistro(){
             $("#divFechasFin").show();
             $("#divFechasFin").addClass("has-error");
             $("#helpErrorFechasFin").html(msje);
-            if(enfoque==null)enfoque =$("#FechaFin");
+            if (enfoque == null)enfoque = $("#FechaFin");
         }
-        if(procesaTextoAFecha(fechaFin,sep)<procesaTextoAFecha(fechaIncor,sep)){
-            ok=false;
+        if (procesaTextoAFecha(fechaFin, sep) < procesaTextoAFecha(fechaIncor, sep)) {
+            ok = false;
             msje = "La fecha de incorporaci&oacute;n no puede ser superior a la fecha de finalizaci&oacute;n.";
             $("#divFechasIncor").show();
             $("#divFechasIncor").addClass("has-error");
@@ -370,80 +489,95 @@ function validaFormularioPorNuevoRegistro(){
             $("#divFechasFin").show();
             $("#divFechasFin").addClass("has-error");
             $("#helpErrorFechasFin").html(msje);
-            if(enfoque==null)enfoque =$("#FechaFin");
+            if (enfoque == null)enfoque = $("#FechaFin");
         }
     }
     /**
      * Se procede al control del número de contrato para personal eventual y consultor de línea.
      */
-    if(id_condicion==2||id_condicion==3||id_condicion==7){
-        if($("#txtNumContrato").val()==null||$("#txtNumContrato").val()==""){
-            ok=false;
+    if (id_condicion == 2 || id_condicion == 3 || id_condicion == 7) {
+        if ($("#txtNumContrato").val() == null || $("#txtNumContrato").val() == "") {
+            ok = false;
             msje = "Debe introducir en n&uacute;mero de contrato necesariamente.";
             $("#divNumContratos").addClass("has-error");
             $("#helpErrorNumContratos").html(msje);
-            if(enfoque==null)enfoque =$("#txtNumContrato");
+            if (enfoque == null)enfoque = $("#txtNumContrato");
         }
-        if(fechaFin==null||fechaFin==""){
-            ok=false;
+        if (fechaFin == null || fechaFin == "") {
+            ok = false;
             msje = "Debe introducir la fecha de finalizaci&oacute;n del contrato.";
             $("#divFechasFin").addClass("has-error");
             $("#helpErrorFechasFin").html(msje);
-            if(enfoque==null)enfoque =$("#FechaFin");
+            if (enfoque == null)enfoque = $("#FechaFin");
         }
     }
     /*switch (id_condicion){
-        case 1:
-            if($("#txtItem").val()==null||$("#txtItem").val()==""){
-                ok=false;
-                msje = "Debe introducir en n&uacute;mero de &iacute;tem necesariamente.";
-                $("#divItems").addClass("has-error");
-                $("#helpErrorItems").html(msje);
-                if(enfoque==null)enfoque =$("#txtItem");
-            }
-            break;
-        case 2:
-        case 3:
-            if($("#txtNumContrato").val()==null||$("#txtNumContrato").val()==""){
-                ok=false;
-                msje = "Debe introducir en n&uacute;mero de contrato necesariamente.";
-                $("#divNumContratos").addClass("has-error");
-                $("#helpErrorNumContratos").html(msje);
-                if(enfoque==null)enfoque =$("#txtNumContrato");
-            }
-            break;
-    }*/
-    if(ubicacion==""||ubicacion==null){
-        ok=false;
+     case 1:
+     if($("#txtItem").val()==null||$("#txtItem").val()==""){
+     ok=false;
+     msje = "Debe introducir en n&uacute;mero de &iacute;tem necesariamente.";
+     $("#divItems").addClass("has-error");
+     $("#helpErrorItems").html(msje);
+     if(enfoque==null)enfoque =$("#txtItem");
+     }
+     break;
+     case 2:
+     case 3:
+     if($("#txtNumContrato").val()==null||$("#txtNumContrato").val()==""){
+     ok=false;
+     msje = "Debe introducir en n&uacute;mero de contrato necesariamente.";
+     $("#divNumContratos").addClass("has-error");
+     $("#helpErrorNumContratos").html(msje);
+     if(enfoque==null)enfoque =$("#txtNumContrato");
+     }
+     break;
+     }*/
+    if (ubicacion == "" || ubicacion == null) {
+        ok = false;
         msje = "Debe seleccionar la ubicaci&oacute;n de trabajo necesariamente.";
         $("#divUbicaciones").addClass("has-error");
         $("#helpErrorUbicaciones").html(msje);
-        if(enfoque==null)enfoque =$("#lstUbicaciones");
+        if (enfoque == null)enfoque = $("#lstUbicaciones");
     }
-    if(proceso==0||proceso==""||proceso==null){
-        ok=false;
+    if (proceso == 0 || proceso == "" || proceso == null) {
+        ok = false;
         msje = "Debe seleccionar el proceso correspondiente necesariamente.";
         $("#divProcesos").addClass("has-error");
         $("#helpErrorProcesos").html(msje);
-        if(enfoque==null)enfoque =$("#lstProcesos");
+        if (enfoque == null)enfoque = $("#lstProcesos");
     }
     /*if(categoria==""||categoria==null){
-        ok=false;
-        msje = "Debe seleccionar la categor&iacute;a necesariamente.";
-        $("#divCategorias").addClass("has-error");
-        $("#helpErrorCategorias").html(msje);
-        if(enfoque==null)enfoque =$("#lstCategorias");
-    }*/
-    $('#formNuevo').jqxValidator( { focus: false } );
+     ok=false;
+     msje = "Debe seleccionar la categor&iacute;a necesariamente.";
+     $("#divCategorias").addClass("has-error");
+     $("#helpErrorCategorias").html(msje);
+     if(enfoque==null)enfoque =$("#lstCategorias");
+     }*/
+    $('#formNuevo').jqxValidator({focus: false});
     $('#formNuevo').jqxValidator({
         hintType: 'label',
         rules: [
-            { input: '#FechaIni', message: 'Debe registrar la fecha de inicio!', action: 'keyup, blur', rule: 'required' },
-            { input: '#FechaIncor', message: 'Debe registrar la fecha de incorporación!', action: 'keyup, blur', rule: 'required' },
-            { input: '#FechaFin', message: 'Debe registrar la fecha de finalización!', action: 'keyup, blur', rule: 'required' }
+            {
+                input: '#FechaIni',
+                message: 'Debe registrar la fecha de inicio!',
+                action: 'keyup, blur',
+                rule: 'required'
+            },
+            {
+                input: '#FechaIncor',
+                message: 'Debe registrar la fecha de incorporación!',
+                action: 'keyup, blur',
+                rule: 'required'
+            },
+            {
+                input: '#FechaFin',
+                message: 'Debe registrar la fecha de finalización!',
+                action: 'keyup, blur',
+                rule: 'required'
+            }
         ]
     });
-    if(enfoque!=null){
+    if (enfoque != null) {
         enfoque.focus();
     }
 
@@ -470,7 +604,7 @@ function validaFormularioPorNuevoRegistro(){
 /**
  * Función para la limpieza de los mensajes de error debido a la validación del formulario para nuevo registro.
  */
-function limpiarMensajesErrorPorValidacionNuevoRegistro(){
+function limpiarMensajesErrorPorValidacionNuevoRegistro() {
     $("#helpErrorUbicaciones").html("");
     $("#helpErrorProcesos").html("");
     $("#helpErrorCategorias").html("");
@@ -491,15 +625,15 @@ function limpiarMensajesErrorPorValidacionNuevoRegistro(){
 /**
  * Función para el almacenamiento de un nuevo registro en la Base de Datos.
  */
-function guardarNuevoRegistro(){
-    var ok=true;
-    var item=0;
+function guardarNuevoRegistro() {
+    var ok = true;
+    var item = 0;
     var idArea = 0;
     /*
-        Si se ha definido la opción de registro de áreas
+     Si se ha definido la opción de registro de áreas
      */
-    if($("#lstAreas").val()!=null){
-        idArea =$("#lstAreas").val();
+    if ($("#lstAreas").val() != null) {
+        idArea = $("#lstAreas").val();
     }
     var idRegional = 1;
     var idPersona = $("#hdnIdPersonaSeleccionada").val();
@@ -508,44 +642,45 @@ function guardarNuevoRegistro(){
     var idProceso = $('#lstProcesos').val();
     //var idCategoria = $('#lstCategorias').val();
     var idCondicion = $("#hdnIdCondicionNuevaSeleccionada").val();
-    var numContrato=  '';
+    var numContrato = '';
     //Si la condición de la relación laboral es consultoría se requiere que se llene el campo del número de contrato.
-    var fechaFin=null;
-    if(idCondicion==2||idCondicion==3||idCondicion==7){
-        numContrato =  $("#txtNumContrato").val();
+    var fechaFin = null;
+    if (idCondicion == 2 || idCondicion == 3 || idCondicion == 7) {
+        numContrato = $("#txtNumContrato").val();
         var fechaFin = $('#FechaFin').jqxDateTimeInput('getText');
     }
     var fechaIni = $('#FechaIni').jqxDateTimeInput('getText');
     var fechaIncor = $('#FechaIncor').jqxDateTimeInput('getText');
     var observacion = $("#txtObservacion").val();
-    if(idPersona>0&&idCargo>0){
-        var ok=$.ajax({
-            url:'/relaborales/save/',
-            type:"POST",
+    if (idPersona > 0 && idCargo > 0) {
+        var ok = $.ajax({
+            url: '/relaborales/save/',
+            type: "POST",
             datatype: 'json',
-            async:false,
-            cache:false,
-            data:{id:0,
-                id_persona:idPersona,
-                id_cargo:idCargo,
-                num_contrato:numContrato,
-                id_area:idArea,
-                id_ubicacion:idUbicacion,
-                id_regional:idRegional,
-                id_procesocontratacion:idProceso,
-                fecha_inicio:fechaIni,
-                fecha_incor:fechaIncor,
-                fecha_fin:fechaFin,
-                observacion:observacion
+            async: false,
+            cache: false,
+            data: {
+                id: 0,
+                id_persona: idPersona,
+                id_cargo: idCargo,
+                num_contrato: numContrato,
+                id_area: idArea,
+                id_ubicacion: idUbicacion,
+                id_regional: idRegional,
+                id_procesocontratacion: idProceso,
+                fecha_inicio: fechaIni,
+                fecha_incor: fechaIncor,
+                fecha_fin: fechaFin,
+                observacion: observacion
             },
-            success: function(data) {  //alert(data);
+            success: function (data) {  //alert(data);
 
                 var res = jQuery.parseJSON(data);
                 /**
                  * Si se ha realizado correctamente el registro de la relación laboral
                  */
                 $(".msjes").hide();
-                if(res.result==1){
+                if (res.result == 1) {
                     $("#divMsjePorSuccess").html("");
                     $("#divMsjePorSuccess").append(res.msj);
                     $("#divMsjeNotificacionSuccess").jqxNotification("open");
@@ -557,14 +692,14 @@ function guardarNuevoRegistro(){
                     $('#jqxTabs').jqxTabs('disableAt', 1);
                     deshabilitarCamposParaNuevoRegistroDeRelacionLaboral();
                     $("#jqxgrid").jqxGrid("updatebounddata");
-                } else if(res.result==0){
+                } else if (res.result == 0) {
                     /**
                      * En caso de haberse presentado un error al momento de especificar la ubicación del trabajo
                      */
                     $("#divMsjePorWarning").html("");
                     $("#divMsjePorWarning").append(res.msj);
                     $("#divMsjeNotificacionWarning").jqxNotification("open");
-                }else{
+                } else {
                     /**
                      * En caso de haberse presentado un error crítico al momento de registrarse la relación laboral
                      */
@@ -574,9 +709,11 @@ function guardarNuevoRegistro(){
                 }
 
             }, //mostramos el error
-            error: function() { alert('Se ha producido un error Inesperado'); }
+            error: function () {
+                alert('Se ha producido un error Inesperado');
+            }
         });
-    }else {
+    } else {
         ok = false;
     }
     return ok;

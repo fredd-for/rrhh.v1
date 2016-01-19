@@ -105,10 +105,34 @@ function defineFechasBajas(fecha_ren,fecha_acepta_ren,fecha_agra_Serv){
  * @param nivelsalarial_resolucion_id
  * @param nivelsalarial_resolucion
  */
-function agregarCargoSeleccionadoEnGrillaParaBaja(id_cargo,codigo,cargo_resolucion_ministerial_id,cargo_resolucion_ministerial,id_finpartida,finpartida,id_condicion,condicion,id_organigrama,gerencia_administrativa,departamento_administrativo,nivelsalarial,cargo,haber,nivelsalarial_resolucion_id,nivelsalarial_resolucion){
+function agregarCargoSeleccionadoEnGrillaParaBaja(dataRecord){
+    //dataRecord.id_cargo, dataRecord.cargo_codigo, dataRecord.cargo_resolucion_ministerial_id, dataRecord.cargo_resolucion_ministerial,dataRecord.id_finpartida, dataRecord.finpartida,
+    // dataRecord.id_condicion, dataRecord.condicion, dataRecord.id_organigrama, dataRecord.gerencia_administrativa, dataRecord.departamento_administrativo,
+    // dataRecord.nivelsalarial, dataRecord.cargo, dataRecord.sueldo,dataRecord.nivelsalarial_resolucion_id,dataRecord.nivelsalarial_resolucion
+    //
+    var id_cargo=dataRecord.id_cargo;
+    var gestion="";
+    if(dataRecord.cargo_gestion!=null&&dataRecord.cargo_gestion!=""){
+        gestion=dataRecord.cargo_gestion;
+    }
+    var codigo=dataRecord.cargo_codigo;
+    var cargo_resolucion_ministerial_id=dataRecord.cargo_resolucion_ministerial_id;
+    var cargo_resolucion_ministerial=dataRecord.cargo_resolucion_ministerial;
+    var id_finpartida=dataRecord.id_finpartida;
+    var finpartida=dataRecord.finpartida;
+    var id_condicion=dataRecord.id_condicion;
+    var condicion=dataRecord.condicion;
+    var id_organigrama=dataRecord.id_organigrama;
+    var gerencia_administrativa=dataRecord.gerencia_administrativa;
+    var departamento_administrativo=dataRecord.departamento_administrativo;
+    var nivelsalarial=dataRecord.nivelsalarial;
+    var cargo=dataRecord.cargo;
+    var haber=dataRecord.sueldo;
+    var nivelsalarial_resolucion_id=dataRecord.nivelsalarial_resolucion_id;
+    var nivelsalarial_resolucion=dataRecord.nivelsalarial_resolucion;
     $("#tr_cargo_seleccionado").html("");
     $("#tr_cargo_seleccionado_editar").html("");
-    var grilla = "<td class='text-center'>"+codigo+"</td><td class='text-center'>"+cargo_resolucion_ministerial+"</td><td class='text-center'>"+nivelsalarial_resolucion+"</td><td class='text-center'>"+condicion+"</td><td>"+gerencia_administrativa+"</td><td>"+departamento_administrativo+"</td><td>"+nivelsalarial+"</td><td>"+cargo+"</td><td class='text-center'>"+haber+"</td>";
+    var grilla = "<td class='text-center'>"+codigo+"</td><td class='text-center'>"+gestion+"</td><td class='text-center'>"+cargo_resolucion_ministerial+"</td><td class='text-center'>"+nivelsalarial_resolucion+"</td><td class='text-center'>"+condicion+"</td><td>"+gerencia_administrativa+"</td><td>"+departamento_administrativo+"</td><td>"+nivelsalarial+"</td><td>"+cargo+"</td><td class='text-center'>"+haber+"</td>";
     $("#tr_cargo_seleccionado_baja").append(grilla);
     $("#hdnIdCargoSeleccionadoBaja").val(id_cargo);
     $("#hdnIdCondicionSeleccionadaBaja").val(id_condicion);

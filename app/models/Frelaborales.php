@@ -55,6 +55,8 @@ class Frelaborales extends \Phalcon\Mvc\Model {
     public $cargo;
     public $cargo_resolucion_ministerial_id;
     public $cargo_resolucion_ministerial;
+    public $cargo_gestion;
+    public $cargo_correlativo;
     public $id_nivelessalarial;
     public $nivelsalarial;
     public $nivelsalarial_resolucion_id;
@@ -185,6 +187,8 @@ class Frelaborales extends \Phalcon\Mvc\Model {
             'cargo'=>'cargo',
             'cargo_resolucion_ministerial_id'=>'cargo_resolucion_ministerial_id',
             'cargo_resolucion_ministerial'=>'cargo_resolucion_ministerial',
+            'cargo_gestion'=>'cargo_gestion',
+            'cargo_correlativo'=>'cargo_correlativo',
             'id_nivelessalarial'=>'id_nivelessalarial',
             'nivelsalarial'=>'nivelsalarial',
             'nivelsalarial_resolucion_id'=>'nivelsalarial_resolucion_id',

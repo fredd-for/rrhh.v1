@@ -67,7 +67,7 @@ function definirGrillaParaSeleccionarCargoAcefaloParaEditar(numCertificacion,cod
                         if (selectedrowindex >= 0) {
                             var dataRecord = $('#divGrillaParaSeleccionarCargo').jqxGrid('getrowdata', selectedrowindex);
                             if (dataRecord != undefined) {
-                                agregarCargoSeleccionadoEnGrillaParaEditar(dataRecord.id_cargo,dataRecord.codigo,dataRecord.id_finpartida,dataRecord.finpartida,dataRecord.id_resolucion_ministerial,dataRecord.resolucion_ministerial,dataRecord.id_condicion,dataRecord.condicion,dataRecord.id_organigrama,dataRecord.gerencia_administrativa,dataRecord.departamento_administrativo,0,dataRecord.nivelsalarial,dataRecord.cargo,dataRecord.sueldo);
+                                agregarCargoSeleccionadoEnGrillaParaEditar(dataRecord);
                             }else{
                                 var msje = "Debe seleccionar un cargo necesariamente.";
                                 $("#divMsjePorError").html("");
@@ -100,7 +100,8 @@ function definirGrillaParaSeleccionarCargoAcefaloParaEditar(numCertificacion,cod
                     },*/
                     { text: '&Iacute;tem/C&oacute;digo', filtertype: 'input', datafield: 'codigo', cellsalign: 'center',align: 'center',width: 100},
                     /*{ text: 'Fuente', filtertype: 'checkedlist', datafield: 'finpartida', width: 200},*/
-                    { text: 'Cargo', columntype: 'textbox', filtertype: 'input', datafield: 'cargo', align: 'center',width: 200 },
+                    { text: 'Gesti&oacute;n', columntype: 'textbox', filtertype: 'checkedlist', datafield: 'gestion', align: 'center',width: 100 },
+                    { text: 'Cargo', columntype: 'textbox', filtertype: 'input', datafield: 'cargo', align: 'center',width: 100 },
                     { text: 'Nivel Salarial', filtertype: 'checkedlist', datafield: 'nivelsalarial', align: 'center',width: 200},
                     { text: 'Haber', filtertype: 'checkedlist', datafield: 'sueldo', align: 'center',cellsalign:'center',width: 70},
                     { text: 'Gerencia', filtertype: 'checkedlist', datafield: 'gerencia_administrativa', align: 'center',width: 200},
@@ -234,12 +235,34 @@ function cargaCategoriasParaEditar(idCategoriaPredeterminada){
  * @param cargo Nombre del cargo.
  * @param haber Haber mensual para el cargo.
  */
-function agregarCargoSeleccionadoEnGrillaParaEditar(id_cargo,codigo,id_finpartida,finpartida,cargo_resolucion_ministerial_id,cargo_resolucion_ministerial,id_condicion,condicion,id_organigrama,gerencia_administrativa,departamento_administrativo,id_area,nivelsalarial,cargo,haber,nivelsalarial_resolucion_id,nivelsalarial_resolucion){
+function agregarCargoSeleccionadoEnGrillaParaEditar(dataRecordCargo){
+    var id_cargo =dataRecordCargo.id_cargo;
+    var codigo =dataRecordCargo.cargo_codigo;
+    var id_finpartida =dataRecordCargo.id_finpartida;
+    var finpartida =dataRecordCargo.finpartida;
+    var id_resolucion_ministerial =dataRecordCargo.id_resolucion_ministerial;
+    var resolucion_ministerial =dataRecordCargo.cargo_resolucion_ministerial;
+    var id_condicion =dataRecordCargo.id_condicion;
+    var condicion =dataRecordCargo.condicion;
+    var id_organigrama =dataRecordCargo.id_organigrama;
+    var gerencia_administrativa =dataRecordCargo.gerencia_administrativa;
+    var departamento_administrativo =dataRecordCargo.departamento_administrativo;
+    var id_area =dataRecordCargo.id_area;
+    var nivelsalarial =dataRecordCargo.nivelsalarial;
+    var cargo =dataRecordCargo.cargo;
+    var sueldo =dataRecordCargo.sueldo;
+    var nivelsalarial_resolucion_id =dataRecordCargo.nivelsalarial_resolucion_id;
+    var nivelsalarial_resolucion=dataRecordCargo.nivelsalarial_resolucion;
+    var gestion="";
+    if(dataRecordCargo.cargo_gestion!=''&&dataRecordCargo.cargo_gestion!=null){
+        gestion=dataRecordCargo.cargo_gestion;
+    }
+    var correlativo=dataRecordCargo.cargo_correlativo;
     $("#tr_cargo_seleccionado_editar").html("");
     var btnDescartar = "<td class='text-center'><a class='btn btn-danger btnDescartarCargoSeleccionadoEditar' title='Descartar cargo seleccionado.' data-toggle='tooltip' data-original-title='Descartar' id='btn_editar_"+id_cargo+"' alt='Descartar cargo para el contrato'>";
     btnDescartar += "<i class='fa fa-times'></i></a></td>";
     //var grilla = "<td>"+codigo+"</td><td>"+finpartida+"</td><td>"+condicion+"</td><td>"+gerencia_administrativa+"</td><td>"+departamento_administrativo+"</td><td>"+nivelsalarial+"</td><td>"+cargo+"</td><td>"+haber+"</td>";
-    var grilla = "<td class='text-center'>"+codigo+"</td><td class='text-center'>"+cargo_resolucion_ministerial+"</td><td class='text-center'>"+nivelsalarial_resolucion+"</td><td class='text-center'>"+condicion+"</td><td>"+gerencia_administrativa+"</td><td>"+departamento_administrativo+"</td><td>"+nivelsalarial+"</td><td>"+cargo+"</td><td class='text-center'>"+haber+"</td>";
+    var grilla = "<td class='text-center'>"+codigo+"</td><td class='text-center'>"+gestion+"</td><td class='text-center'>"+resolucion_ministerial+"</td><td class='text-center'>"+nivelsalarial_resolucion+"</td><td class='text-center'>"+condicion+"</td><td>"+gerencia_administrativa+"</td><td>"+departamento_administrativo+"</td><td>"+nivelsalarial+"</td><td>"+cargo+"</td><td class='text-center'>"+sueldo+"</td>";
     $("#tr_cargo_seleccionado_editar").append(btnDescartar+grilla);
     $("#hdnIdCargoSeleccionadoEditar").val(id_cargo);
     $("#hdnIdOrganigramaSeleccionadoEditar").val(id_organigrama);

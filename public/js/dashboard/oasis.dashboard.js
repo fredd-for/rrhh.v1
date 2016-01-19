@@ -19,7 +19,7 @@ $().ready(function(){
         $("#lstGestion").on("change",function(){
             cargarDescuentosPorPersonaEnGestion($("#lstGestion").val());
         });
-    }else{
+    }/*else{
         var respUna = cargarTorta(1,1);
         var respDos = cargarTorta(1,2);
         $('#divEncuestaPrimeraPregunta').highcharts({
@@ -92,7 +92,7 @@ $().ready(function(){
                 data: respDos
             }]
         });
-    }
+    }*/
 
 });
 /**

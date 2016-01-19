@@ -48,7 +48,8 @@ function cargar(){
 		{ name: 'organismo_codigo', type: 'number'},
 		{ name: 'organismo', type: 'string'},
 		{ name: 'asistente', type: 'number'},
-		{ name: 'jefe', type: 'number'}
+		{ name: 'jefe', type: 'number'},
+		{ name: 'gestion', type: 'string'}
 		],
 		url: '/cargos/list',
 		cache: false
@@ -62,6 +63,17 @@ function cargar(){
 	 	var filtergroup = new $.jqx.filter();
 	 	var filter_or_operator = 1;
 	 	var filtervalue = $("#tipo_resolucion").val();
+	 	var filtercondition = 'equal';
+	 	var filter = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+	 	filtergroup.addfilter(filter_or_operator, filter);
+	 	return filtergroup;
+	 }();
+
+	 var firstNameColumnFilterGestion = function () {
+	 	//alert(tipo_resolucion);
+	 	var filtergroup = new $.jqx.filter();
+	 	var filter_or_operator = 1;
+	 	var filtervalue = $("#gestion").val();
 	 	var filtercondition = 'equal';
 	 	var filter = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
 	 	filtergroup.addfilter(filter_or_operator, filter);
@@ -109,6 +121,7 @@ function cargar(){
                 { text: 'Fuente', datafield: 'fuente', filtertype: 'input',width: '10%', hidden: true},
                 { text: 'Organismo Codigo', datafield: 'organismo_codigo', filtertype: 'number',width: '10%' },
                 { text: 'Organismo', datafield: 'organismo', filtertype: 'input',width: '10%', hidden: true},
+                { text: 'Gestión', datafield: 'gestion', filtertype: 'checkedlist',filter:firstNameColumnFilterGestion,width: '10%', hidden: false},
       ]
   });
 
@@ -381,7 +394,25 @@ $("#resolucion_ministerial_id").change(function () {
 });
 
 $("#organigrama_id").change(function () {
-	select_dependencia($("#organigrama_id").val());
+	select_dependencia($("#organigrama_id").val(),0,$("#gestion_fp").val());
+});
+
+$("#fin_partida_id").change(function () {
+	var v=$.ajax({
+		url:'/cargos/getGestion/',
+		type:'POST',
+		datatype: 'json',
+		data:{fin_partida_id:$(this).val()},
+		success: function(data) { 
+			var obj = jQuery.parseJSON(data);
+			$("#gestion_fp").val(obj.gestion);
+			select_dependencia($("#organigrama_id").val(),0,obj.gestion);
+		},
+		error: function() { alert('Se ha producido un error Inesperado'); }
+	});
+
+
+
 });
 
 select_organigrama();
@@ -406,10 +437,10 @@ function select_organigrama(organigrama_id){
 	});
 }
 
-function select_dependencia(organigrama_id,depende_id){
+function select_dependencia(organigrama_id,depende_id,gestion_fp){
 	
 		//elegido=organigrama_id;
-		$.post("/cargos/select_dependencia/", { elegido: organigrama_id }, function(data){
+		$.post("/cargos/select_dependencia/", { elegido: organigrama_id, gestion:gestion_fp }, function(data){
 			$("#depende_id").html(data);
 			$("#depende_id").val(depende_id);
 		});            
@@ -450,7 +481,7 @@ $('#testForm').validate({
 			url:'/cargos/save/',
 			type:'POST',
 			datatype: 'json',
-			data:{id:$("#id").val(),resolucion_ministerial_id:$('#resolucion_ministerial_id').val(),organigrama_id:$('#organigrama_id').val(),fin_partida_id:$('#fin_partida_id').val(),depende_id:$('#depende_id').val(),cargo:$("#cargo").val(),nivel:$("#nivel").val(),codigo_nivel:$("#codigo_nivel").val(),codigo:$('#codigo').val(),ordenador:$('#ordenador').val(),formacion_requerida:$("#formacion_requerida").val(),asistente:asistente,jefe:jefe},
+			data:{id:$("#id").val(),resolucion_ministerial_id:$('#resolucion_ministerial_id').val(),organigrama_id:$('#organigrama_id').val(),fin_partida_id:$('#fin_partida_id').val(),depende_id:$('#depende_id').val(),cargo:$("#cargo").val(),nivel:$("#nivel").val(),codigo_nivel:$("#codigo_nivel").val(),codigo:$('#codigo').val(),ordenador:$('#ordenador').val(),formacion_requerida:$("#formacion_requerida").val(),asistente:asistente,jefe:jefe,gestion_fp:$("#gestion_fp").val()},
 					success: function(data) { 
 												//cargar();
 												location.href="/cargos";	 //alert(data.msm); 
@@ -865,6 +896,7 @@ function exportarPacReporte(option){
     <div class="col-lg-10 col-md-10 col-xs-12">
         <div style="width: 100%; height: 350px;  " id="jqxgrid"></div>
         <input type="hidden" name="tipo_resolucion" id="tipo_resolucion" value="<?php echo $tipo_resolucion ?>">
+        <input type="hidden" name="gestion" id="gestion" value="<?php echo date("Y"); ?>">
     </div>
     <div class="col-lg-2 col-md-2 col-xs-12">
         <div style="width: 100%;" id="jqxlistbox"></div>
@@ -907,6 +939,15 @@ function exportarPacReporte(option){
 
 				<input id="id" name="id" type="hidden" />
 				<input id="nivel" name="nivel" type="hidden" />
+				<input id="gestion_fp" name="gestion_fp" type="hidden">
+				<div class="form-group">
+					<label class="col-md-4 control-label" >Fuente Financiamiento</label>
+					<div class="col-md-8">
+						<?php //echo $finpartida; ?>
+						<select name="fin_partida_id" id="fin_partida_id" class="form-control">
+						</select>
+					</div>
+				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label" >Resolución</label>
 					<div class="col-md-8">
@@ -940,14 +981,7 @@ function exportarPacReporte(option){
 						<span id="sueldotxt"></span> Bs.
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-md-4 control-label" >Fuente Financiamiento</label>
-					<div class="col-md-8">
-						<?php //echo $finpartida; ?>
-						<select name="fin_partida_id" id="fin_partida_id" class="form-control">
-						</select>
-					</div>
-				</div>
+				
 				<div class="form-group">
 					<label class="col-md-4 control-label" >Ordenador</label>
 					<div class="col-md-8">

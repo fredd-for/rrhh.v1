@@ -309,16 +309,23 @@ class OrganigramasController extends ControllerBase
 */
 
 
-	public function personalAction($organigrama_id)
+	public function personalAction($organigrama_id,$gestion='0')
 	{
- 		$primer_dependiente=  Cargos::findFirst(array("organigrama_id='$organigrama_id' and baja_logica='1'",'order'=>'id ASC','limit'=> 1 ));
+ 		if ($gestion==0) {
+ 			$model = new Cargos();
+			$gestiones = $model->getGestiones($organigrama_id);	
+			$gestion = $gestiones[0]->gestion;
+ 		}
+ 		
+		$primer_dependiente=  Cargos::findFirst(array("organigrama_id='$organigrama_id' and gestion= '".$gestion."' and baja_logica='1'",'order'=>'id ASC','limit'=> 1 ));	
+ 		
                 if($primer_dependiente!=FALSE){
                     $model=  new Cargos();
-		$cargo = $model->listPersonal($organigrama_id,$primer_dependiente->depende_id);
+		$cargo = $model->listPersonal($organigrama_id,$primer_dependiente->depende_id,$gestion);
 		$cont = count($cargo);
 		if ($cont>0) {
 			foreach ($cargo as $v) {
-			$this->listarPersonal($v->id,$v->cargo, $v->codigo,$v->estado1,$v->organigrama_id);
+			$this->listarPersonal($v->id,$v->cargo, $v->codigo,$v->estado1,$v->organigrama_id,$gestion);
 			$this->lista.='</ul>';
 			$config = array();
 			}
@@ -332,6 +339,22 @@ class OrganigramasController extends ControllerBase
 		$this->assets->addJs('/js/jorgchart/jquery.jOrgChart.js');
 
 		$this->view->setVar('lista', $this->lista);
+
+
+		$this->tag->setDefault("gestion", $gestion);
+        $gestiones = $this->tag->select(
+			array(
+				'gestion',
+				$model->getGestiones($organigrama_id),
+				'using' => array('gestion', "gestion"),
+				'useEmpty' => FALSE,
+				'emptyText' => '(Selecionar)',
+				'emptyValue' => '',
+				'class' => 'form-control'
+				)
+			);
+		$this->view->setVar('gestiones', $gestiones);
+		$this->view->setVar('organigrama_id', $organigrama_id);
                 }  else {
                     echo "No existe cargos dentro de la oficina..";
                 }
@@ -339,7 +362,7 @@ class OrganigramasController extends ControllerBase
 		
 	}
 
-	public function listarPersonal($id, $cargo, $codigo,$estado,$organigrama_id) {
+	public function listarPersonal($id, $cargo, $codigo,$estado,$organigrama_id,$gestion) {
 		$h=  Cargos::count("depende_id='$id'");
 		$datos_usuario="";
 		$nombre="";
@@ -368,10 +391,10 @@ class OrganigramasController extends ControllerBase
 			$this->lista.='<ul>';
 			//$hijos=  Cargos::find(array("depende_id='$id' and baja_logica=1"));
             $model=  new Cargos();
-            $hijos = $model->listPersonal($organigrama_id,$id);
+            $hijos = $model->listPersonal($organigrama_id,$id,$gestion);
 			foreach ($hijos as $hijo) {
 				$cargo = $hijo->cargo;
-				$this->listarPersonal($hijo->id, $cargo, $hijo->codigo,$hijo->estado1,$organigrama_id);
+				$this->listarPersonal($hijo->id, $cargo, $hijo->codigo,$hijo->estado1,$organigrama_id,$gestion);
 			}
 			$this->lista.='</ul>';
             // echo '</ul>';
@@ -379,6 +402,17 @@ class OrganigramasController extends ControllerBase
 			$this->lista.='</li>';
             //   echo '</li>';
 		}
+	}
+
+	public function pruebaAction()
+	{
+		$model = new Cargos();
+		$gestiones = $model->getGestiones(34);
+		// $gestiones = Cargos::find(array('organigrama_id = 34','DISTINCT'=>'gestion','order'=>'gestion desc'));
+		 echo $gestiones[0]->gestion;
+		// foreach ($gestiones as $v) {
+		// 	echo $v->gestion."<br>";
+		// }
 	}
 
 	
