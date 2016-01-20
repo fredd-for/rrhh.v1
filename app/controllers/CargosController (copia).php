@@ -61,7 +61,7 @@ class CargosController extends ControllerBase
                     // ->addJs('/js/jqwidgets/jqxgrid.export.js')
                     // ->addJs('/js/jqwidgets/jqxgrid.edit.js')
                     ->addJs('/js/jqwidgets/jqxnotification.js')
-                    ->addJs('/scripts/cargos/index.js')
+                    // ->addJs('/js/jqwidgets/jqxbuttongroup.js')
                     ->addJs('/js/bootbox.js');
 
 		// $this->tag->setDefault("organigrama_id", 3);
@@ -318,11 +318,7 @@ public function saveAction()
 			$resul->jefe=$_POST['jefe'];
 			$resul->resolucion_ministerial_id=$_POST['resolucion_ministerial_id'];
 			$resul->gestion=$_POST['gestion_fp'];
-			if ($resul->save()) {
-				$msm = 'Exito: Se guardo correctamente';
-			}else{
-				$msm = 'Error: No se guardo el registro';
-			}
+			$resul->save();
 		}
 		else{
 			$resul = new Cargos();
@@ -352,19 +348,24 @@ public function saveAction()
 			$resul->resolucion_ministerial_id=$_POST['resolucion_ministerial_id'];
 			$resul->gestion=$_POST['gestion_fp'];
 			if ($resul->save()) {
-				$msm = 'Exito: Se guardo correctamente';
+				$msm = array('msm' => 'Exito: Se guardo correctamente' );
 			}else{
-				$msm = 'Error: No se guardo el registro';
+				$msm = array('msm' => 'Error: No se guardo el registro' );
 			}
 		}	
 		}
 		$this->view->disable();
-		echo $msm;
+		echo json_encode();
 	}
 
 public function save_pacAction()
 {
 	if (isset($_POST['cargo_id_pac'])) {
+		// $date = new DateTime($_POST['fecha_ini']);
+		// $fecha_ini = $date->format('Y-m-d');
+		// $date = new DateTime($_POST['fecha_fin']);
+		// $fecha_fin = $date->format('Y-m-d');
+
 		$fecha_ini = date("Y-m-d",strtotime($_POST['fecha_ini']));
 		$fecha_fin = date("Y-m-d",strtotime($_POST['fecha_fin']));
 
@@ -389,7 +390,7 @@ public function save_pacAction()
 		}	
 	}
 		$this->view->disable();
-		echo $msm;
+		echo json_encode($msm);
 }	
 
 public function deleteAction(){
@@ -397,13 +398,9 @@ public function deleteAction(){
 	$resul->user_mod_id = $auth['id'];
 	$resul->fecha_mod = date("Y-m-d H:i:s");
 	$resul->baja_logica = 0;
-	if ($resul->save()) {
-		$msm = 'Exito: Se elimino correctamente';
-	}else{
-		$msm = 'Error: No se elimino el registro';
-	}
+	$resul->save();
 	$this->view->disable();
-	echo $msm;
+	echo json_encode();
 }
 
 
@@ -467,11 +464,7 @@ public function listPersonalAction($organigrama_id)
 public function delete_pacAction(){
 	$resul = Pacs::findFirstById($_POST['id']);
 	$resul->baja_logica = 0;
-	if ($resul->save()) {
-		$msm = 'Exito: Se elimino correctamente';
-	}else{
-		$msm = 'Error: No se elimino el registro';
-	}
+	$resul->save();
 	$this->view->disable();
 	echo json_encode();
 }

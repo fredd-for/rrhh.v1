@@ -3,6 +3,183 @@ use Phalcon\Mvc\Model\Resultset\Simple as Resultset;
 
 class Cargos extends \Phalcon\Mvc\Model
 {
+
+    /**
+     *
+     * @var integer
+     */
+    public $id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $organigrama_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $ejecutora_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $codigo;
+
+    /**
+     *
+     * @var string
+     */
+    public $cargo;
+
+    /**
+     *
+     * @var integer
+     */
+    public $codigo_nivel;
+
+    /**
+     *
+     * @var integer
+     */
+    public $cargo_estado_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $baja_logica;
+
+    /**
+     *
+     * @var integer
+     */
+    public $user_reg_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $fecha_reg;
+
+    /**
+     *
+     * @var integer
+     */
+    public $user_mod_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $fecha_mod;
+
+    /**
+     *
+     * @var integer
+     */
+    public $estado;
+
+    /**
+     *
+     * @var integer
+     */
+    public $fin_partida_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $depende_id;
+
+    /**
+     *
+     * @var string
+     */
+    public $formacion_requerida;
+
+    /**
+     *
+     * @var integer
+     */
+    public $asistente;
+
+    /**
+     *
+     * @var integer
+     */
+    public $jefe;
+
+    /**
+     *
+     * @var integer
+     */
+    public $resolucion_ministerial_id;
+    /**
+     *
+     * @var integer
+     */
+    public $ordenador;
+    /**
+     *
+     * @var integer
+     */
+    public $nivelsalarial_id;
+
+    /**
+     *
+     * @var integer
+     */
+    public $gestion;
+
+    /**
+     *
+     * @var integer
+     */
+    public $correlativo;
+
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        $this->setSchema("");
+    }
+
+    /**
+     * Independent Column Mapping.
+     */
+    public function columnMap()
+    {
+        return array(
+            'id' => 'id',
+            'organigrama_id' => 'organigrama_id',
+            'ejecutora_id' => 'ejecutora_id',
+            'codigo' => 'codigo',
+            'cargo' => 'cargo',
+            'codigo_nivel' => 'codigo_nivel',
+            'cargo_estado_id' => 'cargo_estado_id',
+            'baja_logica' => 'baja_logica',
+            'user_reg_id' => 'user_reg_id',
+            'fecha_reg' => 'fecha_reg',
+            'user_mod_id' => 'user_mod_id',
+            'fecha_mod' => 'fecha_mod',
+            'estado' => 'estado',
+            'fin_partida_id' => 'fin_partida_id',
+            'depende_id' => 'depende_id',
+            'formacion_requerida' => 'formacion_requerida',
+            'asistente' => 'asistente',
+            'jefe' => 'jefe',
+            'resolucion_ministerial_id' => 'resolucion_ministerial_id',
+            'ordenador' => 'ordenador',
+            'nivelsalarial_id' => 'nivelsalarial_id',
+            'gestion' => 'gestion',
+            'correlativo' => 'correlativo',
+        );
+    }
+
     private $_db;
 
     //public function lista($organigrama_id = '', $estado2 = '', $condicion = '')

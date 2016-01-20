@@ -2,7 +2,7 @@
 $option=2;
 switch($option){
     case 1:$HOST="192.168.100.116";$USERNAME="user_rrhh";$PASSWORD="pass_rrhh";$DBNAME="bd_rrhh";break;
-    case 2:$HOST="192.168.10.158";$USERNAME="user_rrhh";$PASSWORD="pass_rrhh";$DBNAME="bd_rrhh2";break;
+    case 2:$HOST="localhost";$USERNAME="postgres";$PASSWORD="miteleferico123";$DBNAME="bd_rrhh";break;
     default:$HOST="localhost";$USERNAME="oasisuser";$PASSWORD="oasispass";$DBNAME="bd_rrhh";
 }
 return new \Phalcon\Config(array(
